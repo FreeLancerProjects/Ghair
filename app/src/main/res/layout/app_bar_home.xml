@@ -39,6 +39,19 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
+                        android:visibility="gone"
+                        />
+                    <ImageView
+                        android:id="@+id/imageplus"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_chat"
+                        android:tint="@color/input"
+                        android:padding="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:visibility="gone"
                         />
                     <TextView
                         android:layout_width="0dp"
