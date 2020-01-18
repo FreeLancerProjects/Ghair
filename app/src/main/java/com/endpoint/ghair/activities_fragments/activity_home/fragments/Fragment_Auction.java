@@ -63,7 +63,7 @@ public class Fragment_Auction extends Fragment {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         category_adapter=new Ouction_Adapter(dataList,activity,this);
-        binding.recView.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+        binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recView.setAdapter(category_adapter);
         setdtat();
 

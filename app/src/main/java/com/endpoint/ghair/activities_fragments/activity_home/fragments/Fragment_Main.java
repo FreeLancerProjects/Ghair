@@ -75,6 +75,9 @@ dataList=new ArrayList<>();
         binding.recDeparment.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
 binding.recDeparment.setAdapter(category_adapter);
 binding.recBestseler.setAdapter(category_adapter);
+binding.tabLayout.setupWithViewPager(binding.pager);
+        binding.tabLayout2.setupWithViewPager(binding.pager2);
+
         setdtat();
 
 
