@@ -1,9 +1,36 @@
 <resources>
     <string name="app_name">Ghair</string>
+    <string name="map_api_key">AIzaSyCbc2Y5AIwZ8uUeHRUXiozGN3CnpjKT0oI</string>
     <string name="home">Home</string>
     <string name="adversiment">Adversiment :- </string>
     <string name="services">Services :-</string>
     <string name="no_services">No Services</string>
     <string name="no_most_active">No Most active</string>
     <string name="most_active">Most active</string>
+    <string name="merchant_name">Merchant name</string>
+    <string name="the_highest_price">the highest price</string>
+    <string name="expiry_date">Expiry date</string>
+    <string name="selling_price">selling price</string>
+    <string name="auction">Auction</string>
+    <string name="my_orders">My Orders</string>
+    <string name="more">More</string>
+    <string name="required">Required</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="add_auction">Add Auction</string>
+    <string name="product_name">Product Name</string>
+    <string name="price">Price</string>
+    <string name="auction_end_time">Auction End Time</string>
+    <string name="auction_starting_price">Auction starting price</string>
+    <string name="product_image">Product Image</string>
+    <string name="add">Add</string>
+    <string name="the_name_of_piece">the name of piece</string>
+    <string name="model">Model</string>
+    <string name="number">Number</string>
+    <string name="brand">Brand</string>
+    <string name="type">Type</string>
+    <string name="news">New</string>
+    <string name="used">used</string>
+    <string name="service_require">Service Require</string>
+    <string name="require">Require</string>
 </resources>

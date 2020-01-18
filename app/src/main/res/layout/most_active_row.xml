@@ -17,7 +17,9 @@
         android:layout_marginBottom="5dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
-        app:contentPadding="5dp">
+        app:contentPadding="5dp"
+        app:cardBackgroundColor="@color/gray3"
+        >
 
 
 
@@ -33,10 +35,10 @@
                     android:layout_height="90dp">
 
 
-                    <com.makeramen.roundedimageview.RoundedImageView
+                    <ImageView
                         android:id="@+id/im_offer"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
@@ -44,9 +46,8 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:riv_border_color="@color/black"
-                        app:riv_corner_radius="10dp"
-android:background="@color/gray9"
+
+                        android:src="@drawable/ic_user"
                         />
 
                     <FrameLayout
@@ -59,10 +60,11 @@ android:background="@color/gray9"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/gray3"
                             android:gravity="center"
-                            android:textColor="@color/white"
+                            android:textColor="@color/input"
                             android:textSize="15sp"
+                            android:text="@string/brand"
 
                            />
                     </FrameLayout>
