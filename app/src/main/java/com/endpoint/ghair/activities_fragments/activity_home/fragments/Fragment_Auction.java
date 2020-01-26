@@ -19,7 +19,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
-import com.endpoint.ghair.adapters.Category_Adapter;
 import com.endpoint.ghair.adapters.Ouction_Adapter;
 import com.endpoint.ghair.adapters.SlidingImage_Adapter;
 import com.endpoint.ghair.databinding.FragmentAuctionBinding;

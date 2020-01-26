@@ -21,7 +21,10 @@
 
     <color name="transparent">#00000000</color>
     <color name="color_bg">#b0b5b9</color>
-
+<color name="accessories">#FFF579</color>
+    <color name="spare_parts">#94EA7A</color>
+    <color name="search">#33BDC2</color>
+    <color name="products">#79F6FF</color>
 
     <color name="secondColor">#32db64</color>
     <color name="endColor">#26A84D</color>

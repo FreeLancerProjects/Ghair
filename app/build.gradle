@@ -58,5 +58,7 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 
 }

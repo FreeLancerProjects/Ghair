@@ -33,4 +33,11 @@
     <string name="used">used</string>
     <string name="service_require">Service Require</string>
     <string name="require">Require</string>
+    <string name="markets">Markets</string>
+    <string name="spare_parts">Spare Parts</string>
+    <string name="searsh">Searsh</string>
+    <string name="accessories">Accessories</string>
+    <string name="products">Products</string>
+    <string name="name">Name</string>
+    <string name="market_profile">Market Profile</string>
 </resources>

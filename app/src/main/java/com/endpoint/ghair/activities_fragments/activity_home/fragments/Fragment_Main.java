@@ -2,6 +2,7 @@ package com.endpoint.ghair.activities_fragments.activity_home.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
+import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
 import com.endpoint.ghair.adapters.Category_Adapter;
 import com.endpoint.ghair.adapters.SlidingImage_Adapter;
 import com.endpoint.ghair.databinding.FragmnetMainBinding;
@@ -97,4 +99,8 @@ binding.tabLayout.setupWithViewPager(binding.pager);
     }
 
 
+    public void showmarkets() {
+        Intent intent=new Intent(activity, MarketActivity.class);
+        startActivity(intent);
+    }
 }

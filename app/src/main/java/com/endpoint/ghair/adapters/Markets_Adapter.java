@@ -2,42 +2,37 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
-import com.endpoint.ghair.databinding.MostActiveRowBinding;
+import com.endpoint.ghair.databinding.AuctionRowBinding;
+import com.endpoint.ghair.databinding.MarketRowBinding;
 import com.endpoint.ghair.models.Slider_Model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Category_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Markets_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Slider_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-private Fragment_Main fragment_main;
-private Fragment fragment;
-    public Category_Adapter(List<Slider_Model.Data> orderlist, Context context, Fragment fragment) {
+
+    public Markets_Adapter(List<Slider_Model.Data> orderlist, Context context, Fragment fragment) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-this.fragment=fragment;
+
 
     }
 
@@ -46,7 +41,7 @@ this.fragment=fragment;
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        MostActiveRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.most_active_row, parent, false);
+        MarketRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.market_row, parent, false);
         return new EventHolder(binding);
 
 
@@ -56,15 +51,7 @@ this.fragment=fragment;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(fragment instanceof  Fragment_Main){
-            fragment_main=(Fragment_Main)fragment;
-            fragment_main.showmarkets();
-        }
-    }
-});
+
 /*
 if(i==position){
     if(i!=0) {
@@ -112,9 +99,9 @@ if(i!=position) {
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public MostActiveRowBinding binding;
+        public MarketRowBinding binding;
 
-        public EventHolder(@NonNull MostActiveRowBinding binding) {
+        public EventHolder(@NonNull MarketRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
