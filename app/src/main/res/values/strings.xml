@@ -2,8 +2,8 @@
     <string name="app_name">Ghair</string>
     <string name="map_api_key">AIzaSyCbc2Y5AIwZ8uUeHRUXiozGN3CnpjKT0oI</string>
     <string name="home">Home</string>
-    <string name="adversiment">Adversiment :- </string>
-    <string name="services">Services :-</string>
+    <string name="adversiment">Adversiment </string>
+    <string name="services">Services</string>
     <string name="no_services">No Services</string>
     <string name="no_most_active">No Most active</string>
     <string name="most_active">Most active</string>

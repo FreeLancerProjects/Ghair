@@ -47,7 +47,7 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
 
-                        android:src="@drawable/ic_user"
+                        android:src="@drawable/ic_tire"
                         />
 
                     <FrameLayout

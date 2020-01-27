@@ -14,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -24,10 +26,16 @@ import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceR
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Require;
+import com.endpoint.ghair.adapters.Category_Adapter;
+import com.endpoint.ghair.adapters.Side_Menu_Adapter;
+import com.endpoint.ghair.adapters.SlidingImage_Adapter;
 import com.endpoint.ghair.language.Language;
+import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.preferences.Preferences;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
@@ -41,10 +49,13 @@ private TextView tv_title;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private Preferences preferences;
+    private RecyclerView recmenu;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
 private ImageView imaddauction,imagechat;
     private Fragment_Require fragment_require;
+private Side_Menu_Adapter side_menu_adapter;
+    private List<Slider_Model.Data> dataList;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -67,6 +78,7 @@ private ImageView imaddauction,imagechat;
 
     @SuppressLint("RestrictedApi")
     private void initView() {
+        dataList=new ArrayList<>();
         ahBottomNav = findViewById(R.id.ah_bottom_nav);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -75,10 +87,12 @@ private ImageView imaddauction,imagechat;
         tv_title=findViewById(R.id.tvtitle);
 imaddauction=findViewById(R.id.imageplus);
 imagechat=findViewById(R.id.imagechat);
+recmenu=findViewById(R.id.recView);
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.input));
-
-
+        side_menu_adapter=new Side_Menu_Adapter(dataList,this);
+recmenu.setLayoutManager(new LinearLayoutManager(this));
+recmenu.setAdapter(side_menu_adapter);
 
 
         toggle.syncState();
@@ -95,6 +109,64 @@ imagechat=findViewById(R.id.imagechat);
                 }
             }
         });
+
+        setdtat();
+
+
+
+    }
+
+    private void setdtat() {
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+        dataList.add(new Slider_Model.Data());
+
+        side_menu_adapter.notifyDataSetChanged();
     }
 
 
@@ -106,7 +178,7 @@ imagechat=findViewById(R.id.imagechat);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(getResources().getString(R.string.my_orders), R.drawable.ic_orders);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem(getResources().getString(R.string.more), R.drawable.ic_more);
 
-       ahBottomNav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_HIDE);
+       ahBottomNav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
        ahBottomNav.setDefaultBackgroundColor(ContextCompat.getColor(this, R.color.white));
        ahBottomNav.setTitleTextSizeInSp(14, 12);
        ahBottomNav.setForceTint(true);
