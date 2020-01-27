@@ -1,22 +1,16 @@
-package com.endpoint.ghair.activities_fragments.activity_market;
+package com.endpoint.ghair.activities_fragments.activity_accesories;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
-import com.endpoint.ghair.adapters.Category_Adapter;
-import com.endpoint.ghair.adapters.Markets_Adapter;
-import com.endpoint.ghair.databinding.ActivityMarketsBinding;
-import com.endpoint.ghair.databinding.ActivityServiceRequireBinding;
+import com.endpoint.ghair.adapters.Accessories_Adapter;
+import com.endpoint.ghair.databinding.ActivityAccessoriesBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Slider_Model;
@@ -27,10 +21,10 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class MarketActivity extends AppCompatActivity implements Listeners.BackListener {
-    private ActivityMarketsBinding binding;
+public class AccessoriesActivity extends AppCompatActivity implements Listeners.BackListener {
+    private ActivityAccessoriesBinding binding;
     private String lang;
-    private Markets_Adapter markets_adapter;
+    private Accessories_Adapter markets_adapter;
     private List<Slider_Model.Data> dataList;
 
 
@@ -43,7 +37,7 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_markets);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_accessories);
         initView();
 
 
@@ -57,7 +51,7 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
-        markets_adapter=new Markets_Adapter(dataList,this);
+        markets_adapter=new Accessories_Adapter(dataList,this);
         binding.recView.setLayoutManager(new GridLayoutManager(this,3));
         binding.recView.setAdapter(markets_adapter);
         setdtat();
@@ -79,10 +73,5 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
     @Override
     public void back() {
         finish();
-    }
-
-    public void showProfile() {
-        Intent intent=new Intent(MarketActivity.this, MarketProfileActivity.class);
-        startActivity(intent);
     }
 }

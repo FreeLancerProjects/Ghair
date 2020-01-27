@@ -19,8 +19,8 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.activities_fragments.activity_home.activity_addauction.AddAuctionActivity;
-import com.endpoint.ghair.activities_fragments.activity_home.activity_service_require.ServiceRequireActivity;
+import com.endpoint.ghair.activities_fragments.activity_addauction.AddAuctionActivity;
+import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceRequireActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Require;

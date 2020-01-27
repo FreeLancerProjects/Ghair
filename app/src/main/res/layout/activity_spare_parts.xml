@@ -82,24 +82,23 @@
                     android:id="@+id/ll"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
+                    android:layout_margin="10dp"
                     android:background="@drawable/bt_shape"
                     android:orientation="horizontal"
                     android:padding="5dp"
                     android:weightSum="4"
-                    android:layout_margin="10dp"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <Button
                         android:id="@+id/btnSend"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:text="@string/searsh"
+                        android:layout_weight="1"
                         android:background="@drawable/search_shape"
+                        android:text="@string/searsh"
+                        android:textColor="@color/white"
 
-                       android:layout_weight="1"
-                        />
+                        android:textSize="13sp" />
 
                     <FrameLayout
                         android:layout_width="0dp"
@@ -114,8 +113,8 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="8dp"
-                            android:background="@drawable/spinner"
-                            android:backgroundTint="@color/black">
+                            android:background="@drawable/spinnerblack"
+                            >
 
                         </Spinner>
                     </FrameLayout>
@@ -134,8 +133,8 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="8dp"
-                            android:background="@drawable/spinner"
-                            android:backgroundTint="@color/black">
+                            android:background="@drawable/spinnerblack"
+                            >
 
                         </Spinner>
                     </FrameLayout>
@@ -156,87 +155,85 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="8dp"
-                            android:background="@drawable/spinner"
-                            android:backgroundTint="@color/black">
+                            android:background="@drawable/spinnerblack"
+                            >
 
                         </Spinner>
                     </FrameLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:background="@drawable/bt_shape"
-                   android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/ll"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_margin="15dp"
+                    android:background="@drawable/bt_shape"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll"
 
                     >
+
                     <TextView
                         android:id="@+id/tvLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
                         android:background="@drawable/spare_parts"
+                        android:gravity="center_vertical"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:textSize="15sp"
                         android:singleLine="true"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginLeft="8dp"
-                        app:layout_constraintBottom_toTopOf="@+id/edtprname"
-                        app:layout_constraintTop_toTopOf="@+id/edtprname"
-                        app:layout_constraintStart_toStartOf="@+id/edtprname"
                         android:text="@string/spare_parts"
                         android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toTopOf="@+id/edtprname"
+                        app:layout_constraintStart_toStartOf="@+id/edtprname"
+                        app:layout_constraintTop_toTopOf="@+id/edtprname"
 
                         />
 
                     <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-       android:layout_weight="1"
-                    >
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                       android:padding="5dp"
-                        >
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp">
+
+                        </androidx.recyclerview.widget.RecyclerView>
 
 
-                    <ProgressBar
-                        android:id="@+id/progBar"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center"
-                        />
+                        <ProgressBar
+                            android:id="@+id/progBar"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:visibility="gone"
+                            android:layout_gravity="center" />
 
-                    <LinearLayout
-                        android:id="@+id/llNoNotification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        >
-
-                        <TextView
+                        <LinearLayout
+                            android:id="@+id/llNoNotification"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:text="no_notifications_to_display"
-                            />
-                    </LinearLayout>
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
-                </FrameLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="no_notifications_to_display"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                    </FrameLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

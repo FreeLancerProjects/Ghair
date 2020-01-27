@@ -2,7 +2,6 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,10 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
-import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
-import com.endpoint.ghair.databinding.AuctionRowBinding;
-import com.endpoint.ghair.databinding.MarketRowBinding;
+import com.endpoint.ghair.databinding.AccesoriesRowBinding;
 import com.endpoint.ghair.models.Slider_Model;
 
 import java.util.List;
@@ -22,20 +18,20 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Markets_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Accessories_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Slider_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-private MarketActivity marketActivity;
-    public Markets_Adapter(List<Slider_Model.Data> orderlist, Context context) {
+
+    public Accessories_Adapter(List<Slider_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-marketActivity=(MarketActivity)context;
+
 
     }
 
@@ -44,7 +40,7 @@ marketActivity=(MarketActivity)context;
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        MarketRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.market_row, parent, false);
+        AccesoriesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.accesories_row, parent, false);
         return new EventHolder(binding);
 
 
@@ -54,12 +50,7 @@ marketActivity=(MarketActivity)context;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        marketActivity.showProfile();
-    }
-});
+
 /*
 if(i==position){
     if(i!=0) {
@@ -107,9 +98,9 @@ if(i!=position) {
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public MarketRowBinding binding;
+        public AccesoriesRowBinding binding;
 
-        public EventHolder(@NonNull MarketRowBinding binding) {
+        public EventHolder(@NonNull AccesoriesRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

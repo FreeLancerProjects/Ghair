@@ -1,4 +1,4 @@
-package com.endpoint.ghair.activities_fragments.activity_home.activity_service_require;
+package com.endpoint.ghair.activities_fragments.activity_service_require;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.databinding.ActivityAddAuctionBinding;
 import com.endpoint.ghair.databinding.ActivityServiceRequireBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;

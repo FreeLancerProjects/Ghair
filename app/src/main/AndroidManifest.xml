@@ -13,9 +13,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         tools:targetApi="m">
-    <uses-library
-        android:name="org.apache.http.legacy"
-        android:required="false" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
 
         <meta-data
@@ -25,22 +25,38 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-    <activity
-        android:name=".activities_fragments.activity_home.HomeActivity"
-        android:configChanges="orientation|screenSize|keyboardHidden"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
         <activity
-            android:name=".activities_fragments.activity_home.activity_addauction.AddAuctionActivity"
+            android:name=".activities_fragments.activity_home.HomeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities_fragments.activity_market_profile.MarketProfileActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_home.activity_service_require.ServiceRequireActivity"
+            android:name=".activities_fragments.activity_accesories.AccessoriesActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activities_fragments.activity_products.ProductsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activities_fragments.activity_spare_parts.SparePartsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activities_fragments.activity_addauction.AddAuctionActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activities_fragments.activity_service_require.ServiceRequireActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
