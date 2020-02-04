@@ -12,21 +12,15 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/input">
+
 
         <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fillViewport="true"
-            android:fitsSystemWindows="true"
             android:scrollbars="none"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/input"
+         >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -50,13 +44,11 @@
                 <LinearLayout
                     android:id="@+id/ll"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/input"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="15dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_skip"
                     app:layout_constraintTop_toBottomOf="@+id/logo"
-                    app:layout_constraintVertical_bias="0"
-app:layout_constraintBottom_toTopOf="@+id/tv_skip"
                     >
 
                     <TextView
@@ -80,9 +72,8 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="30dp"
-                        >
+                        android:layout_height="55dp"
+                        android:layout_marginTop="30dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cons"
@@ -109,7 +100,7 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
                                 android:singleLine="true"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textColorHint="@color/gray4"
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -137,15 +128,15 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
+                                android:background="@color/input"
                                 android:inputType="phone"
                                 android:singleLine="true"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textColorHint="@color/gray4"
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/view2"
                                 app:layout_constraintStart_toEndOf="@id/view"
-
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <View
@@ -203,7 +194,7 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="55dp"
                         android:layout_marginTop="15dp">
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -212,8 +203,8 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
 
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/edt_shape"
+android:padding="5dp"
+                            android:layout_marginTop="8dp" android:background="@drawable/edt_shape"
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp"
 
@@ -230,12 +221,13 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
                                 android:layout_width="match_parent"
                                 android:layout_height="37dp"
                                 android:layout_gravity="center_vertical"
+                                android:layout_marginTop="8dp"
                                 android:inputType="textPassword"
                                 android:singleLine="true"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textColorHint="@color/gray4"
                                 android:textSize="14sp"
-
+                                android:background="@color/input"
                                 />
 
 
@@ -332,7 +324,6 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll"
                     app:layout_constraintVertical_bias="1"
 
 
@@ -340,5 +331,4 @@ app:layout_constraintBottom_toTopOf="@+id/tv_skip"
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
