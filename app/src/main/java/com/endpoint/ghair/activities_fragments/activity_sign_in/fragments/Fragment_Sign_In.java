@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.endpoint.ghair.databinding.FragmentSignInBinding;
 import com.endpoint.ghair.preferences.Preferences;
@@ -59,7 +60,13 @@ public class Fragment_Sign_In extends Fragment  {
            activity.DisplayFragmentSignUpCustomer();
        }
    });
-
+binding.tvSkip.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(activity, HomeActivity.class);
+        startActivity(intent);
+    }
+});
     }
 
 
