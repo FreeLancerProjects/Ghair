@@ -40,4 +40,23 @@
     <string name="products">Products</string>
     <string name="name">Name</string>
     <string name="market_profile">Market Profile</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="are_you_forgot_password">Forgot password ?</string>
+    <string name="sign_up2">Create Account</string>
+    <string name="login">Login</string>
+    <string name="skip">Skip</string>
+    <string name="new_user">Create new Account</string>
+    <string name="register_a_customer">Register a customer</string>
+    <string name="the_name_is_triple">The name is triple</string>
+    <string name="register">Register</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="accept_terms_and_conditions">Accept Terms And Conditions</string>
+    <string name="register_a_marketer_or_service_provider">Register a Marketer or service provider</string>
+    <string name="national_number">National Number</string>
+    <string name="user_name">User Name</string>
+    <string name="location">Location</string>
+    <string name="logo_image">Logo Image</string>
+
 </resources>
