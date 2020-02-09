@@ -104,7 +104,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void Back() {
-        if (fragmentSignUpAsMarketr !=null&& fragmentSignUpAsMarketr.isAdded()&& fragmentSignUpAsMarketr.isVisible())
+        if (fragment_sign_in !=null&& fragment_sign_in.isAdded()&& fragment_sign_in.isVisible())
         {
             finish();
 
