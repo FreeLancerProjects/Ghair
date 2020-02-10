@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_addservice.AddServiceActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
 import com.endpoint.ghair.adapters.Category_Adapter;
@@ -100,7 +101,7 @@ binding.tabLayout.setupWithViewPager(binding.pager);
 
 
     public void showmarkets() {
-        Intent intent=new Intent(activity, MarketActivity.class);
+        Intent intent=new Intent(activity, AddServiceActivity.class);
         startActivity(intent);
     }
 }

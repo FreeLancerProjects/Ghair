@@ -22,6 +22,9 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_addauction.AddAuctionActivity;
+import com.endpoint.ghair.activities_fragments.activity_cart.CartActivity;
+import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_More;
+import com.endpoint.ghair.activities_fragments.activity_profile.ProfileActivity;
 import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceRequireActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
@@ -38,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity  {
@@ -52,10 +56,12 @@ private TextView tv_title;
     private RecyclerView recmenu;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
-private ImageView imaddauction,imagechat;
+private ImageView imaddauction,imagechat,imagecart;
+private CircleImageView improfile;
     private Fragment_Require fragment_require;
 private Side_Menu_Adapter side_menu_adapter;
     private List<Slider_Model.Data> dataList;
+    private Fragment_More fragment_more;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -87,7 +93,10 @@ private Side_Menu_Adapter side_menu_adapter;
         tv_title=findViewById(R.id.tvtitle);
 imaddauction=findViewById(R.id.imageplus);
 imagechat=findViewById(R.id.imagechat);
+        imagecart=findViewById(R.id.imagecart);
+
 recmenu=findViewById(R.id.recView);
+improfile=findViewById(R.id.imageprofile);
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.input));
         side_menu_adapter=new Side_Menu_Adapter(dataList,this);
@@ -109,7 +118,20 @@ recmenu.setAdapter(side_menu_adapter);
                 }
             }
         });
-
+        imagecart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+improfile.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(HomeActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+});
         setdtat();
 
 
@@ -210,6 +232,7 @@ displayFragmentRequire();
                    case 3:
                        break;
                    case 4:
+                       displayFragmentMore();
                        break;
                }
                return false;
@@ -237,6 +260,11 @@ displayFragmentRequire();
            imaddauction.setVisibility(View.VISIBLE);
            tv_title.setText(getResources().getString(R.string.require));
        }
+       else if(pos==4){
+           imagechat.setVisibility(View.GONE);
+           imaddauction.setVisibility(View.VISIBLE);
+           tv_title.setText(getResources().getString(R.string.more));
+       }
     }
 
     private void displayFragmentMain() {
@@ -251,7 +279,9 @@ displayFragmentRequire();
             if (fragment_require != null && fragment_require.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_require).commit();
             }
-
+            if (fragment_more != null && fragment_more.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_more).commit();
+            }
             if (fragment_main.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_main).commit();
 
@@ -275,6 +305,9 @@ displayFragmentRequire();
             }
             if (fragment_require != null && fragment_require.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_require).commit();
+            }
+            if (fragment_more != null && fragment_more.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_more).commit();
             }
             if (fragment_auction.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_auction).commit();
@@ -300,7 +333,9 @@ displayFragmentRequire();
             if (fragment_auction != null && fragment_auction.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_auction).commit();
             }
-
+            if (fragment_more != null && fragment_more.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_more).commit();
+            }
             if (fragment_require.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_require).commit();
 
@@ -314,7 +349,31 @@ displayFragmentRequire();
 
     }
 
+    private void displayFragmentMore() {
+        try {
+            if (fragment_more == null) {
+                fragment_more = Fragment_More.newInstance();
+            }
+            if (fragment_main != null && fragment_main.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_main).commit();
+            }
+            if (fragment_require != null && fragment_require.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_require).commit();
+            }
+            if (fragment_auction != null && fragment_auction.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_auction).commit();
+            }
+            if (fragment_more.isAdded()) {
+                fragmentManager.beginTransaction().show(fragment_more).commit();
 
+            } else {
+                fragmentManager.beginTransaction().add(R.id.fragment_home_container, fragment_more, "fragment_more").addToBackStack("fragment_more").commit();
+
+            }
+            updateBottomNavigationPosition(4);
+        } catch (Exception e) {
+        }
+    }
 
     private void NavigateToSignInActivity() {
        // Intent intent = new Intent(HomeActivity.this, SignInActivity.class);

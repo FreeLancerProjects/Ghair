@@ -58,5 +58,15 @@
     <string name="user_name">User Name</string>
     <string name="location">Location</string>
     <string name="logo_image">Logo Image</string>
+    <string name="about_app">About App</string>
+    <string name="my_auction">My Auction</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="edit_information">Edit Information</string>
+    <string name="banks_account">Banks Account</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="logout">Logout</string>
+    <string name="detials">Detials</string>
+    <string name="cart">cart</string>
+    <string name="offers">Offers</string>
 
 </resources>
