@@ -27,6 +27,7 @@ import com.endpoint.ghair.activities_fragments.activity_addservice.AddServiceAct
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
 import com.endpoint.ghair.adapters.Category_Adapter;
+import com.endpoint.ghair.adapters.Service_Adapter;
 import com.endpoint.ghair.adapters.SlidingImage_Adapter;
 import com.endpoint.ghair.databinding.FragmnetMainBinding;
 import com.endpoint.ghair.models.Slider_Model;
@@ -51,6 +52,7 @@ public class Fragment_Main extends Fragment {
     private Preferences preferences;
     private SlidingImage_Adapter slidingImage__adapter;
     private Category_Adapter category_adapter;
+    private Service_Adapter service_adapter;
 
 private List<Slider_Model.Data> dataList;
     public static Fragment_Main newInstance() {
@@ -74,9 +76,11 @@ dataList=new ArrayList<>();
         preferences = Preferences.getInstance();
         Paper.init(activity);
         category_adapter=new Category_Adapter(dataList,activity,this);
+        service_adapter=new Service_Adapter(dataList,activity,this);
+
         binding.recBestseler.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
         binding.recDeparment.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
-binding.recDeparment.setAdapter(category_adapter);
+binding.recDeparment.setAdapter(service_adapter);
 binding.recBestseler.setAdapter(category_adapter);
 binding.tabLayout.setupWithViewPager(binding.pager);
         binding.tabLayout2.setupWithViewPager(binding.pager2);
@@ -97,11 +101,17 @@ binding.tabLayout.setupWithViewPager(binding.pager);
         binding.pager.setAdapter(slidingImage__adapter);
         binding.pager2.setAdapter(slidingImage__adapter);
         category_adapter.notifyDataSetChanged();
+        service_adapter.notifyDataSetChanged();
+
     }
 
 
     public void showmarkets() {
         Intent intent=new Intent(activity, AddServiceActivity.class);
+        startActivity(intent);
+    }
+    public void showmarkets2() {
+        Intent intent=new Intent(activity, MarketActivity.class);
         startActivity(intent);
     }
 }

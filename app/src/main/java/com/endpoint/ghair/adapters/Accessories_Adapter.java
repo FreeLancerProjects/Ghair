@@ -50,7 +50,9 @@ public class Accessories_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-
+if(position%2!=0){
+    eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.index));
+}
 /*
 if(i==position){
     if(i!=0) {

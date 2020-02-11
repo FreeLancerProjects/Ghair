@@ -50,7 +50,9 @@ HomeActivity activity;
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
-
+        if(position%2!=0){
+            rowBinding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ssss));
+        }
 
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();

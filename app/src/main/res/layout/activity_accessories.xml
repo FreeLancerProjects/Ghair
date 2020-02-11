@@ -28,7 +28,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@color/gray9"
+            android:background="@color/input"
             app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
@@ -48,7 +48,7 @@
                     android:padding="8dp"
                     android:rotation='@{lang.equals("en")?180:0}'
                     android:src="@drawable/ic_arrow_right"
-                    android:tint="@color/input" />
+                    android:tint="@color/white" />
 
                 <TextView
                     android:id="@+id/tvTitle"
@@ -61,7 +61,7 @@
                     android:gravity="center"
                     android:longClickable="false"
                     android:text="@string/accessories"
-                    android:textColor="@color/input"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
 
                     />

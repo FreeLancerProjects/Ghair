@@ -2,15 +2,17 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.databinding.CartRowBinding;
-import com.endpoint.ghair.databinding.OrderRowBinding;
+import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
+import com.endpoint.ghair.databinding.MostActiveRowBinding;
 import com.endpoint.ghair.models.Slider_Model;
 
 import java.util.List;
@@ -18,20 +20,21 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Slider_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-
-    public Cart_Adapter(List<Slider_Model.Data> orderlist, Context context) {
+private Fragment_Main fragment_main;
+private Fragment fragment;
+    public Service_Adapter(List<Slider_Model.Data> orderlist, Context context, Fragment fragment) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+this.fragment=fragment;
 
     }
 
@@ -40,7 +43,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        CartRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.cart_row, parent, false);
+        MostActiveRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.most_active_row, parent, false);
         return new EventHolder(binding);
 
 
@@ -51,8 +54,17 @@ public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         EventHolder eventHolder = (EventHolder) holder;
         if(position%2!=0){
-            eventHolder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_tire));
+            eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_auction));
         }
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(fragment instanceof  Fragment_Main){
+            fragment_main=(Fragment_Main)fragment;
+            fragment_main.showmarkets();
+        }
+    }
+});
 /*
 if(i==position){
     if(i!=0) {
@@ -100,9 +112,9 @@ if(i!=position) {
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public CartRowBinding binding;
+        public MostActiveRowBinding binding;
 
-        public EventHolder(@NonNull CartRowBinding binding) {
+        public EventHolder(@NonNull MostActiveRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

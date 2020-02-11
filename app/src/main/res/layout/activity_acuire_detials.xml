@@ -24,7 +24,56 @@
     </data>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray0"
+        android:orientation="vertical"
 
+        >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/input"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="@{()->backListener.back()}"
+            >
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/white"
+                android:padding="8dp"
+                android:clickable="false"
+                android:longClickable="false"
+                android:rotation='@{lang.equals("en")?180:0}'
+                />
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/white"
+                android:clickable="false"
+                android:longClickable="false"
+                android:textSize="16sp"
+                android:text="@string/auction_detials"
+                android:gravity="center"
+                />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested"
             android:layout_width="match_parent"
@@ -59,7 +108,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="3dp"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/ic_name"
                         android:tint="@color/input"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +146,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="3dp"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/ic_price"
                         android:tint="@color/input"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +184,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="3dp"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/ic_stopwatch"
                         android:tint="@color/input"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +223,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:padding="3dp"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/ic_offers"
                         android:tint="@color/input"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -213,6 +262,7 @@ app:el_expanded="true"
     android:orientation="vertical"
     >
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
@@ -221,8 +271,23 @@ app:el_expanded="true"
     </androidx.recyclerview.widget.RecyclerView>
 
 </net.cachapa.expandablelayout.ExpandableLayout>
+                <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:text="@string/add_offer"
+                    android:background="@drawable/btn_price_shape"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:layout_marginBottom="30dp"
+                    />
             </LinearLayout>
 
 
         </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 </layout>

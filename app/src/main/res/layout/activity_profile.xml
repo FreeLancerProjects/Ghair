@@ -16,6 +16,58 @@
 
 
     </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray0"
+        android:orientation="vertical"
+
+        >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/input"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->backListener.back()}"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:clickable="false"
+                android:longClickable="false"
+                android:padding="8dp"
+                android:rotation='@{lang.equals("en")?180:0}'
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:clickable="false"
+                android:gravity="center"
+                android:longClickable="false"
+                android:text="@string/profile"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+
+                />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -168,11 +220,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
-                app:tabTextColor="@color/colorPrimary"
-                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/input"
+                app:tabSelectedTextColor="@color/input"
                 app:tabIndicatorHeight="4dp"
                 app:tabIndicatorColor="@color/white"
-
+app:tabIndicator="@color/input"
                 />
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/pager"
@@ -182,5 +234,6 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 </layout>
 

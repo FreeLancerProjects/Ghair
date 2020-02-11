@@ -98,7 +98,7 @@ imagechat=findViewById(R.id.imagechat);
 recmenu=findViewById(R.id.recView);
 improfile=findViewById(R.id.imageprofile);
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.input));
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         side_menu_adapter=new Side_Menu_Adapter(dataList,this);
 recmenu.setLayoutManager(new LinearLayoutManager(this));
 recmenu.setAdapter(side_menu_adapter);

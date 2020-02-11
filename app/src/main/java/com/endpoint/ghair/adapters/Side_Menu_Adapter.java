@@ -50,6 +50,9 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
+        if(position%2!=0){
+            eventHolder.binding.icon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_chevrolet));
+        }
 
 /*
 if(i==position){

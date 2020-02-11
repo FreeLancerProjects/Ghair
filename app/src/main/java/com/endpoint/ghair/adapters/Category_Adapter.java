@@ -56,12 +56,19 @@ this.fragment=fragment;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        if(position%2!=0){
+            eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_tire));
+        }
+        else {
+            eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_auction));
+
+        }
+        eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         if(fragment instanceof  Fragment_Main){
             fragment_main=(Fragment_Main)fragment;
-            fragment_main.showmarkets();
+            fragment_main.showmarkets2();
         }
     }
 });

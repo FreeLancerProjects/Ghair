@@ -68,5 +68,8 @@
     <string name="detials">Detials</string>
     <string name="cart">cart</string>
     <string name="offers">Offers</string>
+    <string name="add_offer">Add Offer</string>
+    <string name="auction_detials">Auction Detials</string>
+    <string name="profile">Profile</string>
 
 </resources>

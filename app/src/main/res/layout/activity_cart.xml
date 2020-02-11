@@ -23,7 +23,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/input"
         app:contentInsetStart="0dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +35,7 @@
             android:longClickable="false"
             android:padding="13dp"
             android:src="@drawable/ic_arrow_right"
-            android:tint="@color/input"
+            android:tint="@color/white"
 
             android:rotation='@{lang.equals("en")?180:0}'
             android:onClick="@{()->backListener.back()}"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/cart"
-            android:textColor="@color/input"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
 

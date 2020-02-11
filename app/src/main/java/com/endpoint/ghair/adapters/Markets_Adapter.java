@@ -60,6 +60,9 @@ eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
         marketActivity.showProfile();
     }
 });
+        if(position%2!=0){
+            eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.ssss));
+        }
 /*
 if(i==position){
     if(i!=0) {

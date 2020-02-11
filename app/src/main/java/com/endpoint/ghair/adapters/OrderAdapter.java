@@ -50,7 +50,9 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-
+        if(position%2!=0){
+            eventHolder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_tire));
+        }
 /*
 if(i==position){
     if(i!=0) {

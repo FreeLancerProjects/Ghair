@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.databinding.CartRowBinding;
-import com.endpoint.ghair.databinding.OrderRowBinding;
+import com.endpoint.ghair.databinding.OfferRowBinding;
 import com.endpoint.ghair.models.Slider_Model;
 
 import java.util.List;
@@ -18,14 +18,14 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Offer_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Slider_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
 
-    public Cart_Adapter(List<Slider_Model.Data> orderlist, Context context) {
+    public Offer_Adapter(List<Slider_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -40,7 +40,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        CartRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.cart_row, parent, false);
+        OfferRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.offer_row, parent, false);
         return new EventHolder(binding);
 
 
@@ -50,9 +50,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-        if(position%2!=0){
-            eventHolder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_tire));
-        }
+
 /*
 if(i==position){
     if(i!=0) {
@@ -100,9 +98,9 @@ if(i!=position) {
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public CartRowBinding binding;
+        public OfferRowBinding binding;
 
-        public EventHolder(@NonNull CartRowBinding binding) {
+        public EventHolder(@NonNull OfferRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
