@@ -213,7 +213,7 @@
     </com.google.android.material.appbar.CollapsingToolbarLayout>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -223,7 +223,6 @@
             app:tabSelectedTextColor="@color/input"
             app:tabIndicatorHeight="4dp"
             app:tabIndicatorColor="@color/white"
-            app:tabIndicator="@color/input"
             />
 
 
@@ -233,6 +232,7 @@
             android:id="@+id/nested"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
@@ -244,9 +244,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-            >
+          />
 
-        </androidx.viewpager.widget.ViewPager>
 
 
 </androidx.core.widget.NestedScrollView>
