@@ -71,5 +71,7 @@
     <string name="add_offer">Add Offer</string>
     <string name="auction_detials">Auction Detials</string>
     <string name="profile">Profile</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
 
 </resources>

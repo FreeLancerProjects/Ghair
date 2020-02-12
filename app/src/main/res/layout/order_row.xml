@@ -85,7 +85,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/name"
+                        android:text="Mohamed"
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -116,7 +116,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/price"
+                        android:text="120"
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -147,7 +147,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/expiry_date"
+                        android:text="12/12/2020"
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -177,7 +177,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/auction_end_time"
+                        android:text="12:09 Am"
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 

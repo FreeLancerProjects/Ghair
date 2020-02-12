@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -128,6 +129,7 @@ recmenu.setAdapter(side_menu_adapter);
 improfile.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+        drawer.closeDrawer(GravityCompat.START);
         Intent intent=new Intent(HomeActivity.this, ProfileActivity.class);
         startActivity(intent);
     }

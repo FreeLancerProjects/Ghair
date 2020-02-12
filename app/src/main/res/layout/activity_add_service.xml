@@ -106,7 +106,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/name"
+                        android:text="@string/date"
                         android:textColor="@color/white"
                         android:textSize="13sp" />
                     <LinearLayout
@@ -164,7 +164,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/name"
+                        android:text="@string/time"
                         android:textColor="@color/white"
                         android:textSize="13sp" />
                     <LinearLayout
@@ -221,7 +221,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/name"
+                        android:text="@string/location"
                         android:textColor="@color/white"
                         android:textSize="13sp" />
                     <LinearLayout
