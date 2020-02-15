@@ -1,7 +1,6 @@
-package com.endpoint.ghair.activities_fragments.activity_home.fragments;
+package com.endpoint.ghair.activities_fragments.activity_home.fragments.fragment_profile.fragments;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,25 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.activities_fragments.activity_addservice.AddServiceActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
-import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
-import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentMyAuction;
-import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentMyOrder;
-import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentMyServices;
-import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentRequired;
-import com.endpoint.ghair.adapters.Category_Adapter;
-import com.endpoint.ghair.adapters.Service_Adapter;
-import com.endpoint.ghair.adapters.SlidingImage_Adapter;
+
 import com.endpoint.ghair.adapters.ViewPagerAdapter;
 import com.endpoint.ghair.databinding.FragmentProfileBinding;
-import com.endpoint.ghair.databinding.FragmnetMainBinding;
 import com.endpoint.ghair.models.Slider_Model;
-import com.endpoint.ghair.preferences.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +60,7 @@ activity=(HomeActivity)getActivity();
         addFragments_Titles();
         binding.pager.setOffscreenPageLimit(fragmentList.size());
 
-        adapter = new ViewPagerAdapter(activity.getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragments(fragmentList);
         adapter.addTitles(titles);
         binding.pager.setAdapter(adapter);
