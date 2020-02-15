@@ -55,6 +55,7 @@ public class FragmentMyOrder extends Fragment {
         activity = (ProfileActivity) getActivity();
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
+        binding.progBar.setVisibility(View.GONE);
 
 
         markets_adapter=new OrderAdapter(dataList,activity);
