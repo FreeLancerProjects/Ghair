@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentMyOrder;
 import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentMyAuction;
+import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentMyServices;
 import com.endpoint.ghair.activities_fragments.activity_profile.fragments.FragmentRequired;
 import com.endpoint.ghair.adapters.ViewPagerAdapter;
 import com.endpoint.ghair.databinding.ActivityProfileBinding;
@@ -76,10 +77,11 @@ binding.setBackListener(this);
         fragmentList.add(FragmentMyAuction.newInstance());
 
         fragmentList.add(FragmentRequired.newInstance());
-
+fragmentList.add(FragmentMyServices.newInstance());
         titles.add(getString(R.string.my_orders));
         titles.add(getString(R.string.my_auction));
         titles.add(getString(R.string.require));
+        titles.add(getString(R.string.my_services));
 
 
 

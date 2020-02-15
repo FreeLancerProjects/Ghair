@@ -27,6 +27,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_addauction.AddAuctionActivity;
 import com.endpoint.ghair.activities_fragments.activity_cart.CartActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_More;
+import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Profile;
 import com.endpoint.ghair.activities_fragments.activity_profile.ProfileActivity;
 import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceRequireActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
@@ -50,6 +51,11 @@ import io.paperdb.Paper;
 public class HomeActivity extends AppCompatActivity  {
     private FragmentManager fragmentManager;
     private Fragment_Main fragment_main;
+    private Fragment_Require fragment_require;
+    private Side_Menu_Adapter side_menu_adapter;
+    private List<Slider_Model.Data> dataList;
+    private Fragment_More fragment_more;
+    private Fragment_Profile fragment_profile;
     private Fragment_Auction fragment_auction;
     private AHBottomNavigation ahBottomNav;
 private TextView tv_title;
@@ -61,10 +67,6 @@ private TextView tv_title;
     private Toolbar toolbar;
 private ImageView imaddauction,imagechat,imagecart;
 private CircleImageView improfile;
-    private Fragment_Require fragment_require;
-private Side_Menu_Adapter side_menu_adapter;
-    private List<Slider_Model.Data> dataList;
-    private Fragment_More fragment_more;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -203,7 +205,7 @@ improfile.setOnClickListener(new View.OnClickListener() {
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(getResources().getString(R.string.home), R.drawable.ic_home);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(getResources().getString(R.string.auction), R.drawable.ic_auction);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(getResources().getString(R.string.required), R.drawable.ic_required);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(getResources().getString(R.string.my_orders), R.drawable.ic_orders);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(getResources().getString(R.string.profile), R.drawable.ic_user);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem(getResources().getString(R.string.more), R.drawable.ic_more);
 
        ahBottomNav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
@@ -236,6 +238,7 @@ improfile.setOnClickListener(new View.OnClickListener() {
 displayFragmentRequire();
                        break;
                    case 3:
+                       displayFragmentProfile();
                        break;
                    case 4:
                        displayFragmentMore();
@@ -266,6 +269,11 @@ displayFragmentRequire();
            imaddauction.setVisibility(View.VISIBLE);
            tv_title.setText(getResources().getString(R.string.require));
        }
+       else if(pos==3){
+           imagechat.setVisibility(View.GONE);
+           imaddauction.setVisibility(View.VISIBLE);
+           tv_title.setText(getResources().getString(R.string.profile));
+       }
        else if(pos==4){
            imagechat.setVisibility(View.GONE);
            imaddauction.setVisibility(View.VISIBLE);
@@ -287,6 +295,9 @@ displayFragmentRequire();
             }
             if (fragment_more != null && fragment_more.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_more).commit();
+            }
+            if (fragment_profile != null && fragment_profile.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_profile).commit();
             }
             if (fragment_main.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_main).commit();
@@ -315,6 +326,9 @@ displayFragmentRequire();
             if (fragment_more != null && fragment_more.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_more).commit();
             }
+            if (fragment_profile != null && fragment_profile.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_profile).commit();
+            }
             if (fragment_auction.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_auction).commit();
 
@@ -342,6 +356,9 @@ displayFragmentRequire();
             if (fragment_more != null && fragment_more.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_more).commit();
             }
+            if (fragment_profile != null && fragment_profile.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_profile).commit();
+            }
             if (fragment_require.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_require).commit();
 
@@ -353,6 +370,34 @@ displayFragmentRequire();
         } catch (Exception e) {
         }
 
+    }
+    private void displayFragmentProfile() {
+        try {
+            if (fragment_profile == null) {
+                fragment_profile = Fragment_Profile.newInstance();
+            }
+            if (fragment_main != null && fragment_main.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_main).commit();
+            }
+            if (fragment_require != null && fragment_require.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_require).commit();
+            }
+            if (fragment_auction != null && fragment_auction.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_auction).commit();
+            }
+            if (fragment_more != null && fragment_more.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_more).commit();
+            }
+            if (fragment_profile.isAdded()) {
+                fragmentManager.beginTransaction().show(fragment_profile).commit();
+
+            } else {
+                fragmentManager.beginTransaction().add(R.id.fragment_home_container, fragment_profile, "fragment_profile").addToBackStack("fragment_profile").commit();
+
+            }
+            updateBottomNavigationPosition(3);
+        } catch (Exception e) {
+        }
     }
 
     private void displayFragmentMore() {
@@ -368,6 +413,9 @@ displayFragmentRequire();
             }
             if (fragment_auction != null && fragment_auction.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_auction).commit();
+            }
+            if (fragment_profile != null && fragment_profile.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_profile).commit();
             }
             if (fragment_more.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_more).commit();

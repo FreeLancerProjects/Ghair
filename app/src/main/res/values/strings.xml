@@ -73,5 +73,6 @@
     <string name="profile">Profile</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
+    <string name="my_services">My Services</string>
 
 </resources>
