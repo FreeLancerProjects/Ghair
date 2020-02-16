@@ -82,4 +82,14 @@ public class ProductsDetialsActivity extends AppCompatActivity implements Listen
     public void back() {
         finish();
     }
+
+    public void showimage(int layoutPosition) {
+        if(layoutPosition%2!=0){
+           binding.imBanner.setImageDrawable(getResources().getDrawable(R.drawable.index));
+        }
+        else {
+            binding.imBanner.setImageDrawable(getResources().getDrawable(R.drawable.ic_auction));
+
+        }
+    }
 }

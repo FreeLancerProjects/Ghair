@@ -2,6 +2,7 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_products_detials.ProductsDetialsActivity;
 import com.endpoint.ghair.databinding.AccesoriesRowBinding;
 import com.endpoint.ghair.databinding.ProductImageRowBinding;
 import com.endpoint.ghair.models.Slider_Model;
@@ -24,14 +26,14 @@ public class Image_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-
+private ProductsDetialsActivity productsDetialsActivity;
     public Image_Adapter(List<Slider_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+productsDetialsActivity=(ProductsDetialsActivity)context;
 
     }
 
@@ -53,6 +55,12 @@ public class Image_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 if(position%2!=0){
     eventHolder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.index));
 }
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        productsDetialsActivity.showimage(eventHolder.getLayoutPosition());
+    }
+});
 /*
 if(i==position){
     if(i!=0) {

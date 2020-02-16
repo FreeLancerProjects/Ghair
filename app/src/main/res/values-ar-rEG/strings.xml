@@ -81,5 +81,8 @@
     <string name="add_to_cart">اضافه الى السله</string>
     <string name="confirm_order">اتمام الطلب</string>
     <string name="prodyct_detials">Prodyct Detials</string>
+    <string name="add_product">Add Product</string>
+    <string name="product_type">Product Type</string>
+    <string name="desc">Description</string>
 
 </resources>

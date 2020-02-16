@@ -81,5 +81,8 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="confirm_order">Confirm Order</string>
     <string name="prodyct_detials">Prodyct Detials</string>
+    <string name="add_product">Add Product</string>
+    <string name="product_type">Product Type</string>
+    <string name="desc">Description</string>
 
 </resources>

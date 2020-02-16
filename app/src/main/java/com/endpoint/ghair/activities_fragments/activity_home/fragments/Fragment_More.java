@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_addauction.AddProductActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.databinding.FragmentMoreBinding;
 import com.endpoint.ghair.preferences.Preferences;
@@ -51,7 +52,13 @@ public class Fragment_More extends Fragment {
         preferences = Preferences.getInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+binding.addProduct.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(activity, AddProductActivity.class);
+        startActivity(intent);
+    }
+});
 
     }
 
