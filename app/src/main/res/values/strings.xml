@@ -74,5 +74,12 @@
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="my_services">My Services</string>
+    <string name="front_car_detection">Front car detection</string>
+    <string name="honda_2020_unveiled">Honda 2020 unveiled</string>
+    <string name="properties">Properties</string>
+    <string name="rain_resistant">Rain resistant</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="prodyct_detials">Prodyct Detials</string>
 
 </resources>

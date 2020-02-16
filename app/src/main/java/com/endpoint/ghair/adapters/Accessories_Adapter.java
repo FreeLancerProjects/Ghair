@@ -2,6 +2,7 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivity;
 import com.endpoint.ghair.databinding.AccesoriesRowBinding;
 import com.endpoint.ghair.models.Slider_Model;
 
@@ -24,7 +26,7 @@ public class Accessories_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-
+private ProductsActivity productsActivity;
     public Accessories_Adapter(List<Slider_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
@@ -53,6 +55,15 @@ public class Accessories_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
 if(position%2!=0){
     eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.index));
 }
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(context instanceof  ProductsActivity){
+            productsActivity=(ProductsActivity)context;
+            productsActivity.showdetials();
+        }
+    }
+});
 /*
 if(i==position){
     if(i!=0) {

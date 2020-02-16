@@ -18,6 +18,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_complete_order.CompleteOrderActivity;
+import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivity;
+import com.endpoint.ghair.activities_fragments.activity_products_detials.ProductsDetialsActivity;
 import com.endpoint.ghair.adapters.Cart_Adapter;
 import com.endpoint.ghair.databinding.ActivityCartBinding;
 import com.endpoint.ghair.interfaces.Listeners;
@@ -98,4 +101,8 @@ private Cart_Adapter cart_adapter;
         finish();
     }
 
+    public void Complete() {
+        Intent intent=new Intent(CartActivity.this, CompleteOrderActivity.class);
+        startActivity(intent);
+    }
 }

@@ -74,5 +74,12 @@
     <string name="time">الوقت</string>
     <string name="date">التاريخ</string>
     <string name="my_services">خدماتى</string>
+    <string name="front_car_detection">كشف سياره امامى</string>
+    <string name="honda_2020_unveiled">كشف سياره هوندا امامى</string>
+    <string name="properties">الخصائص</string>
+    <string name="rain_resistant">مضاد للامطار</string>
+    <string name="add_to_cart">اضافه الى السله</string>
+    <string name="confirm_order">اتمام الطلب</string>
+    <string name="prodyct_detials">Prodyct Detials</string>
 
 </resources>
