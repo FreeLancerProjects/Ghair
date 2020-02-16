@@ -51,12 +51,38 @@ public class Fragment_More extends Fragment {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         Paper.init(activity);
+
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-binding.addProduct.setOnClickListener(new View.OnClickListener() {
+        if(lang.equals("en")){
+            binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
+            binding.tvEn.setTextColor(activity.getResources().getColor(R.color.white));
+            binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
+            binding.tvAr.setTextColor(activity.getResources().getColor(R.color.input));
+        }
+        else {
+            binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
+            binding.tvAr.setTextColor(activity.getResources().getColor(R.color.white));
+            binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
+            binding.tvEn.setTextColor(activity.getResources().getColor(R.color.input));
+        }
+binding.llLang.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(activity, AddProductActivity.class);
-        startActivity(intent);
+        if(lang.equals("ar")){
+            lang="en";
+            binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
+            binding.tvEn.setTextColor(activity.getResources().getColor(R.color.white));
+            binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
+            binding.tvAr.setTextColor(activity.getResources().getColor(R.color.input));
+        }
+        else {
+            lang="ar";
+            binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
+            binding.tvAr.setTextColor(activity.getResources().getColor(R.color.white));
+            binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
+            binding.tvEn.setTextColor(activity.getResources().getColor(R.color.input));
+        }
+activity.RefreshActivity(lang);
     }
 });
 

@@ -80,9 +80,10 @@
     <string name="rain_resistant">مضاد للامطار</string>
     <string name="add_to_cart">اضافه الى السله</string>
     <string name="confirm_order">اتمام الطلب</string>
-    <string name="prodyct_detials">Prodyct Detials</string>
-    <string name="add_product">Add Product</string>
-    <string name="product_type">Product Type</string>
-    <string name="desc">Description</string>
+    <string name="prodyct_detials">تفاصيل المنتج</string>
+    <string name="add_product">اضافة منتج</string>
+    <string name="product_type">نوع المنتج</string>
+    <string name="desc">التفاصيل</string>
+    <string name="product_price">سعر المنتج </string>
 
 </resources>

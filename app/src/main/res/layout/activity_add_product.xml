@@ -190,7 +190,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/price"
+                        android:text="@string/product_price"
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -199,8 +199,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingLeft="25dp"
-                        android:paddingRight="25dp">
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -217,14 +217,12 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginStart="30dp"
-                            android:background="@color/input"
-                            tools:ignore="RtlCompat" />
+
+                            android:background="@color/input" />
                     </LinearLayout>
 
 
                 </LinearLayout>
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -266,7 +264,9 @@
 
                     android:layout_height="150dp"
                     android:background="@drawable/edt_shape_dialog"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:layout_marginTop="10dp"
+                    >
 
 
                 </LinearLayout>

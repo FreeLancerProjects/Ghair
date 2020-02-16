@@ -228,51 +228,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/add_product"
-                        android:layout_width="0dp"
-                        android:layout_height="90dp"
-                        android:layout_marginStart="3dp"
-                        android:layout_marginEnd="3dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-
-                        >
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_horizontal"
-                            android:clickable="false"
-                            android:longClickable="false"
-                            android:src="@drawable/add"
-                            android:tint="@color/input"
-                            android:padding="5dp"
-                            android:background="@drawable/add_bg"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
-                            android:clickable="false"
-                            android:gravity="center"
-                            android:longClickable="false"
-                            android:text="@string/add_product"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-
-                            />
-                    </LinearLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="3dp"
@@ -306,12 +261,13 @@
 
                             />
                     </LinearLayout>
-
                 </LinearLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_lang"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -320,10 +276,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
 android:padding="2dp"
-                android:weightSum="3"
+                android:weightSum="2"
                 >
 
                 <TextView
+                    android:id="@+id/tv_en"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -331,7 +288,7 @@ android:padding="2dp"
                     android:clickable="false"
                     android:gravity="center"
                     android:longClickable="false"
-                    android:padding="10dp"
+                    android:padding="15dp"
                     android:text="English"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -340,6 +297,7 @@ android:padding="2dp"
                     />
 
                 <TextView
+                    android:id="@+id/tv_ar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -350,7 +308,7 @@ android:padding="2dp"
                     android:text="عربى"
                     android:textColor="@color/input"
                     android:textSize="14sp"
-android:layout_weight="1"
+                    android:layout_weight="1"
                     />
 
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -25,6 +27,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_addauction.AddAuctionActivity;
+import com.endpoint.ghair.activities_fragments.activity_addauction.AddProductActivity;
 import com.endpoint.ghair.activities_fragments.activity_cart.CartActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_More;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.fragment_profile.fragments.Fragment_Profile;
@@ -46,7 +49,7 @@ import java.util.Locale;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
-public class HomeActivity extends AppCompatActivity  {
+public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment_Main fragment_main;
     private Fragment_Require fragment_require;
@@ -56,15 +59,17 @@ public class HomeActivity extends AppCompatActivity  {
     private Fragment_Profile fragment_profile;
     private Fragment_Auction fragment_auction;
     private AHBottomNavigation ahBottomNav;
-private TextView tv_title;
+
+    private TextView tv_title;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private Preferences preferences;
     private RecyclerView recmenu;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
-private ImageView imaddauction,imagechat,imagecart;
-private CircleImageView improfile;
+    private ImageView imaddauction, imagechat, imagecart;
+    private ConstraintLayout cons_add;
+    private CircleImageView improfile;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -89,24 +94,25 @@ private CircleImageView improfile;
 
     @SuppressLint("RestrictedApi")
     private void initView() {
-        dataList=new ArrayList<>();
+        dataList = new ArrayList<>();
         ahBottomNav = findViewById(R.id.ah_bottom_nav);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         fragmentManager = getSupportFragmentManager();
         toolbar = findViewById(R.id.toolbar);
-        tv_title=findViewById(R.id.tvtitle);
-imaddauction=findViewById(R.id.imageplus);
-imagechat=findViewById(R.id.imagechat);
-        imagecart=findViewById(R.id.imagecart);
+        tv_title = findViewById(R.id.tvtitle);
+        imaddauction = findViewById(R.id.imageplus);
+        imagechat = findViewById(R.id.imagechat);
+        imagecart = findViewById(R.id.imagecart);
 
-recmenu=findViewById(R.id.recView);
-improfile=findViewById(R.id.imageprofile);
-        toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
+        recmenu = findViewById(R.id.recView);
+        improfile = findViewById(R.id.imageprofile);
+        cons_add = findViewById(R.id.cons_add);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-        side_menu_adapter=new Side_Menu_Adapter(dataList,this);
-recmenu.setLayoutManager(new LinearLayoutManager(this));
-recmenu.setAdapter(side_menu_adapter);
+        side_menu_adapter = new Side_Menu_Adapter(dataList, this);
+        recmenu.setLayoutManager(new LinearLayoutManager(this));
+        recmenu.setAdapter(side_menu_adapter);
 
 
         toggle.syncState();
@@ -114,11 +120,11 @@ recmenu.setAdapter(side_menu_adapter);
         imaddauction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(fragment_auction!=null&&fragment_auction.isVisible()){
-                Intent intent=new Intent(HomeActivity.this, AddAuctionActivity.class);
-                startActivity(intent);}
-                else {
-                    Intent intent=new Intent(HomeActivity.this, ServiceRequireActivity.class);
+                if (fragment_auction != null && fragment_auction.isVisible()) {
+                    Intent intent = new Intent(HomeActivity.this, AddAuctionActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(HomeActivity.this, ServiceRequireActivity.class);
                     startActivity(intent);
                 }
             }
@@ -126,20 +132,26 @@ recmenu.setAdapter(side_menu_adapter);
         imagecart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomeActivity.this, CartActivity.class);
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });
-improfile.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        drawer.closeDrawer(GravityCompat.START);
-        Intent intent=new Intent(HomeActivity.this, ProfileActivity.class);
-        startActivity(intent);
-    }
-});
+        improfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.closeDrawer(GravityCompat.START);
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        cons_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            }
+        });
         setdtat();
-
 
 
     }
@@ -206,77 +218,73 @@ improfile.setOnClickListener(new View.OnClickListener() {
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(getResources().getString(R.string.profile), R.drawable.ic_user);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem(getResources().getString(R.string.more), R.drawable.ic_more);
 
-       ahBottomNav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
-       ahBottomNav.setDefaultBackgroundColor(ContextCompat.getColor(this, R.color.white));
-       ahBottomNav.setTitleTextSizeInSp(14, 12);
-       ahBottomNav.setForceTint(true);
-       ahBottomNav.setAccentColor(ContextCompat.getColor(this, R.color.input));
-       ahBottomNav.setInactiveColor(ContextCompat.getColor(this, R.color.gray8));
+        ahBottomNav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
+        ahBottomNav.setDefaultBackgroundColor(ContextCompat.getColor(this, R.color.white));
+        ahBottomNav.setTitleTextSizeInSp(14, 12);
+        ahBottomNav.setForceTint(true);
+        ahBottomNav.setAccentColor(ContextCompat.getColor(this, R.color.input));
+        ahBottomNav.setInactiveColor(ContextCompat.getColor(this, R.color.gray8));
 
-       ahBottomNav.addItem(item1);
-       ahBottomNav.addItem(item2);
-       ahBottomNav.addItem(item3);
-       ahBottomNav.addItem(item4);
-       ahBottomNav.addItem(item5);
+        ahBottomNav.addItem(item1);
+        ahBottomNav.addItem(item2);
+        ahBottomNav.addItem(item3);
+        ahBottomNav.addItem(item4);
+        ahBottomNav.addItem(item5);
 
         updateBottomNavigationPosition(0);
 
-       ahBottomNav.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
-           @Override
-           public boolean onTabSelected(int position, boolean wasSelected) {
-               switch (position) {
-                   case 0:
-                       displayFragmentMain();
-                       break;
-                   case 1:
-                       displayFragmentAuction();
+        ahBottomNav.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                switch (position) {
+                    case 0:
+                        displayFragmentMain();
+                        break;
+                    case 1:
+                        displayFragmentAuction();
 
-                       break;
-                   case 2:
-displayFragmentRequire();
-                       break;
-                   case 3:
-                       displayFragmentProfile();
-                       break;
-                   case 4:
-                       displayFragmentMore();
-                       break;
-               }
-               return false;
-           }
-       });
+                        break;
+                    case 2:
+                        displayFragmentRequire();
+                        break;
+                    case 3:
+                        displayFragmentProfile();
+                        break;
+                    case 4:
+                        displayFragmentMore();
+                        break;
+                }
+                return false;
+            }
+        });
 
 
     }
 
     private void updateBottomNavigationPosition(int pos) {
 
-       ahBottomNav.setCurrentItem(pos, false);
-       if(pos==0){
-           imagechat.setVisibility(View.VISIBLE);
-           imaddauction.setVisibility(View.GONE);
-           tv_title.setText(getResources().getString(R.string.home));
-       }
-       else if(pos==1){
-           imagechat.setVisibility(View.GONE);
-           imaddauction.setVisibility(View.VISIBLE);
-           tv_title.setText(getResources().getString(R.string.auction));
-       }
-       else if(pos==2){
-           imagechat.setVisibility(View.GONE);
-           imaddauction.setVisibility(View.VISIBLE);
-           tv_title.setText(getResources().getString(R.string.require));
-       }
-       else if(pos==3){
-           imagechat.setVisibility(View.GONE);
-           imaddauction.setVisibility(View.VISIBLE);
-           tv_title.setText(getResources().getString(R.string.profile));
-       }
-       else if(pos==4){
-           imagechat.setVisibility(View.GONE);
-           imaddauction.setVisibility(View.VISIBLE);
-           tv_title.setText(getResources().getString(R.string.more));
-       }
+        ahBottomNav.setCurrentItem(pos, false);
+        if (pos == 0) {
+            imagechat.setVisibility(View.VISIBLE);
+            imaddauction.setVisibility(View.GONE);
+            tv_title.setText(getResources().getString(R.string.home));
+        } else if (pos == 1) {
+            imagechat.setVisibility(View.GONE);
+            imaddauction.setVisibility(View.VISIBLE);
+            tv_title.setText(getResources().getString(R.string.auction));
+        } else if (pos == 2) {
+            imagechat.setVisibility(View.GONE);
+            imaddauction.setVisibility(View.VISIBLE);
+            tv_title.setText(getResources().getString(R.string.require));
+        } else if (pos == 3) {
+            imagechat.setVisibility(View.GONE);
+            imaddauction.setVisibility(View.VISIBLE);
+            tv_title.setText(getResources().getString(R.string.profile));
+        } else if (pos == 4) {
+            imagechat.setVisibility(View.GONE);
+            imaddauction.setVisibility(View.VISIBLE);
+            tv_title.setText(getResources().getString(R.string.more));
+        }
     }
 
     private void displayFragmentMain() {
@@ -369,6 +377,7 @@ displayFragmentRequire();
         }
 
     }
+
     private void displayFragmentProfile() {
         try {
             if (fragment_profile == null) {
@@ -428,38 +437,43 @@ displayFragmentRequire();
     }
 
     private void NavigateToSignInActivity() {
-       // Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
-       // startActivity(intent);
-       // finish();
+        // Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+        // startActivity(intent);
+        // finish();
     }
 
-    public void refreshActivity(String lang) {
-        Paper.book().write("lang", lang);
-        Language.setNewLocale(this, lang);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+    public void RefreshActivity(String lang)
+    {
+        Paper.book().write("lang",lang);
+        Language.setNewLocale(this,lang);
+        new Handler()
+                .postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent intent =  getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+                },1050);
+
+
 
     }
-
-
-
-
 
 
     @SuppressLint("RestrictedApi")
     @Override
     public void onBackPressed() {
 
-            if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
+        if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
 
-            } else {
-                displayFragmentMain();
-            }
+        } else {
+            displayFragmentMain();
+        }
 
 
     }
-
 
 
 }
