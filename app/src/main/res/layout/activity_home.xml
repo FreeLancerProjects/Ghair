@@ -19,12 +19,13 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/input"
         android:layout_gravity="start"
+        android:background="@color/input"
         android:fitsSystemWindows="true"
         android:padding="5dp"
 
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,82 +34,83 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/input"
-                android:padding="15dp"
                 android:layout_marginTop="10dp"
-                >
+                android:background="@color/input"
+                android:padding="15dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageprofile"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:layout_marginStart="8dp"
                     android:src="@drawable/ic_user"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="1dp"
                     app:civ_circle_background_color="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="8dp"
 
                     tools:ignore="RtlCompat" />
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/imageprofile"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    >
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:text="Ahmed"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                  />
 
-                <TextView
-                    android:id="@+id/tvphone"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="100000000"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                   />
-</LinearLayout>
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageprofile"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Ahmed"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvphone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="100000000"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/white"/>
+                android:background="@color/white" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cons_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/input"
-                >
+                android:background="@color/input">
+
                 <FrameLayout
                     android:id="@+id/fr"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:background="@drawable/add_bg"
                     android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     >
+
                     <ImageView
                         android:id="@+id/icon"
                         android:layout_width="25dp"
@@ -116,8 +118,7 @@
                         android:clickable="false"
                         android:longClickable="false"
                         android:src="@drawable/add"
-                        android:tint="@color/input"
-                        />
+                        android:tint="@color/input" />
 
                 </FrameLayout>
 
@@ -125,18 +126,18 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toEndOf="@id/fr"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:text="@string/add_product"
-                    android:clickable="false"
-                    android:longClickable="false"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:clickable="false"
+                    android:gravity="center_vertical"
+                    android:longClickable="false"
+                    android:text="@string/add_product"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/fr"
+                    app:layout_constraintTop_toTopOf="parent"
 
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -144,15 +145,15 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/white"/>
-            <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recView"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    >
+                android:background="@color/white" />
 
-</androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
