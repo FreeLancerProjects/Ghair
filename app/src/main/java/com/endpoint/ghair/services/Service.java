@@ -28,7 +28,7 @@ public interface Service {
 
     );
 
-    @GET("api/my-services")
+    @GET("api/services")
     Call<Service_Model> getservices(
             @Field("page") int page,
             @Header("lang")String lang
