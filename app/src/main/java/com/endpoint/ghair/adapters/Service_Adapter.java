@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
+import com.endpoint.ghair.databinding.ServicesRowBinding;
+import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.services.Service;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,13 +25,13 @@ import io.paperdb.Paper;
 
 public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Slider_Model.Data> orderlist;
+    private List<Service_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
 private Fragment_Main fragment_main;
 private Fragment fragment;
-    public Service_Adapter(List<Slider_Model.Data> orderlist, Context context, Fragment fragment) {
+    public Service_Adapter(List<Service_Model.Data> orderlist, Context context, Fragment fragment) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -43,7 +46,7 @@ this.fragment=fragment;
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        MostActiveRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.most_active_row, parent, false);
+        ServicesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.services_row, parent, false);
         return new EventHolder(binding);
 
 
@@ -53,9 +56,7 @@ this.fragment=fragment;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-        if(position%2!=0){
-            eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_auction));
-        }
+      eventHolder.binding.setServicemodel(orderlist.get(position));
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -112,9 +113,9 @@ if(i!=position) {
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public MostActiveRowBinding binding;
+        public ServicesRowBinding binding;
 
-        public EventHolder(@NonNull MostActiveRowBinding binding) {
+        public EventHolder(@NonNull ServicesRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

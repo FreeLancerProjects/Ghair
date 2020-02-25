@@ -17,6 +17,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.databinding.SliderBinding;
 import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.tags.Tags;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -50,9 +51,9 @@ HomeActivity activity;
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
-        if(position%2!=0){
-            rowBinding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ssss));
-        }
+        Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
+
+
 
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();

@@ -133,7 +133,7 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recDeparment"
+                    android:id="@+id/recservice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorAccent">
@@ -142,7 +142,7 @@
 
 
                 <ProgressBar
-                    android:id="@+id/progBar2"
+                    android:id="@+id/progBarservice"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -263,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
 
-                    android:visibility="gone" />
+                     />
             </FrameLayout>
 
         </LinearLayout>

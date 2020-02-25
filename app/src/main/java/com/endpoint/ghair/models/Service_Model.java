@@ -1,10 +1,21 @@
 package com.endpoint.ghair.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Service_Model implements Serializable {
+    private List<Data> data;
     private int current_page;
-            public class Data implements Serializable
+
+    public List<Data> getData() {
+        return data;
+    }
+
+    public int getCurrent_page() {
+        return current_page;
+    }
+
+    public class Data implements Serializable
     {
         private int id;
             private String ar_title;

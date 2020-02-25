@@ -85,5 +85,6 @@
     <string name="product_type">نوع المنتج</string>
     <string name="desc">التفاصيل</string>
     <string name="product_price">سعر المنتج </string>
+    <string name="something">تحقق من اتصالك بالانترنت</string>
 
 </resources>

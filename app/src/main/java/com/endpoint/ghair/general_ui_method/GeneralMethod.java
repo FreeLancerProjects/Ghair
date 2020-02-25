@@ -32,6 +32,29 @@ public class GeneralMethod {
 
         }
     }
+    @BindingAdapter("image")
+    public static void displayImage(View view,String endPoint)
+    {
+        if (endPoint!=null&&!endPoint.isEmpty())
+        {
+            if (view instanceof CircleImageView)
+            {
+                CircleImageView circleImageView = (CircleImageView) view;
+
+                Picasso.with(view.getContext()).load(Uri.parse(Tags.IMAGE_URL)+endPoint).fit().into(circleImageView);
+            }else if (view instanceof RoundedImageView)
+            {
+                RoundedImageView roundedImageView = (RoundedImageView) view;
+                Picasso.with(view.getContext()).load(Uri.parse(Tags.IMAGE_URL)+endPoint).fit().into(roundedImageView);
+
+            }else if (view instanceof ImageView)
+            {
+                ImageView imageView = (ImageView) view;
+                Picasso.with(view.getContext()).load(Uri.parse(Tags.IMAGE_URL)+endPoint).fit().into(imageView);
+
+            }
+        }
+    }
 
 
 

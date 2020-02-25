@@ -85,5 +85,6 @@
     <string name="product_type">Product Type</string>
     <string name="desc">Description</string>
     <string name="product_price">Product Price</string>
+    <string name="something">Check internet connection</string>
 
 </resources>

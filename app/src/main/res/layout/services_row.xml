@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="servicemodel"
+            type="com.endpoint.ghair.models.Service_Model.Data" />
 
 
     </data>
@@ -47,6 +50,7 @@
                         app:riv_border_color="@color/black"
                         app:riv_corner_radius="10dp"
 android:background="@color/gray9"
+image="@{servicemodel.image}"
                         />
 
                     <FrameLayout
@@ -64,7 +68,7 @@ android:background="@color/gray9"
                             android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="15sp"
-
+android:text="@{servicemodel.title}"
                            />
                     </FrameLayout>
 
