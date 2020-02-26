@@ -15,8 +15,12 @@ public class Service_Model implements Serializable {
         return current_page;
     }
 
-    public class Data implements Serializable
+    public static class Data implements Serializable
     {
+        public Data(String title) {
+            this.title = title;
+        }
+
         private int id;
             private String ar_title;
             private String en_title;

@@ -94,5 +94,6 @@
     <string name="ch_city">إختر المدينة</string>
     <string name="please_accept_terms">من فضلك اقبل الشروط  والاحكام</string>
     <string name="user_exists">المستخدم موجود</string>
+    <string name="ch_service">Choose Service</string>
 
 </resources>

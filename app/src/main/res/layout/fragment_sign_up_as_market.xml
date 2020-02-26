@@ -9,6 +9,10 @@
             name="lang"
             type="String" />
 
+        <variable
+            name="showDialogListener"
+            type="com.endpoint.ghair.interfaces.Listeners.ShowCountryDialogListener" />
+
 
     </data>
 
@@ -271,8 +275,8 @@
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
                                 android:padding="12dp"
-                                android:rotation='@{lang.equals("ar")?180:0}'
-                                android:src="@drawable/ic_arrow_right"
+                                android:rotation='@{lang.equals("en")?180:0}'
+                                android:onClick="@{()->showDialogListener.showDialog()}"                                android:src="@drawable/ic_arrow_right"
                                 android:tint="@color/white"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -406,7 +410,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/edtcompany"
                             app:layout_constraintTop_toTopOf="@+id/edtcompany"
                             app:layout_constraintStart_toStartOf="@+id/edtcompany"
-                            android:text="@string/country"
+                            android:text="@string/services"
                             android:textColor="@color/white"
 
                             />
@@ -435,7 +439,7 @@
 
 
                             <Spinner
-                                android:id="@+id/sp_type"
+                                android:id="@+id/spinnerCity"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 >
@@ -591,6 +595,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <RadioButton
+                        android:id="@+id/checkradio"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:text="@string/accept_terms_and_conditions"
