@@ -86,5 +86,6 @@
     <string name="desc">Description</string>
     <string name="product_price">Product Price</string>
     <string name="something">Check internet connection</string>
+    <string name="no_brands_found">No Brands Found</string>
 
 </resources>

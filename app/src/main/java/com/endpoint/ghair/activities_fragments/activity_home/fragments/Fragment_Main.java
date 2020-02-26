@@ -2,6 +2,7 @@ package com.endpoint.ghair.activities_fragments.activity_home.fragments;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,10 +24,11 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_addservice.AddServiceActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
-import com.endpoint.ghair.adapters.Category_Adapter;
+import com.endpoint.ghair.adapters.MostActiveMarkets_Adapter;
 import com.endpoint.ghair.adapters.Service_Adapter;
 import com.endpoint.ghair.adapters.SlidingImage_Adapter;
 import com.endpoint.ghair.databinding.FragmnetMainBinding;
+import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.preferences.Preferences;
@@ -51,12 +54,14 @@ public class Fragment_Main extends Fragment {
     private LinearLayoutManager manager, manager2;
     private Preferences preferences;
     private SlidingImage_Adapter slidingImage__adapter,slidingImage_adapter;
-    private Category_Adapter category_adapter;
+    private MostActiveMarkets_Adapter marketsAdapter;
     private Service_Adapter service_adapter;
     private int current_page = 0,current_page2 = 0, NUM_PAGES,NUM_PAGES2;
-    private boolean isLoading = false;
-    private int current_page3 = 1;
+    private boolean isLoading = false,isLoading2 = false;
+    private int current_page3 = 1,current_page4=1;
 private List<Service_Model.Data> servicedatalist;
+    private List<Market_Model.Data> marketlist;
+
     private String lang;
 
     public static Fragment_Main newInstance() {
@@ -71,6 +76,7 @@ get_sliderup();
 get_sliderdown();
 change_slide_image();
 getService();
+getMArkets();
         return binding.getRoot();
     }
 
@@ -79,33 +85,66 @@ getService();
     private void initView() {
 
 servicedatalist=new ArrayList<>();
+marketlist=new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        //category_adapter=new Category_Adapter(se,activity,this);
+        marketsAdapter=new MostActiveMarkets_Adapter(marketlist,activity,this);
         service_adapter=new Service_Adapter(servicedatalist,activity,this);
-
-        binding.recBestseler.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
-        binding.recservice.setLayoutManager(new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false));
+manager=new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false);
+        manager2=new LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false);
+binding.recservice.setDrawingCacheEnabled(true);
+binding.recservice.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+binding.recservice.setItemViewCacheSize(25);
+        binding.recBestseler.setDrawingCacheEnabled(true);
+        binding.recBestseler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        binding.recBestseler.setItemViewCacheSize(25);
+        binding.recBestseler.setLayoutManager(manager2);
+        binding.recservice.setLayoutManager(manager);
 binding.recservice.setAdapter(service_adapter);
-//binding.recBestseler.setAdapter(category_adapter);
+binding.recBestseler.setAdapter(marketsAdapter);
 binding.tabLayout.setupWithViewPager(binding.pager);
         binding.tabLayout2.setupWithViewPager(binding.pager2);
-        binding.recservice.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        binding.progBarservice.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        binding.progBarSlider.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        binding.progBarSlider2.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+
+//        binding.recservice.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//                if (dy > 0) {
+//                    int totalItems = service_adapter.getItemCount();
+//                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
+//                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
+//                        isLoading = true;
+//                        servicedatalist.add(null);
+//                        service_adapter.notifyItemInserted(servicedatalist.size() - 1);
+//                        int page = current_page3 + 1;
+//                        loadMoreService(page);
+//
+//
+//                    }
+//                }
+//            }
+//        });
+        binding.recBestseler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (dy > 0) {
-                    int totalItems = service_adapter.getItemCount();
-                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
-                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
-                        isLoading = true;
-                        servicedatalist.add(null);
-                        service_adapter.notifyItemInserted(servicedatalist.size() - 1);
-                        int page = current_page3 + 1;
-                        loadMoreService(page);
+                    int totalItems = marketsAdapter.getItemCount();
+                    int lastVisiblePos = manager2.findLastCompletelyVisibleItemPosition();
+                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading2) {
+                        isLoading2 = true;
+                        marketlist.add(null);
+                        marketsAdapter.notifyItemInserted(marketlist.size() - 1);
+                        int page = current_page4 + 1;
+                        loadMoreMarkets(page);
 
 
                     }
@@ -145,7 +184,7 @@ binding.tabLayout.setupWithViewPager(binding.pager);
         Api.getService(Tags.base_url).get_slider("up").enqueue(new Callback<Slider_Model>() {
             @Override
             public void onResponse(Call<Slider_Model> call, Response<Slider_Model> response) {
-                binding.progBar.setVisibility(View.GONE);
+                binding.progBarSlider.setVisibility(View.GONE);
 
                 if (response.isSuccessful()&&response.body()!=null&&response.body().getData()!=null) {
                     if (response.body().getData().size() > 0) {
@@ -173,7 +212,7 @@ binding.tabLayout.setupWithViewPager(binding.pager);
             @Override
             public void onFailure(Call<Slider_Model> call, Throwable t) {
                 try {
-                    binding.progBar.setVisibility(View.GONE);
+                    binding.progBarSlider.setVisibility(View.GONE);
                     binding.pager.setVisibility(View.GONE);
 
                     Log.e("Error", t.getMessage());
@@ -235,22 +274,22 @@ binding.tabLayout.setupWithViewPager(binding.pager);
     private void getService() {
         servicedatalist.clear();
         service_adapter.notifyDataSetChanged();
-        binding.progBar.setVisibility(View.VISIBLE);
+        binding.progBarservice.setVisibility(View.VISIBLE);
         try {
 
 
             Api.getService(Tags.base_url)
-                    .getservices(1,lang)
+                    .getServices(lang)
                     .enqueue(new Callback<Service_Model>() {
                         @Override
                         public void onResponse(Call<Service_Model> call, Response<Service_Model> response) {
-                            binding.progBar.setVisibility(View.GONE);
+                            binding.progBarservice.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 servicedatalist.clear();
                                 servicedatalist.addAll(response.body().getData());
                                 if (response.body().getData().size() > 0) {
                                     // rec_sent.setVisibility(View.VISIBLE);
-                                    //  Log.e("data",response.body().getData().get(0).getAr_title());
+                                      Log.e("datasssss",response.body().getData().get(0).getAr_title());
 
                                     binding.llNoServices.setVisibility(View.GONE);
                                     service_adapter.notifyDataSetChanged();
@@ -280,6 +319,119 @@ binding.tabLayout.setupWithViewPager(binding.pager);
                         public void onFailure(Call<Service_Model> call, Throwable t) {
                             try {
 
+                                binding.progBarservice.setVisibility(View.GONE);
+                                binding.llNoServices.setVisibility(View.VISIBLE);
+                                Toast.makeText(activity, getResources().getString(R.string.something), Toast.LENGTH_LONG).show();
+
+
+                                Log.e("errorsssss", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e("errorsss", e.getMessage());
+
+            binding.progBarservice.setVisibility(View.GONE);
+            binding.llNoServices.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+//    private void loadMoreService(int page) {
+//        try {
+//
+//
+//            Api.getService(Tags.base_url)
+//                    .getServices(page,lang)
+//                    .enqueue(new Callback<Service_Model>() {
+//                        @Override
+//                        public void onResponse(Call<Service_Model> call, Response<Service_Model> response) {
+//                            servicedatalist.remove(servicedatalist.size() - 1);
+//                            service_adapter.notifyItemRemoved(servicedatalist.size() - 1);
+//                            isLoading = false;
+//                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+//
+//                                servicedatalist.addAll(response.body().getData());
+//                                // categories.addAll(response.body().getCategories());
+//                                current_page3 = response.body().getCurrent_page();
+//                                service_adapter.notifyDataSetChanged();
+//
+//                            } else {
+//                                //Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+//                                try {
+//                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Service_Model> call, Throwable t) {
+//                            try {
+//                                servicedatalist.remove(servicedatalist.size() - 1);
+//                                service_adapter.notifyItemRemoved(servicedatalist.size() - 1);
+//                                isLoading = false;
+//                                // Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+//                                Log.e("error", t.getMessage());
+//                            } catch (Exception e) {
+//                            }
+//                        }
+//                    });
+//        } catch (Exception e) {
+//            servicedatalist.remove(servicedatalist.size() - 1);
+//            service_adapter.notifyItemRemoved(servicedatalist.size() - 1);
+//            isLoading = false;
+//        }
+//    }
+    private void getMArkets() {
+        servicedatalist.clear();
+        service_adapter.notifyDataSetChanged();
+        binding.progBar.setVisibility(View.VISIBLE);
+        try {
+
+
+            Api.getService(Tags.base_url)
+                    .getMarkets(1,lang)
+                    .enqueue(new Callback<Market_Model>() {
+                        @Override
+                        public void onResponse(Call<Market_Model> call, Response<Market_Model> response) {
+                            binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                                marketlist.clear();
+                                marketlist.addAll(response.body().getData());
+                                if (response.body().getData().size() > 0) {
+                                    // rec_sent.setVisibility(View.VISIBLE);
+
+                                    binding.llNoServices.setVisibility(View.GONE);
+                                    marketsAdapter.notifyDataSetChanged();
+                                    //   total_page = response.body().getMeta().getLast_page();
+
+                                } else {
+                                    marketsAdapter.notifyDataSetChanged();
+
+                                    binding.llNoStore.setVisibility(View.VISIBLE);
+
+                                }
+                            } else {
+                                marketsAdapter.notifyDataSetChanged();
+
+                                binding.llNoStore.setVisibility(View.VISIBLE);
+
+                                //Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Market_Model> call, Throwable t) {
+                            try {
+
                                 binding.progBar.setVisibility(View.GONE);
                                 binding.llNoStore.setVisibility(View.VISIBLE);
                                 Toast.makeText(activity, getResources().getString(R.string.something), Toast.LENGTH_LONG).show();
@@ -291,30 +443,32 @@ binding.tabLayout.setupWithViewPager(binding.pager);
                         }
                     });
         } catch (Exception e) {
+            Log.e("errorsss", e.getMessage());
+
             binding.progBar.setVisibility(View.GONE);
             binding.llNoStore.setVisibility(View.VISIBLE);
 
         }
     }
 
-    private void loadMoreService(int page) {
+    private void loadMoreMarkets(int page) {
         try {
 
 
             Api.getService(Tags.base_url)
-                    .getservices(page,lang)
-                    .enqueue(new Callback<Service_Model>() {
+                    .getMarkets(page,lang)
+                    .enqueue(new Callback<Market_Model>() {
                         @Override
-                        public void onResponse(Call<Service_Model> call, Response<Service_Model> response) {
-                            servicedatalist.remove(servicedatalist.size() - 1);
-                            service_adapter.notifyItemRemoved(servicedatalist.size() - 1);
-                            isLoading = false;
+                        public void onResponse(Call<Market_Model> call, Response<Market_Model> response) {
+                            marketlist.remove(marketlist.size() - 1);
+                            marketsAdapter.notifyItemRemoved(marketlist.size() - 1);
+                            isLoading2 = false;
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
 
-                                servicedatalist.addAll(response.body().getData());
+                                marketlist.addAll(response.body().getData());
                                 // categories.addAll(response.body().getCategories());
-                                current_page3 = response.body().getCurrent_page();
-                                service_adapter.notifyDataSetChanged();
+                                current_page4 = response.body().getCurrent_page();
+                                marketsAdapter.notifyDataSetChanged();
 
                             } else {
                                 //Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -327,11 +481,11 @@ binding.tabLayout.setupWithViewPager(binding.pager);
                         }
 
                         @Override
-                        public void onFailure(Call<Service_Model> call, Throwable t) {
+                        public void onFailure(Call<Market_Model> call, Throwable t) {
                             try {
-                                servicedatalist.remove(servicedatalist.size() - 1);
-                                service_adapter.notifyItemRemoved(servicedatalist.size() - 1);
-                                isLoading = false;
+                                marketlist.remove(marketlist.size() - 1);
+                                marketsAdapter.notifyItemRemoved(marketlist.size() - 1);
+                                isLoading2 = false;
                                 // Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 Log.e("error", t.getMessage());
                             } catch (Exception e) {
@@ -339,12 +493,11 @@ binding.tabLayout.setupWithViewPager(binding.pager);
                         }
                     });
         } catch (Exception e) {
-            servicedatalist.remove(servicedatalist.size() - 1);
-            service_adapter.notifyItemRemoved(servicedatalist.size() - 1);
-            isLoading = false;
+            marketlist.remove(marketlist.size() - 1);
+            marketsAdapter.notifyItemRemoved(marketlist.size() - 1);
+            isLoading2 = false;
         }
     }
-
 
 
     public void showmarkets() {

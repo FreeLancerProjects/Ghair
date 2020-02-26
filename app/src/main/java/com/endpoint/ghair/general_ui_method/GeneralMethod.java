@@ -12,6 +12,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.tags.Tags;
+import com.github.siyamed.shapeimageview.HexagonImageView;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -42,12 +43,19 @@ public class GeneralMethod {
                 CircleImageView circleImageView = (CircleImageView) view;
 
                 Picasso.with(view.getContext()).load(Uri.parse(Tags.IMAGE_URL)+endPoint).fit().into(circleImageView);
-            }else if (view instanceof RoundedImageView)
+            }else if (view instanceof HexagonImageView)
+            {
+                HexagonImageView roundedImageView = (HexagonImageView) view;
+                Picasso.with(view.getContext()).load(Uri.parse(Tags.IMAGE_URL)+endPoint).fit().into(roundedImageView);
+
+            }
+            else  if (view instanceof RoundedImageView)
             {
                 RoundedImageView roundedImageView = (RoundedImageView) view;
                 Picasso.with(view.getContext()).load(Uri.parse(Tags.IMAGE_URL)+endPoint).fit().into(roundedImageView);
 
-            }else if (view instanceof ImageView)
+            }
+            else if (view instanceof ImageView)
             {
                 ImageView imageView = (ImageView) view;
                 Picasso.with(view.getContext()).load(Uri.parse(Tags.IMAGE_URL)+endPoint).fit().into(imageView);

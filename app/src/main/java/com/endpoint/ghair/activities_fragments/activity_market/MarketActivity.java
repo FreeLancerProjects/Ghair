@@ -10,18 +10,14 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
-import com.endpoint.ghair.adapters.Category_Adapter;
-import com.endpoint.ghair.adapters.Markets_Adapter;
+import com.endpoint.ghair.adapters.MostActiveMarkets_Adapter;
 import com.endpoint.ghair.databinding.ActivityMarketsBinding;
-import com.endpoint.ghair.databinding.ActivityServiceRequireBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;
-import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.models.Market_Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +28,8 @@ import io.paperdb.Paper;
 public class MarketActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityMarketsBinding binding;
     private String lang;
-    private Markets_Adapter markets_adapter;
-    private List<Slider_Model.Data> dataList;
+    private MostActiveMarkets_Adapter mostActiveMarkets_adapter;
+    private List<Market_Model.Data> dataList;
 
 
     protected void attachBaseContext(Context newBase) {
@@ -61,24 +57,15 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
-        markets_adapter=new Markets_Adapter(dataList,this);
+        mostActiveMarkets_adapter =new MostActiveMarkets_Adapter(dataList,this,null);
         binding.recView.setLayoutManager(new GridLayoutManager(this,3));
-        binding.recView.setAdapter(markets_adapter);
-        setdtat();
+        binding.recView.setAdapter(mostActiveMarkets_adapter);
+       // setdtat();
 
 
 
     }
 
-    private void setdtat() {
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-
-
-        markets_adapter.notifyDataSetChanged();
-    }
 
     @Override
     public void back() {

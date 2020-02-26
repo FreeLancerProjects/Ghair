@@ -1,17 +1,20 @@
 package com.endpoint.ghair.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
+import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
 import com.endpoint.ghair.databinding.ServicesRowBinding;
 import com.endpoint.ghair.models.Service_Model;
@@ -24,7 +27,8 @@ import java.util.Locale;
 import io.paperdb.Paper;
 
 public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    private final int ITEM_DATA = 1;
+    private final int LOAD = 2;
     private List<Service_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
@@ -44,66 +48,41 @@ this.fragment=fragment;
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+        if (viewType==ITEM_DATA)
+        {
 
         ServicesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.services_row, parent, false);
         return new EventHolder(binding);
 
+    }else
+    {
+        LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more,parent,false);
+        return new LoadHolder(binding);
+    }
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        EventHolder eventHolder = (EventHolder) holder;
-      eventHolder.binding.setServicemodel(orderlist.get(position));
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(fragment instanceof  Fragment_Main){
-            fragment_main=(Fragment_Main)fragment;
-            fragment_main.showmarkets();
-        }
-    }
-});
-/*
-if(i==position){
-    if(i!=0) {
-        if (((EventHolder) holder).binding.expandLayout.isExpanded()) {
-            ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
-            ((EventHolder) holder).binding.expandLayout.collapse(true);
-            ((EventHolder) holder).binding.expandLayout.setVisibility(View.GONE);
-
-
+        if (holder instanceof EventHolder) {
+            EventHolder eventHolder = (EventHolder) holder;
+            eventHolder.binding.setServicemodel(orderlist.get(position));
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (fragment instanceof Fragment_Main) {
+                        fragment_main = (Fragment_Main) fragment;
+                        fragment_main.showmarkets();
+                    }
+                }
+            });
 
         }
-        else {
-
-          //  ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-            ((EventHolder) holder).binding.expandLayout.setVisibility(View.VISIBLE);
-
-           ((EventHolder) holder).binding.expandLayout.expand(true);
+        else
+        {
+            LoadHolder loadHolder = (LoadHolder) holder;
+            loadHolder.binding.progBar.setIndeterminate(true);
         }
-    }
-    else {
-        eventHolder.binding.tvTitle.setBackground(activity.getResources().getDrawable(R.drawable.linear_bg_green));
-
-        ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
-
-    }
-}
-if(i!=position) {
-    eventHolder.binding.tvTitle.setBackground(activity.getResources().getDrawable(R.drawable.linear_bg_white));
-    ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-    ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
-    ((EventHolder) holder).binding.expandLayout.collapse(true);
-
-
-}*/
 
     }
 
@@ -121,6 +100,27 @@ if(i!=position) {
 
         }
     }
+    public class LoadHolder extends RecyclerView.ViewHolder {
+        private LoadMoreBinding binding;
+        public LoadHolder(@NonNull LoadMoreBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        }
 
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+       Service_Model.Data order_Model = orderlist.get(position);
+        if (order_Model!=null)
+        {
+            return ITEM_DATA;
+        }else
+        {
+            return LOAD;
+        }
+
+    }
 
 }

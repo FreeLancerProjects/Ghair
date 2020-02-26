@@ -66,7 +66,7 @@ image="@{servicemodel.image}"
                             android:layout_gravity="center"
                             android:background="@color/colorPrimary"
                             android:gravity="center"
-                            android:textColor="@color/white"
+                            android:textColor="@color/input"
                             android:textSize="15sp"
 android:text="@{servicemodel.title}"
                            />

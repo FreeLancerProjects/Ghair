@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
-import com.endpoint.ghair.databinding.NavSideRowBinding;
-import com.endpoint.ghair.databinding.ServicesRowBinding;
-import com.endpoint.ghair.models.Brand_Model;
+import com.endpoint.ghair.databinding.MarketRowBinding;
+import com.endpoint.ghair.databinding.MostActiveRowBinding;
+import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.Service_Model;
 
 import java.util.List;
@@ -25,20 +25,22 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MostActiveMarkets_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int ITEM_DATA = 1;
     private final int LOAD = 2;
-    private List<Brand_Model.Data> orderlist;
+    private List<Market_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-
-    public Side_Menu_Adapter(List<Brand_Model.Data> orderlist, Context context) {
+private Fragment_Main fragment_main;
+private Fragment fragment;
+    public MostActiveMarkets_Adapter(List<Market_Model.Data> orderlist, Context context, Fragment fragment) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+this.fragment=fragment;
 
     }
 
@@ -48,7 +50,7 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (viewType==ITEM_DATA)
         {
 
-        NavSideRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.nav_side_row, parent, false);
+        MostActiveRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.most_active_row, parent, false);
         return new EventHolder(binding);
 
     }else
@@ -63,8 +65,16 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventHolder) {
             EventHolder eventHolder = (EventHolder) holder;
-            eventHolder.binding.setBrandemodel(orderlist.get(position));
+            eventHolder.binding.setMarketmodel(orderlist.get(position));
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (fragment instanceof Fragment_Main) {
+                        fragment_main = (Fragment_Main) fragment;
 
+                    }
+                }
+            });
 
         }
         else
@@ -81,9 +91,9 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public NavSideRowBinding binding;
+        public MostActiveRowBinding binding;
 
-        public EventHolder(@NonNull NavSideRowBinding binding) {
+        public EventHolder(@NonNull MostActiveRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -101,7 +111,7 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-       Brand_Model.Data order_Model = orderlist.get(position);
+       Market_Model.Data order_Model = orderlist.get(position);
         if (order_Model!=null)
         {
             return ITEM_DATA;

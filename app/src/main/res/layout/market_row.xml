@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="marketmodel"
+            type="com.endpoint.ghair.models.Market_Model.Data" />
 
 
     </data>
@@ -38,7 +41,9 @@
                 android:src="@drawable/shiop"
                 app:siBorderColor="@color/white"
                 app:siBorderWidth="5dp"
-                app:siSquare="true" />
+                app:siSquare="true"
+                image="@{marketmodel.logo}"
+                />
 
 
             <TextView
@@ -47,9 +52,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/markets"
+                android:text="@{marketmodel.market_title}"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+
+                />
 
 
         </LinearLayout>

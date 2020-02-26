@@ -5,7 +5,9 @@
 
     <data>
 
-
+        <variable
+            name="marketmodel"
+            type="com.endpoint.ghair.models.Market_Model.Data" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -17,7 +19,6 @@
         android:layout_marginBottom="5dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
-        app:contentPadding="5dp"
         app:cardBackgroundColor="@color/gray3"
         >
 
@@ -32,12 +33,12 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="90dp"
-                    android:layout_height="150dp">
+                    android:layout_height="90dp">
 
 
                     <ImageView
                         android:id="@+id/im_offer"
-                        android:layout_width="70dp"
+                        android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
@@ -46,8 +47,7 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-
-                        android:src="@drawable/ic_tire"
+                        image="@{marketmodel.logo}"
                         />
 
                     <FrameLayout
@@ -65,7 +65,7 @@
                             android:gravity="center"
                             android:textColor="@color/input"
                             android:textSize="15sp"
-                            android:text="@string/brand"
+                            android:text="@{marketmodel.market_title}"
 
                            />
                     </FrameLayout>

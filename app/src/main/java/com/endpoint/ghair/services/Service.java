@@ -1,6 +1,8 @@
 package com.endpoint.ghair.services;
 
 
+import com.endpoint.ghair.models.Brand_Model;
+import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.Slider_Model;
 
@@ -29,8 +31,17 @@ public interface Service {
     );
 
     @GET("api/services")
-    Call<Service_Model> getservices(
-            @Field("page") int page,
+    Call<Service_Model> getServices(
+            @Header("lang")String lang
+    );
+    @GET("api/brands")
+    Call<Brand_Model> getBrands(
+            @Query("page") int page,
+            @Header("lang")String lang
+    );
+    @GET("api/all-markets")
+    Call<Market_Model> getMarkets(
+            @Query("page") int page,
             @Header("lang")String lang
     );
 }

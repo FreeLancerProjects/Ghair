@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="brandemodel"
+            type="com.endpoint.ghair.models.Brand_Model.Data" />
 
     </data>
     <LinearLayout
@@ -28,11 +30,12 @@
                 >
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/icon"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:clickable="false"
                     android:longClickable="false"
 android:src="@drawable/ic_kia"
+                    image="@{brandemodel.image}"
                     />
                 <ProgressBar
                     android:id="@+id/progBar"
@@ -45,7 +48,7 @@ android:visibility="gone"
             <ImageView
                 android:id="@+id/arrow"
                 android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_height="45dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/ic_arrow_right"
                 android:padding="10dp"
@@ -59,7 +62,7 @@ android:visibility="gone"
 android:rotation="90"                />
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="55dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -67,7 +70,7 @@ android:rotation="90"                />
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/arrow"
-                android:text="Kia"
+                android:text="@{brandemodel.title}"
                 android:clickable="false"
                 android:longClickable="false"
                 android:layout_marginStart="10dp"

@@ -3,14 +3,20 @@ package com.endpoint.ghair.activities_fragments.activity_home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -38,28 +44,35 @@ import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Require;
 import com.endpoint.ghair.adapters.Side_Menu_Adapter;
 import com.endpoint.ghair.language.Language;
-import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.models.Brand_Model;
+import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.preferences.Preferences;
+import com.endpoint.ghair.remote.Api;
+import com.endpoint.ghair.tags.Tags;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment_Main fragment_main;
     private Fragment_Require fragment_require;
     private Side_Menu_Adapter side_menu_adapter;
-    private List<Slider_Model.Data> dataList;
+    private List<Brand_Model.Data> brandList;
     private Fragment_More fragment_more;
     private Fragment_Profile fragment_profile;
     private Fragment_Auction fragment_auction;
     private AHBottomNavigation ahBottomNav;
-
+private LinearLayoutManager manager;
     private TextView tv_title;
     private DrawerLayout drawer;
     private NavigationView navigationView;
@@ -70,7 +83,11 @@ public class HomeActivity extends AppCompatActivity {
     private ImageView imaddauction, imagechat, imagecart;
     private ConstraintLayout cons_add;
     private CircleImageView improfile;
-
+    private boolean isLoading = false;
+    private int current_page3 = 1;
+    private String lang;
+    private ProgressBar progBar;
+    private LinearLayout llNobrands;
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
@@ -84,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
         initView();
+        getBrands();
         if (savedInstanceState == null) {
 
             displayFragmentMain();
@@ -94,7 +112,9 @@ public class HomeActivity extends AppCompatActivity {
 
     @SuppressLint("RestrictedApi")
     private void initView() {
-        dataList = new ArrayList<>();
+        Paper.init(this);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        brandList = new ArrayList<>();
         ahBottomNav = findViewById(R.id.ah_bottom_nav);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -104,14 +124,18 @@ public class HomeActivity extends AppCompatActivity {
         imaddauction = findViewById(R.id.imageplus);
         imagechat = findViewById(R.id.imagechat);
         imagecart = findViewById(R.id.imagecart);
+        progBar = findViewById(R.id.progBar);
+        llNobrands=findViewById(R.id.ll_no_brands);
+        progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         recmenu = findViewById(R.id.recView);
         improfile = findViewById(R.id.imageprofile);
         cons_add = findViewById(R.id.cons_add);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-        side_menu_adapter = new Side_Menu_Adapter(dataList, this);
-        recmenu.setLayoutManager(new LinearLayoutManager(this));
+        side_menu_adapter = new Side_Menu_Adapter(brandList, this);
+        manager=new LinearLayoutManager(this);
+        recmenu.setLayoutManager(manager);
         recmenu.setAdapter(side_menu_adapter);
 
 
@@ -151,64 +175,143 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        setdtat();
+
+        recmenu.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy > 0) {
+                    int totalItems = side_menu_adapter.getItemCount();
+                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
+                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
+                        isLoading = true;
+                        brandList.add(null);
+                        side_menu_adapter.notifyItemInserted(brandList.size() - 1);
+                        int page = current_page3 + 1;
+                        loadMoreBrands(page);
 
 
+                    }
+                }
+            }
+        });
     }
 
-    private void setdtat() {
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-        dataList.add(new Slider_Model.Data());
-
+    private void getBrands() {
+        brandList.clear();
         side_menu_adapter.notifyDataSetChanged();
+        progBar.setVisibility(View.VISIBLE);
+        try {
+
+
+            Api.getService(Tags.base_url)
+                    .getBrands(1,lang)
+                    .enqueue(new Callback<Brand_Model>() {
+                        @Override
+                        public void onResponse(Call<Brand_Model> call, Response<Brand_Model> response) {
+                          progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                                brandList.clear();
+                                brandList.addAll(response.body().getData());
+                                if (response.body().getData().size() > 0) {
+                                    // rec_sent.setVisibility(View.VISIBLE);
+
+                                   llNobrands.setVisibility(View.GONE);
+                                    side_menu_adapter.notifyDataSetChanged();
+                                    recmenu.setVisibility(View.VISIBLE);
+                                    //   total_page = response.body().getMeta().getLast_page();
+
+                                } else {
+                                    side_menu_adapter.notifyDataSetChanged();
+
+                                    llNobrands.setVisibility(View.VISIBLE);
+
+                                }
+                            } else {
+                                side_menu_adapter.notifyDataSetChanged();
+
+                               llNobrands.setVisibility(View.VISIBLE);
+
+                                //Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Brand_Model> call, Throwable t) {
+                            try {
+
+                                progBar.setVisibility(View.GONE);
+                              llNobrands.setVisibility(View.VISIBLE);
+                                Toast.makeText(HomeActivity.this, getResources().getString(R.string.something), Toast.LENGTH_LONG).show();
+
+
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e("errorsss", e.getMessage());
+
+            progBar.setVisibility(View.GONE);
+            llNobrands.setVisibility(View.VISIBLE);
+
+        }
     }
 
+    private void loadMoreBrands(int page) {
+        try {
+
+
+            Api.getService(Tags.base_url)
+                    .getBrands(page,lang)
+                    .enqueue(new Callback<Brand_Model>() {
+                        @Override
+                        public void onResponse(Call<Brand_Model> call, Response<Brand_Model> response) {
+                            brandList.remove(brandList.size() - 1);
+                            side_menu_adapter.notifyItemRemoved(brandList.size() - 1);
+                            isLoading = false;
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+
+                                brandList.addAll(response.body().getData());
+                                // categories.addAll(response.body().getCategories());
+                                current_page3 = response.body().getCurrent_page();
+                                side_menu_adapter.notifyDataSetChanged();
+
+                            } else {
+                                //Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Brand_Model> call, Throwable t) {
+                            try {
+                                brandList.remove(brandList.size() - 1);
+                                side_menu_adapter.notifyItemRemoved(brandList.size() - 1);
+                                isLoading = false;
+                                // Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            brandList.remove(brandList.size() - 1);
+            side_menu_adapter.notifyItemRemoved(brandList.size() - 1);
+            isLoading = false;
+        }
+    }
 
     private void setUpBottomNavigation() {
 

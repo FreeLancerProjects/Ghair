@@ -147,13 +147,63 @@
                 android:layout_height="2dp"
                 android:background="@color/white" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recView"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:padding="8dp"
+android:layout_weight="1"
+                android:background="@color/input"
+                >
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <LinearLayout
+                    android:id="@+id/ll_no_brands"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:tint="@color/colorPrimary"
+android:src="@drawable/ic_cart"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/no_brands_found"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/input"
+                    android:visibility="gone"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+                <ProgressBar
+                    android:id="@+id/progBar"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+
+                    />
+
+
+            </FrameLayout>
+
 
         </LinearLayout>
 
