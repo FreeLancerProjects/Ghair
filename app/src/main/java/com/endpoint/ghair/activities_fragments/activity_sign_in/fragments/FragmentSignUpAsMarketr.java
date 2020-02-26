@@ -143,7 +143,7 @@ public class FragmentSignUpAsMarketr extends Fragment implements  Listeners.Show
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .getCity()
+                    .getServices(current_language)
                     .enqueue(new Callback<Service_Model>() {
                         @Override
                         public void onResponse(Call<Service_Model> call, Response<Service_Model> response) {
