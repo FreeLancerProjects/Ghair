@@ -3,6 +3,7 @@ package com.endpoint.ghair.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.tags.Tags;
 import com.google.gson.Gson;
 
@@ -49,7 +50,7 @@ public class Preferences {
         return preferences.getBoolean("selected", false);
     }
 
-  /*  public void create_update_userdata(Context context, UserModel userModel) {
+   public void create_update_userdata(Context context, UserModel userModel) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String user_data = gson.toJson(userModel);
@@ -66,8 +67,7 @@ public class Preferences {
         String user_data = preferences.getString("user_data", "");
         UserModel userModel = gson.fromJson(user_data, UserModel.class);
         return userModel;
-    }*/
-
+    }
     public void create_update_session(Context context, String session) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
 

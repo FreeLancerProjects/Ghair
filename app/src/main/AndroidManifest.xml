@@ -35,6 +35,18 @@
         <activity
             android:name=".activities_fragments.activity_sign_in.activities.SignInActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+
+            />
+        <activity
+            android:name=".activities_fragments.activity_terms.TermsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+
+            />
+        <activity
+            android:name=".activities_fragments.activity_splash.Splash_Activity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,7 +8,22 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="loginModel"
+            type="com.endpoint.ghair.models.LoginModel" />
+        <variable
+            name="loginListener"
+            type="com.endpoint.ghair.interfaces.Listeners.LoginListener" />
+        <variable
+            name="showDialogListener"
+            type="com.endpoint.ghair.interfaces.Listeners.ShowCountryDialogListener" />
 
+        <variable
+            name="newAccountListener"
+            type="com.endpoint.ghair.interfaces.Listeners.CreateAccountListener" />
+        <variable
+            name="skipListener"
+            type="com.endpoint.ghair.interfaces.Listeners.SkipListener" />
 
     </data>
 
@@ -134,6 +149,9 @@
                                 android:textColor="@color/white"
                                 android:textColorHint="@color/gray4"
                                 android:textSize="14sp"
+                                android:text="@={loginModel.phone}"
+                                error="@{loginModel.error_phone}"
+
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/view2"
                                 app:layout_constraintStart_toEndOf="@id/view"
@@ -153,12 +171,12 @@
                             <ImageView
                                 android:id="@+id/image_phone_code"
                                 android:layout_width="40dp"
-                                android:layout_height="37dp"
+                                android:layout_height="0dp"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
                                 android:padding="12dp"
                                 android:rotation='@{lang.equals("ar")?180:0}'
-                                android:src="@drawable/ic_arrow_right"
+                                android:onClick="@{()->showDialogListener.showDialog()}"                                android:src="@drawable/ic_arrow_right"
                                 android:tint="@color/white"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +187,7 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="15dp"
@@ -228,6 +246,9 @@ android:padding="5dp"
                                 android:textColorHint="@color/gray4"
                                 android:textSize="14sp"
                                 android:background="@color/input"
+                                android:text="@={loginModel.password}"
+                                error="@{loginModel.error_password}"
+
                                 />
 
 
@@ -236,7 +257,7 @@ android:padding="5dp"
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="15dp"
@@ -286,7 +307,10 @@ android:padding="5dp"
                         android:paddingRight="50dp"
                         android:text="@string/login"
                         android:textColor="@color/input"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:onClick="@{()->loginListener.checkDataLogin(loginModel.phone_code,loginModel.phone,loginModel.password)}"
+
+                        />
                 </LinearLayout>
 
 
@@ -307,6 +331,7 @@ android:padding="5dp"
                     app:layout_constraintTop_toBottomOf="@id/ll"
                     app:layout_constraintVertical_bias="1"
 
+                    android:onClick="@{()->newAccountListener.createNewAccount()}"
 
                     tools:ignore="RtlCompat" />
 
@@ -325,6 +350,7 @@ android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintVertical_bias="1"
+                    android:onClick="@{()->skipListener.skip()}"
 
 
                     tools:ignore="RtlCompat" />

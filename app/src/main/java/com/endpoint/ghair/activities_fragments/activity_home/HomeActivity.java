@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -46,10 +47,12 @@ import com.endpoint.ghair.adapters.Side_Menu_Adapter;
 import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.Service_Model;
+import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.preferences.Preferences;
 import com.endpoint.ghair.remote.Api;
 import com.endpoint.ghair.tags.Tags;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,10 +76,11 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Auction fragment_auction;
     private AHBottomNavigation ahBottomNav;
 private LinearLayoutManager manager;
-    private TextView tv_title;
+    private TextView tv_title,tvname,tvphone;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private Preferences preferences;
+    private UserModel userModel;
     private RecyclerView recmenu;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
@@ -101,6 +105,11 @@ private LinearLayoutManager manager;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
         initView();
+        if(userModel!=null){
+            tvphone.setText(userModel.getPhone_code().replaceFirst("00","+")+userModel.getPhone());
+            tvname.setText(userModel.getName());
+            Picasso.with(this).load(Uri.parse(Tags.IMAGE_URL+userModel.getLogo())).placeholder(R.drawable.ic_user).fit().into(improfile);
+        }
         getBrands();
         if (savedInstanceState == null) {
 
@@ -112,6 +121,8 @@ private LinearLayoutManager manager;
 
     @SuppressLint("RestrictedApi")
     private void initView() {
+        preferences=Preferences.getInstance();
+        userModel=preferences.getUserData(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         brandList = new ArrayList<>();
@@ -121,6 +132,8 @@ private LinearLayoutManager manager;
         fragmentManager = getSupportFragmentManager();
         toolbar = findViewById(R.id.toolbar);
         tv_title = findViewById(R.id.tvtitle);
+        tvname=findViewById(R.id.tvName);
+        tvphone=findViewById(R.id.tvphone);
         imaddauction = findViewById(R.id.imageplus);
         imagechat = findViewById(R.id.imagechat);
         imagecart = findViewById(R.id.imagecart);

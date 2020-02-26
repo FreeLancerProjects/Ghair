@@ -87,5 +87,12 @@
     <string name="product_price">سعر المنتج </string>
     <string name="something">تحقق من اتصالك بالانترنت</string>
     <string name="no_brands_found">No Brands Found</string>
+    <string name="field_req">الحقل مطلوب</string>
+    <string name="pass_short">كلمة المرور قصيرة جدا</string>
+    <string name="wait">إنتظر قليلا...</string>
+    <string name="inc_phone_pas">رقم الجوال او كلمة المرور غير صحيحة</string>
+    <string name="ch_city">إختر المدينة</string>
+    <string name="please_accept_terms">من فضلك اقبل الشروط  والاحكام</string>
+    <string name="user_exists">المستخدم موجود</string>
 
 </resources>

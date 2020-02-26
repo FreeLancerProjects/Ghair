@@ -1,10 +1,13 @@
 package com.endpoint.ghair.services;
 
 
+import com.endpoint.ghair.models.App_Data_Model;
 import com.endpoint.ghair.models.Brand_Model;
+import com.endpoint.ghair.models.Cities_Model;
 import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.models.UserModel;
 
 import java.util.List;
 
@@ -43,5 +46,30 @@ public interface Service {
     Call<Market_Model> getMarkets(
             @Query("page") int page,
             @Header("lang")String lang
+    );
+    @FormUrlEncoded
+    @POST("api/login")
+    Call<UserModel> login(
+            @Field("phone_code") String phone_code,
+            @Field("phone") String phone,
+            @Field("password") String password
+    );
+    @GET("api/all-cities")
+    Call<Cities_Model> getCity();
+    @GET("api/app/info")
+    Call<App_Data_Model> getterms(
+            @Header("lang")String lang
+
+    );
+    @FormUrlEncoded
+    @POST("api/client/register")
+    Call<UserModel> sign_up(@Field("name") String name,
+                            @Field("phone_code") String phone_code,
+                            @Field("phone") String phone,
+
+                            @Field("country_id") String country_id,
+                            @Field("city_id") String city_id,
+                            @Field("password") String password,
+                            @Field("software_type")String software_type
     );
 }

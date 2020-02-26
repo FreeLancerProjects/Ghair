@@ -87,5 +87,12 @@
     <string name="product_price">Product Price</string>
     <string name="something">Check internet connection</string>
     <string name="no_brands_found">No Brands Found</string>
+    <string name="field_req">Field required</string>
+    <string name="pass_short">Password to short</string>
+    <string name="wait">Wait...</string>
+    <string name="inc_phone_pas">Incorrect phone number or password</string>
+    <string name="ch_city">Choose city</string>
+    <string name="please_accept_terms">Please Accept Terms And Condition</string>
+    <string name="user_exists">User Exists</string>
 
 </resources>
