@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">غيار</string>
-    <string name="map_api_key">AIzaSyCbc2Y5AIwZ8uUeHRUXiozGN3CnpjKT0oI</string>
+    <string name="map_api_key">AIzaSyArjmbYWTWZhDFFtPOLRLKYwjtBDkOEGrY</string>
     <string name="home">الرئيسيه</string>
     <string name="adversiment">اعلانات </string>
     <string name="services">خدمات</string>
@@ -94,6 +94,16 @@
     <string name="ch_city">إختر المدينة</string>
     <string name="please_accept_terms">من فضلك اقبل الشروط  والاحكام</string>
     <string name="user_exists">المستخدم موجود</string>
-    <string name="ch_service">Choose Service</string>
+    <string name="ch_service">اختر الخدمه</string>
+    <string name="english_title">العنوان بالانجليزى</string>
+    <string name="arabic_title">العنوان بالعربى</string>
+    <string name="perm_image_denied">الوصول لصور غير مسموح</string>
+    <string name="perm_camera_denied">الوصول للكاميرا غير مسموح</string>
+    <string name="upload_picture">إرفع صورة</string>
+    <string name="select_a_picture_to_upload">إختر صورة لرفعها</string>
+    <string name="camera">كاميرا</string>
+    <string name="gallery">البوم صور</string>
+    <string name="cancel">إلغاء</string>
+    <string name="inv_email">Invalid Email</string>
 
 </resources>

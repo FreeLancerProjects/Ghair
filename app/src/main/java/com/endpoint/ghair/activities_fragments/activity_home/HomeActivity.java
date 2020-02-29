@@ -107,7 +107,17 @@ private LinearLayoutManager manager;
         initView();
         if(userModel!=null){
             tvphone.setText(userModel.getPhone_code().replaceFirst("00","+")+userModel.getPhone());
-            tvname.setText(userModel.getName());
+            if(userModel.getUser_type().equals("market")){
+                if(lang.equals("ar")){
+                    tvname.setText(userModel.getAr_market_title());
+                }
+                else {
+                    tvname.setText(userModel.getEn_market_title());
+
+                }
+            }
+            else {
+            tvname.setText(userModel.getName());}
             Picasso.with(this).load(Uri.parse(Tags.IMAGE_URL+userModel.getLogo())).placeholder(R.drawable.ic_user).fit().into(improfile);
         }
         getBrands();

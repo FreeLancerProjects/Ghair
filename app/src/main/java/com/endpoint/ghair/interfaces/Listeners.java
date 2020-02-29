@@ -1,6 +1,8 @@
 package com.endpoint.ghair.interfaces;
 
 
+import com.endpoint.ghair.models.ContactUsModel;
+import com.endpoint.ghair.models.SignUpMArketModel;
 
 public interface Listeners {
 
@@ -39,9 +41,17 @@ public interface Listeners {
     {
         void back();
     }
+    interface SignupMArketListener
+    {
+        void checkDataSignUpMarket(SignUpMArketModel signUpMArketModel);
+    }
 
 
 
+    interface ContactListener
+    {
+        void sendContact(ContactUsModel contactUsModel);
+    }
 
 
 

@@ -1,4 +1,4 @@
-package com.endpoint.ghair.activities_fragments.activity_terms;
+package com.endpoint.ghair.activities_fragments.activity_about;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -15,7 +15,7 @@ import androidx.databinding.DataBindingUtil;
 
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.databinding.ActivityTermsBinding;
+import com.endpoint.ghair.databinding.ActivityAboutBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.App_Data_Model;
@@ -30,8 +30,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TermsActivity extends AppCompatActivity implements Listeners.BackListener {
-    private ActivityTermsBinding binding;
+public class AboutActivity extends AppCompatActivity implements Listeners.BackListener {
+    private ActivityAboutBinding binding;
     private String lang;
 
     @Override
@@ -45,7 +45,7 @@ public class TermsActivity extends AppCompatActivity implements Listeners.BackLi
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_terms);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_about);
         initView();
 
     }
@@ -58,12 +58,12 @@ public class TermsActivity extends AppCompatActivity implements Listeners.BackLi
         binding.setLang(lang);
         binding.setBackListener(this);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-        getTerms();
+        getAbout();
 
 
     }
 
-    private void getTerms() {
+    private void getAbout() {
 
         Api.getService(Tags.base_url)
                 .getterms(lang)
@@ -71,7 +71,7 @@ public class TermsActivity extends AppCompatActivity implements Listeners.BackLi
                     @Override
                     public void onResponse(Call<App_Data_Model> call, Response<App_Data_Model> response) {
                         binding.progBar.setVisibility(View.GONE);
-                        if (response.isSuccessful() && response.body() != null && response.body().getTerms() != null && response.body().getTerms()!= null) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getAbout_us() != null ) {
 
                             binding.setAppdatamodel(response.body());
                         } else {
@@ -81,14 +81,7 @@ public class TermsActivity extends AppCompatActivity implements Listeners.BackLi
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            if (response.code() == 500) {
-                                Toast.makeText(TermsActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
 
-                            } else {
-                                Toast.makeText(TermsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-
-
-                            }
                         }
                     }
 
@@ -99,9 +92,9 @@ public class TermsActivity extends AppCompatActivity implements Listeners.BackLi
                             if (t.getMessage() != null) {
                                 Log.e("error", t.getMessage());
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                    Toast.makeText(TermsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AboutActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(TermsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AboutActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
 

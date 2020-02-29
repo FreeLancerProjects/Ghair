@@ -142,7 +142,7 @@ binding.tvRegister.setOnClickListener(new View.OnClickListener() {
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .getCity()
+                    .getCity(current_language)
                     .enqueue(new Callback<Cities_Model>() {
                         @Override
                         public void onResponse(Call<Cities_Model> call, Response<Cities_Model> response) {
