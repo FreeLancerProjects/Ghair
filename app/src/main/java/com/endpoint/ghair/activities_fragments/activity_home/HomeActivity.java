@@ -43,6 +43,7 @@ import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceR
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Require;
+import com.endpoint.ghair.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.endpoint.ghair.adapters.Side_Menu_Adapter;
 import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Brand_Model;
@@ -219,6 +220,14 @@ private LinearLayoutManager manager;
                 }
             }
         });
+    }
+    public void Logout() {
+        userModel = null;
+        preferences.create_update_userdata(this, userModel);
+        preferences.create_update_session(this, Tags.session_logout);
+        Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void getBrands() {

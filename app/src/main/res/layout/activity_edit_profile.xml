@@ -11,23 +11,23 @@
 
         <variable
             name="editprofilelistner"
-            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.EditprofileListener" />
+            type="com.endpoint.ghair.interfaces.Listeners.EditprofileListener" />
 
         <variable
             name="showDialogListener"
-            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.ShowCountryDialogListener" />
+            type="com.endpoint.ghair.interfaces.Listeners.ShowCountryDialogListener" />
 
         <variable
             name="backListener"
-            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener" />
+            type="com.endpoint.ghair.interfaces.Listeners.BackListener" />
 
         <variable
             name="viewModel"
-            type="com.creative.share.apps.aamalnaa.models.EditprofileModel" />
+            type="com.endpoint.ghair.models.EditprofileModel" />
 
         <variable
             name="userModel"
-            type="com.creative.share.apps.aamalnaa.models.UserModel" />
+            type="com.endpoint.ghair.models.UserModel" />
     </data>
 
     <ScrollView
@@ -66,9 +66,9 @@
                     android:clickable="false"
                     android:longClickable="false"
                     android:padding="8dp"
-                    android:rotation='@{lang.equals("ar")?180:0}'
-                    android:src="@drawable/ic_left_arrow"
-                    android:tint="@color/colorPrimary"
+                    android:rotation='@{lang.equals("en")?180:0}'
+                    android:src="@drawable/ic_arrow_right"
+                    android:tint="@color/input"
 
                     />
 
@@ -79,7 +79,7 @@
                     android:clickable="false"
                     android:longClickable="false"
                     android:text="@string/back"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/input"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -96,11 +96,9 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/image"
-                    imageUserEndPoint="@{userModel.user.avatar}"
-                    type="@{2}"
+                    image="@{userModel.logo}"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:src="@drawable/logo"
                     app:civ_border_color="@color/gray4"
                     app:civ_border_width="1dp"
                     app:civ_circle_background_color="@color/white" />
@@ -187,7 +185,6 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:padding="5dp"
-                            android:src="@drawable/ic_phone_call"
                             android:tint="@color/colorPrimary"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -238,54 +235,6 @@
                         android:layout_marginBottom="8dp"
                         android:background="@color/colorPrimary" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:padding="5dp"
-                            android:src="@drawable/ic_email"
-                            android:tint="@color/colorPrimary" />
-
-                        <View
-                            android:layout_width="1px"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@color/gray4" />
-
-                        <EditText
-                            android:id="@+id/edtEmail"
-                            error="@{viewModel.error_email}"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:background="@color/transparent"
-                            android:hint="@string/email"
-                            android:inputType="textEmailAddress"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:singleLine="true"
-                            android:text="@={viewModel.email}"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/gray4"
-                            android:textSize="14sp"
-
-
-                            />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@color/colorPrimary" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -308,29 +257,7 @@
                         android:layout_marginBottom="8dp"
                         android:background="@color/colorPrimary" />
 
-                    <EditText
-                        android:id="@+id/edtabout"
-                        error="@{viewModel.error_about}"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@color/transparent"
-                        android:gravity="top"
-                        android:hint="@string/about"
-                        android:inputType="textEmailAddress"
-                        android:padding="8dp"
-                        android:singleLine="true"
-                        android:text="@={viewModel.about}"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/gray4"
-                        android:textSize="14sp"
 
-                        />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@color/colorPrimary" />
 
                 </LinearLayout>
 
@@ -343,8 +270,8 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="100dp"
-                android:background="@drawable/btn_login_bg"
-                android:onClick="@{()->editprofilelistner.Editprofile(viewModel.name,viewModel.phone,viewModel.email,viewModel.about)}"
+                android:background="@drawable/btn_price_shape"
+                android:onClick="@{()->editprofilelistner.Editprofile(viewModel.name,viewModel.phone)}"
                 android:text="@string/edit_profile"
                 android:textColor="@color/white"
                 android:textSize="15sp"

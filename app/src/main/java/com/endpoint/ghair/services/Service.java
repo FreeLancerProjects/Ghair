@@ -2,6 +2,7 @@ package com.endpoint.ghair.services;
 
 
 import com.endpoint.ghair.models.App_Data_Model;
+import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.Cities_Model;
 import com.endpoint.ghair.models.Market_Model;
@@ -64,6 +65,11 @@ public interface Service {
             @Header("lang") String lang
     );
 
+    @GET("api/allAuctions")
+    Call<Auction_Model> getAuctions(
+            @Query("page") int page,
+            @Header("lang") String lang
+    );
     @FormUrlEncoded
     @POST("api/login")
     Call<UserModel> login(
@@ -142,4 +148,15 @@ public interface Service {
                                    @Field("phone") String phone,
                                    @Field("message") String message
     );
+    @FormUrlEncoded
+    @POST("api/client/profile/update")
+    Call<UserModel> editprofile(@Field("name") String name,
+                                @Field("phone") String phone,
+                                @Field("city_id") String city_id,
+                                @Field("Authorization") String Authorization);
+    @Multipart
+    @POST("api/user_image")
+    Call<UserModel> editUserImage(@Part("Authorization") RequestBody Authorization,
+                                  @Part MultipartBody.Part image);
+
 }

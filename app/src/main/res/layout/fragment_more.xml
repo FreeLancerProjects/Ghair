@@ -43,6 +43,7 @@
                     android:weightSum="3">
 
                     <LinearLayout
+                        android:id="@+id/llabout"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="3dp"
@@ -78,6 +79,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llcontact"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="3dp"
@@ -113,6 +115,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/lledit"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="3dp"
@@ -191,6 +194,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llterms"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="3dp"
@@ -228,6 +232,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/lllogout"
                         android:layout_width="0dp"
                         android:layout_height="90dp"
                         android:layout_marginStart="3dp"

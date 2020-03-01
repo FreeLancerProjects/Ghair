@@ -1,11 +1,13 @@
 package com.endpoint.ghair.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.databinding.AuctionRowBinding;
+import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
+import com.endpoint.ghair.models.Auction_Model;
+import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.Slider_Model;
 
 import java.util.List;
@@ -23,12 +28,14 @@ import io.paperdb.Paper;
 
 public class Ouction_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Slider_Model.Data> orderlist;
+    private List<Auction_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
 Fragment_Auction fragment_auction;
-    public Ouction_Adapter(List<Slider_Model.Data> orderlist, Context context, Fragment fragment) {
+    private final int ITEM_DATA = 1;
+    private final int LOAD = 2;
+    public Ouction_Adapter(List<Auction_Model.Data> orderlist, Context context, Fragment fragment) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -42,64 +49,46 @@ Fragment_Auction fragment_auction;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+        if (viewType==ITEM_DATA) {
 
-        AuctionRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.auction_row, parent, false);
-        return new EventHolder(binding);
-
+            AuctionRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.auction_row, parent, false);
+            return new EventHolder(binding);
+        }
+        else
+        {
+            LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more,parent,false);
+            return new LoadHolder(binding);
+        }
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof MostActiveMarkets_Adapter.EventHolder) {
 
-        EventHolder eventHolder = (EventHolder) holder;
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        fragment_auction.show();
-    }
-});
-        if(position%2!=0){
-            eventHolder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ssss));
-        }
-/*
-if(i==position){
-    if(i!=0) {
-        if (((EventHolder) holder).binding.expandLayout.isExpanded()) {
-            ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
-            ((EventHolder) holder).binding.expandLayout.collapse(true);
-            ((EventHolder) holder).binding.expandLayout.setVisibility(View.GONE);
-
-
+            EventHolder eventHolder = (EventHolder) holder;
+            ((EventHolder) holder).binding.setAuctionmodel(orderlist.get(position));
+            if(orderlist.get(position).getAuction_image()!=null&&orderlist.get(position).getAuction_image().size()>0){
+                ((EventHolder) holder).binding.image.setVisibility(View.GONE);
+                SlidingImageAuction_Adapter slidingImageAuction_adapter=new SlidingImageAuction_Adapter(context,orderlist.get(position));
+            ((EventHolder) holder).binding.pager.setAdapter(slidingImageAuction_adapter);
+            }
+            else {
+                ((EventHolder) holder).binding.image.setVisibility(View.VISIBLE);
+            }
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    fragment_auction.show();
+                }
+            });
 
         }
-        else {
-
-          //  ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-            ((EventHolder) holder).binding.expandLayout.setVisibility(View.VISIBLE);
-
-           ((EventHolder) holder).binding.expandLayout.expand(true);
+        else
+        {
+            LoadHolder loadHolder = (LoadHolder) holder;
+            loadHolder.binding.progBar.setIndeterminate(true);
         }
-    }
-    else {
-        eventHolder.binding.tvTitle.setBackground(activity.getResources().getDrawable(R.drawable.linear_bg_green));
-
-        ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
-
-    }
-}
-if(i!=position) {
-    eventHolder.binding.tvTitle.setBackground(activity.getResources().getDrawable(R.drawable.linear_bg_white));
-    ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-    ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
-    ((EventHolder) holder).binding.expandLayout.collapse(true);
-
-
-}*/
 
     }
 
@@ -116,6 +105,28 @@ if(i!=position) {
             this.binding = binding;
 
         }
+    }
+    public class LoadHolder extends RecyclerView.ViewHolder {
+        private LoadMoreBinding binding;
+        public LoadHolder(@NonNull LoadMoreBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        }
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        Auction_Model.Data order_Model = orderlist.get(position);
+        if (order_Model!=null)
+        {
+            return ITEM_DATA;
+        }else
+        {
+            return LOAD;
+        }
+
     }
 
 

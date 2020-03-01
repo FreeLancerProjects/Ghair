@@ -105,5 +105,11 @@
     <string name="gallery">Gallery</string>
     <string name="cancel">Cancel</string>
     <string name="inv_email">Invalid Email</string>
+    <string name="send">Send</string>
+    <string name="email">Email</string>
+    <string name="phone">phone</string>
+    <string name="message">Message</string>
+    <string name="back">Back</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>

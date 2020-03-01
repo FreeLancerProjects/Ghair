@@ -16,10 +16,16 @@ import androidx.fragment.app.Fragment;
 
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_about.AboutActivity;
 import com.endpoint.ghair.activities_fragments.activity_addauction.AddProductActivity;
+import com.endpoint.ghair.activities_fragments.activity_contact.ContactActivity;
+import com.endpoint.ghair.activities_fragments.activity_edit_profile.Edit_Profile_Activity;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
+import com.endpoint.ghair.activities_fragments.activity_terms.TermsActivity;
 import com.endpoint.ghair.databinding.FragmentMoreBinding;
+import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.preferences.Preferences;
+import com.endpoint.ghair.share.Common;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
@@ -32,7 +38,7 @@ public class Fragment_More extends Fragment {
     private FragmentMoreBinding binding;
     private Preferences preferences;
     private String lang;
-
+    private UserModel userModel;
 
     public static Fragment_More newInstance() {
 
@@ -50,45 +56,83 @@ public class Fragment_More extends Fragment {
     private void initView() {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(activity);
         Paper.init(activity);
 
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        if(lang.equals("en")){
+        if (lang.equals("en")) {
             binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
             binding.tvEn.setTextColor(activity.getResources().getColor(R.color.white));
             binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
             binding.tvAr.setTextColor(activity.getResources().getColor(R.color.input));
-        }
-        else {
+        } else {
             binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
             binding.tvAr.setTextColor(activity.getResources().getColor(R.color.white));
             binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
             binding.tvEn.setTextColor(activity.getResources().getColor(R.color.input));
         }
-binding.llLang.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(lang.equals("ar")){
-            lang="en";
-            binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
-            binding.tvEn.setTextColor(activity.getResources().getColor(R.color.white));
-            binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
-            binding.tvAr.setTextColor(activity.getResources().getColor(R.color.input));
-        }
-        else {
-            lang="ar";
-            binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
-            binding.tvAr.setTextColor(activity.getResources().getColor(R.color.white));
-            binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
-            binding.tvEn.setTextColor(activity.getResources().getColor(R.color.input));
-        }
-activity.RefreshActivity(lang);
+        binding.llLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (lang.equals("ar")) {
+                    lang = "en";
+                    binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
+                    binding.tvEn.setTextColor(activity.getResources().getColor(R.color.white));
+                    binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
+                    binding.tvAr.setTextColor(activity.getResources().getColor(R.color.input));
+                } else {
+                    lang = "ar";
+                    binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
+                    binding.tvAr.setTextColor(activity.getResources().getColor(R.color.white));
+                    binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));
+                    binding.tvEn.setTextColor(activity.getResources().getColor(R.color.input));
+                }
+                activity.RefreshActivity(lang);
+            }
+        });
+        binding.llabout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, AboutActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.llterms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, TermsActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.lledit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userModel != null) {
+                    Intent intent = new Intent(activity, Edit_Profile_Activity.class);
+                    startActivity(intent);
+                } else {
+
+                }
+            }
+        });
+        binding.lllogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userModel != null) {
+                    activity.Logout();
+                } else {
+
+                }
+            }
+        });
+        binding.llcontact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ContactActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-});
-
-    }
-
-
 
 
 }
