@@ -153,10 +153,34 @@ public interface Service {
     Call<UserModel> editprofile(@Field("name") String name,
                                 @Field("phone") String phone,
                                 @Field("city_id") String city_id,
-                                @Field("Authorization") String Authorization);
+                                @Header("Authorization") String Authorization);
     @Multipart
     @POST("api/user_image")
     Call<UserModel> editUserImage(@Part("Authorization") RequestBody Authorization,
                                   @Part MultipartBody.Part image);
+    @FormUrlEncoded
+    @POST("api/addNewRequiredRequest")
+    Call<ResponseBody> requireservice(@Field("ar_title") String ar_title,
+                            @Field("en_title") String en_title,
+                            @Field("model_title") String model_title,
 
+                            @Field("brand_id") String brand_id,
+                            @Field("amount") String amount,
+                            @Field("required_type") String required_type,
+                                      @Header("Authorization") String Authorization
+    );
+    @Multipart
+    @POST("api/addNewRequiredRequest")
+    Call<ResponseBody> Requiredwithimage(
+            @Part("ar_title") RequestBody ar_title,
+            @Part("en_title") RequestBody en_title,
+            @Part("model_title") RequestBody model_title,
+
+            @Part("brand_id") RequestBody brand_id,
+            @Part("amount") RequestBody amount,
+
+            @Part("required_type") RequestBody required_type,
+            @Header("Authorization") String Authorization,
+
+            @Part List<MultipartBody.Part> image);
 }

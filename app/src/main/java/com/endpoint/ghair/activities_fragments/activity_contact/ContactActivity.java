@@ -92,6 +92,12 @@ sendmessge(contactUsModel);
                                // Toast.makeText(ContactActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
+                                try {
+                                    Log.e("errorssss",response.code()+"_"+response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
                                 if (response.code() == 422) {
                                   //  Toast.makeText(ContactActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 } else if (response.code() == 500) {
@@ -103,7 +109,7 @@ sendmessge(contactUsModel);
 
                                     try {
 
-                                        Log.e("error",response.code()+"_"+response.errorBody().string());
+                                        Log.e("errorssss",response.code()+"_"+response.errorBody().string());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }

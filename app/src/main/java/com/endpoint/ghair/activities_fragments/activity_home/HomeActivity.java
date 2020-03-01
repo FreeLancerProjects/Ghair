@@ -200,26 +200,26 @@ private LinearLayoutManager manager;
             }
         });
 
-        recmenu.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (dy > 0) {
-                    int totalItems = side_menu_adapter.getItemCount();
-                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
-                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
-                        isLoading = true;
-                        brandList.add(null);
-                        side_menu_adapter.notifyItemInserted(brandList.size() - 1);
-                        int page = current_page3 + 1;
-                        loadMoreBrands(page);
-
-
-                    }
-                }
-            }
-        });
+//        recmenu.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//                if (dy > 0) {
+//                    int totalItems = side_menu_adapter.getItemCount();
+//                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
+//                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
+//                        isLoading = true;
+//                        brandList.add(null);
+//                        side_menu_adapter.notifyItemInserted(brandList.size() - 1);
+//                        int page = current_page3 + 1;
+//                        loadMoreBrands(page);
+//
+//
+//                    }
+//                }
+//            }
+//        });
     }
     public void Logout() {
         userModel = null;
@@ -422,7 +422,7 @@ private LinearLayoutManager manager;
         }
     }
 
-    private void displayFragmentMain() {
+    public void displayFragmentMain() {
         try {
             if (fragment_main == null) {
                 fragment_main = Fragment_Main.newInstance();

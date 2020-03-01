@@ -27,7 +27,7 @@ public class Auction_Model implements Serializable {
         private String user_id;
                 private int offer_id;
                 private int taker_id;
-              public static List<String> auction_image;
+              private  List<String> auction_image;
                 private User user;
 
         public int getId() {
@@ -70,7 +70,7 @@ public class Auction_Model implements Serializable {
             return taker_id;
         }
 
-        public static List<String> getAuction_image() {
+        public  List<String> getAuction_image() {
             return auction_image;
         }
 

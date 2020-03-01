@@ -2,6 +2,7 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,8 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.databinding.AuctionRowBinding;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
-import com.endpoint.ghair.databinding.MostActiveRowBinding;
 import com.endpoint.ghair.models.Auction_Model;
-import com.endpoint.ghair.models.Market_Model;
-import com.endpoint.ghair.models.Slider_Model;
+
 
 import java.util.List;
 import java.util.Locale;
@@ -64,10 +63,17 @@ Fragment_Auction fragment_auction;
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof MostActiveMarkets_Adapter.EventHolder) {
+        if (holder instanceof EventHolder) {
 
             EventHolder eventHolder = (EventHolder) holder;
             ((EventHolder) holder).binding.setAuctionmodel(orderlist.get(position));
+            try {
+                Log.e("kkkkkkkk",orderlist.get(position).getAuction_image().size()+"");
+
+            }
+            catch (Exception e){
+
+            }
             if(orderlist.get(position).getAuction_image()!=null&&orderlist.get(position).getAuction_image().size()>0){
                 ((EventHolder) holder).binding.image.setVisibility(View.GONE);
                 SlidingImageAuction_Adapter slidingImageAuction_adapter=new SlidingImageAuction_Adapter(context,orderlist.get(position));

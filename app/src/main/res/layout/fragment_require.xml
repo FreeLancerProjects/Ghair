@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
+    <data>
+        <variable
+            name="requireModel"
+            type="com.endpoint.ghair.models.ReguiredModel" />
+
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +34,7 @@
                     android:layout_height="50dp"
                     >
                     <EditText
-                        android:id="@+id/edtprname"
+                        android:id="@+id/edtartitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:singleLine="true"
@@ -38,11 +44,13 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp"/>
+                        android:paddingRight="8dp"
+                        android:text="@={requireModel.english_title}"
+                        error="@{requireModel.error_english_title}"
+                        />
                     <TextView
-                        android:id="@+id/tvLocation"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -54,10 +62,10 @@
                         android:paddingEnd="8dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
-                        app:layout_constraintBottom_toTopOf="@+id/edtprname"
-                        app:layout_constraintTop_toTopOf="@+id/edtprname"
-                        app:layout_constraintStart_toStartOf="@+id/edtprname"
-                        android:text="@string/the_name_of_piece"
+                        app:layout_constraintBottom_toTopOf="@+id/edtartitle"
+                        app:layout_constraintTop_toTopOf="@+id/edtartitle"
+                        app:layout_constraintStart_toStartOf="@+id/edtartitle"
+                        android:text="@string/english_title"
                         android:textColor="@color/white"
 
                         />
@@ -65,6 +73,51 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    >
+                    <EditText
+                        android:id="@+id/edtentitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:singleLine="true"
+                        android:background="@drawable/edt_shape"
+                        android:layout_marginTop="8dp"
+                        android:textColorHint="@color/gray4"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@={requireModel.arabic_title}"
+                        error="@{requireModel.error_arabic_title}"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/input"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:textSize="17sp"
+                        android:singleLine="true"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        app:layout_constraintBottom_toTopOf="@+id/edtentitle"
+                        app:layout_constraintTop_toTopOf="@+id/edtentitle"
+                        app:layout_constraintStart_toStartOf="@+id/edtentitle"
+                        android:text="@string/arabic_title"
+                        android:textColor="@color/white"
+
+                        />
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -81,10 +134,13 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp"/>
+                        android:paddingRight="8dp"
+                        android:text="@={requireModel.model}"
+                        error="@{requireModel.error_model}"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -123,10 +179,14 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp"/>
+                        android:paddingRight="8dp"
+                        android:inputType="number"
+                        android:text="@={requireModel.amount}"
+                        error="@{requireModel.error_amount}"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -141,7 +201,7 @@
                         app:layout_constraintBottom_toTopOf="@+id/edtnum"
                         app:layout_constraintTop_toTopOf="@+id/edtnum"
                         app:layout_constraintStart_toStartOf="@+id/edtnum"
-                        android:text="@string/number"
+                        android:text="@string/amount"
                         android:textColor="@color/white"
 
                         />
@@ -182,7 +242,7 @@
                     </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -207,6 +267,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="15dp"
+                    android:visibility="gone"
                     >
                     <LinearLayout
 
@@ -236,7 +297,7 @@
                     </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -283,15 +344,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".4"
                             >
+
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:id="@+id/image1"
                                 android:layout_width="match_parent"
-                                android:layout_height="130dp"
-                                app:riv_border_width="0dp"
+                                android:layout_height="132dp"
                                 android:background="@color/input"
                                 android:clickable="false"
                                 android:longClickable="false"
-                                />
+                                app:riv_border_width="0dp" />
                             <ImageView
                                 android:id="@+id/icon1"
                                 android:layout_width="90dp"
@@ -341,7 +402,7 @@
                     </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -368,6 +429,7 @@
                     android:orientation="horizontal"
                     >
                     <CheckBox
+                        android:id="@+id/checknew"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
@@ -375,6 +437,7 @@
                         android:textColor="@color/white"
                         android:theme="@style/MyCheckBox"    />
                     <CheckBox
+                        android:id="@+id/checkused"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"

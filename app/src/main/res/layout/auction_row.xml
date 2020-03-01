@@ -109,10 +109,9 @@
 
     android:paddingLeft="13dp"
     android:paddingRight="13dp"
-    android:text="@string/the_highest_price"
+    android:text="@string/start_price"
     android:textColor="@color/input"
     android:textSize="14sp"
-    android:textStyle="bold"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -163,14 +162,14 @@ android:visibility="gone"
 
             android:paddingLeft="13dp"
             android:paddingRight="13dp"
-            android:text="@{auctionmodel.end_date}"
+            android:text='@{auctionmodel.end_date.split(" ")[0]}'
             android:textColor="@color/color_bg"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
+android:singleLine="true"
             />
         <TextView
             android:layout_width="wrap_content"

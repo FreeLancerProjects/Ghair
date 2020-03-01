@@ -84,7 +84,7 @@ public class EditprofileModel extends BaseObservable implements Serializable {
         )
         {
             error_name.set(null);
-           // error_phone_code.set(null);
+           // error_amount.set(null);
             error_phone.set(null);
             //error_email.set(null);
 
@@ -103,10 +103,10 @@ public class EditprofileModel extends BaseObservable implements Serializable {
 
           /*  if (phone_code.isEmpty())
             {
-                error_phone_code.set(context.getString(R.string.field_req));
+                error_amount.set(context.getString(R.string.field_req));
             }else
             {
-                error_phone_code.set(null);
+                error_amount.set(null);
             }*/
 
             if (phone.isEmpty())

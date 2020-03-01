@@ -1,6 +1,7 @@
 package com.endpoint.ghair.activities_fragments.activity_home.fragments;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,7 +60,7 @@ public class Fragment_Auction extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_auction,container,false);
         initView();
-
+getAuction();
         return binding.getRoot();
     }
 
@@ -72,6 +74,7 @@ public class Fragment_Auction extends Fragment {
         preferences = Preferences.getInstance();
         auction_adapter =new Ouction_Adapter(dataList,activity,this);
         manager=new LinearLayoutManager(activity);
+        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.input), PorterDuff.Mode.SRC_IN);
 
         binding.recView.setLayoutManager(manager);
         binding.recView.setAdapter(auction_adapter);

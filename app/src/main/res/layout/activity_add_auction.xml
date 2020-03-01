@@ -98,9 +98,8 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"/>
     <TextView
-        android:id="@+id/tvLocation"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_marginTop="8dp"
         android:background="@color/input"
@@ -142,7 +141,7 @@
                         android:paddingRight="8dp"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -184,7 +183,7 @@
                         android:paddingRight="8dp"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"
@@ -226,7 +225,7 @@
                         android:paddingRight="8dp"/>
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:background="@color/input"

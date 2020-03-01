@@ -26,7 +26,7 @@
     <string name="add">اضافه</string>
     <string name="the_name_of_piece">اسم القطعه</string>
     <string name="model">موديل</string>
-    <string name="number">رقم</string>
+    <string name="amount">رقم</string>
     <string name="brand">علامة تجارية</string>
     <string name="type">نوع</string>
     <string name="news">جديد</string>
@@ -104,12 +104,16 @@
     <string name="camera">كاميرا</string>
     <string name="gallery">البوم صور</string>
     <string name="cancel">إلغاء</string>
-    <string name="inv_email">Invalid Email</string>
-    <string name="send">Send</string>
-    <string name="email">Email</string>
-    <string name="phone">phone</string>
-    <string name="message">Message</string>
-    <string name="back">Back</string>
-    <string name="edit_profile">Edit Profile</string>
+    <string name="inv_email">ايميل خاطئ</string>
+    <string name="send">ارسال</string>
+    <string name="email">بريد الكترونى</string>
+    <string name="phone">رقم جوال</string>
+    <string name="message">رساله</string>
+    <string name="back">رجوع</string>
+    <string name="edit_profile">تعديل الصفحه الشخصيه</string>
+    <string name="ch_brand">اختر</string>
+    <string name="ch_type">اختر النوع</string>
+    <string name="suc">تم بنجاح</string>
+    <string name="start_price">سعر البدايه:</string>
 
 </resources>

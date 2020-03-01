@@ -92,7 +92,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     private void updatedata(UserModel userModel) {
         this.userModel = userModel;
         preferences.create_update_userdata(this, userModel);
-//        editprofileModel.setCity_id(this.userModel.getCity_id() + "");
+//        editprofileModel.setBrand_id(this.userModel.getBrand_id() + "");
 //        editprofileModel.setName(this.userModel.getName());
 //        editprofileModel.setPhone(this.userModel.getUser().getMobile());
 //        editprofileModel.setEmail(this.userModel.getUser().getEmail());
@@ -244,7 +244,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
         } else {
             String code = "+966";
             // binding.tvPhoneCode.setText(code);
-            //  editprofileModel.setPhone_code(code.replace("+","00"));
+            //  editprofileModel.setAmount(code.replace("+","00"));
 
         }
 
@@ -264,7 +264,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
 
     private void updatePhoneCode(Country country) {
         // binding.tvPhoneCode.setText(country.getDialCode());
-        // editprofileModel.setPhone_code(country.getDialCode().replace("+","00"));
+        // editprofileModel.setAmount(country.getDialCode().replace("+","00"));
 
     }
 
@@ -417,7 +417,6 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
 
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -15,7 +15,7 @@ public class Brand_Model implements Serializable {
         return current_page;
     }
 
-    public class Data implements Serializable {
+    public static class Data implements Serializable {
         private int id;
         private String ar_title;
         private String en_title;
@@ -27,6 +27,10 @@ public class Brand_Model implements Serializable {
         private int custom_order;
         private String title;
         private String desc;
+
+        public Data(String title) {
+            this.title = title;
+        }
 
         public int getId() {
             return id;
