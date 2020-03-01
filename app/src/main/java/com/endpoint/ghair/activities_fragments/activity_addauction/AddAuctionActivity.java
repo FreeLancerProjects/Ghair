@@ -3,6 +3,7 @@ package com.endpoint.ghair.activities_fragments.activity_addauction;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -36,7 +37,12 @@ public class AddAuctionActivity extends AppCompatActivity implements Listeners.B
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_add_auction);
         initView();
+binding.consTime.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+    }
+});
 
 
     }
