@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="auctionmodel"
+            type="com.endpoint.ghair.models.Auction_Model.Data" />
 
     </data>
 <LinearLayout
@@ -50,6 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:civ_circle_background_color="@color/white"
                 android:layout_margin="5dp"
+                image="@{auctionmodel.user.logo}"
                 />
 
 
@@ -71,7 +75,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:text="Mohamed"
+                android:text='@{auctionmodel.user.user_type.equals("client")?auctionmodel.user.name:auctionmodel.user.market_title}'
                 android:textColor="@color/black"
                 android:textSize="13sp"
 
@@ -85,7 +89,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:text="12:00"
+                android:text="@{auctionmodel.time}"
                 android:textColor="@color/input"
                 android:textSize="13sp"
              android:layout_weight=".5"
@@ -96,7 +100,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:text="R.S"
+        android:text='@{auctionmodel.price+""}'
         android:textColor="@color/input"
         android:textSize="13sp"
         android:layout_weight=".5"

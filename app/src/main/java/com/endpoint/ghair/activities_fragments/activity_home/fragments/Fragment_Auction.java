@@ -217,8 +217,16 @@ getAuction();
         }
     }
 
-    public void show() {
+    public void show(int id) {
         Intent intent=new Intent (activity, AuctionDetialsActivity.class);
+        intent.putExtra("search",id);
+
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getAuction();
     }
 }

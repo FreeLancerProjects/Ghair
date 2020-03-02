@@ -70,6 +70,7 @@ public interface Service {
             @Query("page") int page,
             @Header("lang") String lang
     );
+
     @FormUrlEncoded
     @POST("api/login")
     Call<UserModel> login(
@@ -141,6 +142,7 @@ public interface Service {
             @Part("longitude") RequestBody longitude,
             @Part("services") List<RequestBody> services,
             @Part MultipartBody.Part image);
+
     @FormUrlEncoded
     @POST("api/contactUs")
     Call<ResponseBody> sendContact(@Field("name") String name,
@@ -148,27 +150,31 @@ public interface Service {
                                    @Field("phone") String phone,
                                    @Field("message") String message
     );
+
     @FormUrlEncoded
     @POST("api/client/profile/update")
     Call<UserModel> editprofile(@Field("name") String name,
                                 @Field("phone") String phone,
                                 @Field("city_id") String city_id,
                                 @Header("Authorization") String Authorization);
+
     @Multipart
     @POST("api/user_image")
     Call<UserModel> editUserImage(@Part("Authorization") RequestBody Authorization,
                                   @Part MultipartBody.Part image);
+
     @FormUrlEncoded
     @POST("api/addNewRequiredRequest")
     Call<ResponseBody> requireservice(@Field("ar_title") String ar_title,
-                            @Field("en_title") String en_title,
-                            @Field("model_title") String model_title,
+                                      @Field("en_title") String en_title,
+                                      @Field("model_title") String model_title,
 
-                            @Field("brand_id") String brand_id,
-                            @Field("amount") String amount,
-                            @Field("required_type") String required_type,
+                                      @Field("brand_id") String brand_id,
+                                      @Field("amount") String amount,
+                                      @Field("required_type") String required_type,
                                       @Header("Authorization") String Authorization
     );
+
     @Multipart
     @POST("api/addNewRequiredRequest")
     Call<ResponseBody> Requiredwithimage(
@@ -183,4 +189,35 @@ public interface Service {
             @Header("Authorization") String Authorization,
 
             @Part List<MultipartBody.Part> image);
+
+    @FormUrlEncoded
+    @POST("api/addNewAuctionRequest")
+    Call<ResponseBody> auctionservice(@Field("ar_title") String ar_title,
+                                      @Field("en_title") String en_title,
+                                      @Field("start_price") String start_price,
+                                      @Header("Authorization") String Authorization,
+                                      @Field("end_date") String end_date
+    );
+
+    @Multipart
+    @POST("api/addNewAuctionRequest")
+    Call<ResponseBody> auctionwithimage(
+            @Part("ar_title") RequestBody ar_title,
+            @Part("en_title") RequestBody en_title,
+            @Part("start_price") RequestBody start_price,
+
+            @Part("end_date") RequestBody end_date,
+
+            @Header("Authorization") String Authorization,
+
+            @Part List<MultipartBody.Part> image);
+    @FormUrlEncoded
+    @POST("api/singleAuction")
+    Call<Auction_Model> get_singleauction(
+            @Field("auction_id") String auction_id,
+            @Header("lang") String lang,
+            @Field("page") int page
+
+
+    );
 }

@@ -3,6 +3,7 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.endpoint.ghair.tags.Tags;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SlidingImageAuction_Adapter extends PagerAdapter {
@@ -29,14 +32,12 @@ public class SlidingImageAuction_Adapter extends PagerAdapter {
    Auction_Model.Data auction_model;
     private LayoutInflater inflater;
      Context context;
-
-HomeActivity activity;
 private List<String> IMAGES;
     public SlidingImageAuction_Adapter(Context context, Auction_Model.Data auction_model) {
         this.context = context;
         this.auction_model=auction_model;
         inflater = LayoutInflater.from(context);
-        activity=(HomeActivity)context;
+
         IMAGES=auction_model.getAuction_image();
     }
 
@@ -54,7 +55,6 @@ private List<String> IMAGES;
     public Object instantiateItem(ViewGroup view, int position) {
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
         Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL+IMAGES.get(position))).fit().into(rowBinding.image);
-
 
 
         view.addView(rowBinding.getRoot());
@@ -79,4 +79,5 @@ private List<String> IMAGES;
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
+
 }

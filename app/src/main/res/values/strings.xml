@@ -115,5 +115,6 @@
     <string name="ch_type">Choose Type</string>
     <string name="suc">Success</string>
     <string name="start_price">Start Price :</string>
+    <string name="no_auction_to_display">No Auction To Display</string>
 
 </resources>

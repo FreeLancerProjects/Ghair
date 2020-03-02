@@ -6,9 +6,13 @@ import java.util.List;
 public class Auction_Model implements Serializable {
     private List<Data> data;
     private int current_page;
-
+private Data auction_data;
     public List<Data> getData() {
         return data;
+    }
+
+    public Data getAuction_data() {
+        return auction_data;
     }
 
     public int getCurrent_page() {
@@ -20,6 +24,7 @@ public class Auction_Model implements Serializable {
         private int id;
                 private String ar_title;
         private String en_title;
+        private String title;
         private String start_date;
         private String end_date;
         private String start_price;
@@ -27,6 +32,12 @@ public class Auction_Model implements Serializable {
         private String user_id;
                 private int offer_id;
                 private int taker_id;
+        private String date;
+        private String time;
+        private double price;
+        private String model_type;
+        private String model_id;
+        private String details;
               private  List<String> auction_image;
                 private User user;
 
@@ -40,6 +51,10 @@ public class Auction_Model implements Serializable {
 
         public String getEn_title() {
             return en_title;
+        }
+
+        public String getTitle() {
+            return title;
         }
 
         public String getStart_date() {
@@ -196,4 +211,32 @@ public class Auction_Model implements Serializable {
                         return market_title;
                     }
     }
-    }}
+        public String getDate() {
+            return date;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+
+        public String getModel_type() {
+            return model_type;
+        }
+
+        public String getModel_id() {
+            return model_id;
+        }
+
+        public String getDetails() {
+            return details;
+        }
+    }
+
+
+
+}

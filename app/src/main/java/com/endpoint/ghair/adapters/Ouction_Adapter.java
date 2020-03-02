@@ -2,6 +2,8 @@ package com.endpoint.ghair.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +20,14 @@ import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_
 import com.endpoint.ghair.databinding.AuctionRowBinding;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.models.Auction_Model;
+import com.endpoint.ghair.tags.Tags;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import io.paperdb.Paper;
 
@@ -77,6 +83,31 @@ Fragment_Auction fragment_auction;
             if(orderlist.get(position).getAuction_image()!=null&&orderlist.get(position).getAuction_image().size()>0){
                 ((EventHolder) holder).binding.image.setVisibility(View.GONE);
                 SlidingImageAuction_Adapter slidingImageAuction_adapter=new SlidingImageAuction_Adapter(context,orderlist.get(position));
+
+                final Handler handler = new Handler();
+                final Runnable Update = new Runnable() {
+                    public void run() {
+                        if(orderlist.size()>0){
+                        if (((EventHolder) holder).binding.pager.getCurrentItem() == orderlist.get(position).getAuction_image().size()-1) {
+                           ((EventHolder) holder).binding.pager.setCurrentItem(0);
+                        }
+                        else {
+                            ((EventHolder) holder).binding.pager.setCurrentItem(((EventHolder) holder).binding.pager.getCurrentItem()+1);
+
+                        }}
+//                        notifyDataSetChanged();
+                        // setCurrentItem(current_page++, true);
+
+                    }
+                };
+                Timer swipeTimer = new Timer();
+                swipeTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.post(Update);
+                    }
+                }, 3000, 3000);
+
             ((EventHolder) holder).binding.pager.setAdapter(slidingImageAuction_adapter);
             }
             else {
@@ -85,7 +116,7 @@ Fragment_Auction fragment_auction;
             eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    fragment_auction.show();
+                    fragment_auction.show(orderlist.get(holder.getLayoutPosition()).getId());
                 }
             });
 

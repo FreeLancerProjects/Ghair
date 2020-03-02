@@ -10,7 +10,9 @@
             name="backListener"
             type="com.endpoint.ghair.interfaces.Listeners.BackListener"
             />
-
+        <variable
+            name="addauctionmodel"
+            type="com.endpoint.ghair.models.AddAuctionModel" />
         <variable
             name="lang"
             type="String" />
@@ -96,7 +98,10 @@
         android:textColor="@color/white"
         android:textSize="13sp"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp"/>
+        android:paddingRight="8dp"
+        android:text="@={addauctionmodel.english_title}"
+        error="@{addauctionmodel.error_english_title}"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,7 +143,10 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp"/>
+                        android:paddingRight="8dp"
+                        android:text="@={addauctionmodel.arabic_title}"
+                        error="@{addauctionmodel.error_arabic_title}"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -175,11 +183,15 @@
                         android:singleLine="true"
                         android:background="@drawable/edt_shape"
                         android:layout_marginTop="8dp"
+                        android:inputType="numberDecimal"
                         android:textColorHint="@color/gray4"
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp"/>
+                        android:paddingRight="8dp"
+                        android:text="@={addauctionmodel.price}"
+                        error="@{addauctionmodel.error_price}"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -223,7 +235,11 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp"/>
+                        android:paddingRight="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@={addauctionmodel.time}"
+                        error="@{addauctionmodel.error_time}"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -20,6 +20,11 @@
             type="String"
 
             />
+        <variable
+            name="auctionmodel"
+            type="com.endpoint.ghair.models.Auction_Model.Data" />
+
+
 
     </data>
 
@@ -48,16 +53,16 @@
             android:orientation="horizontal"
             android:onClick="@{()->backListener.back()}"
             >
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/ic_arrow_right"
-                android:tint="@color/white"
-                android:padding="8dp"
                 android:clickable="false"
                 android:longClickable="false"
+                android:padding="8dp"
                 android:rotation='@{lang.equals("en")?180:0}'
-                />
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/white" />
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
@@ -74,30 +79,57 @@
                 />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nested"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/input"
             android:fillViewport="true"
-            android:padding="20dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:padding="20dp">
 
-            <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/lang_shape"
-                >
-                <com.github.siyamed.shapeimageview.RoundedImageView
-                    android:id="@+id/im_banner"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="@null"
+                app:titleEnabled="false">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:src="@drawable/shiop"
-                    android:layout_margin="8dp"
-                    app:riv_corner_radius="10dp"
-                    android:padding="3dp"
-                    />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/lang_shape"
+                    >
+                <FrameLayout
+                    android:id="@+id/flSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_gravity="center"
+
+                    >
+                    <com.github.siyamed.shapeimageview.RoundedImageView
+                        android:id="@+id/im_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:src="@drawable/shiop"
+                        android:layout_margin="8dp"
+                        app:riv_corner_radius="10dp"
+                        android:padding="3dp"
+                        />
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+
+                </FrameLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
 
@@ -132,8 +164,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@string/name"
-                        android:textColor="@color/input"
+                        android:text="@{auctionmodel.title}"                        android:textColor="@color/input"
                         android:textSize="13sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -170,7 +201,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="10 R.S"
+                        android:text='@{auctionmodel.start_price}'
                         android:textColor="@color/input"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -208,63 +239,88 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="10:10 AM"
+                        android:text='@{auctionmodel.end_date.split(" ")[1]}'
                         android:textColor="@color/input"
                         android:textSize="13sp" />
-                </LinearLayout>
+                </LinearLayout></LinearLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <LinearLayout
+                android:id="@+id/offer"
+                android:layout_width="match_parent"
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_offers"
+                    android:tint="@color/input"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/offers"
+                    android:textColor="@color/input"
+                    android:textSize="13sp"
+                    android:layout_weight="1"
+                    />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="3dp"
-                        android:src="@drawable/ic_offers"
-                        android:tint="@color/input"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_arrow_right"
+                    android:tint="@color/input"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:rotation='@{lang.equals("ar")?180:0}'
 
-                        />
+                    />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:text="@string/offers"
-                        android:textColor="@color/input"
-                        android:textSize="13sp"
-                        android:layout_weight="1"
-                        />
+        </com.google.android.material.appbar.AppBarLayout>
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="3dp"
-                        android:src="@drawable/ic_arrow_right"
-                        android:tint="@color/input"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
 
-                        />
-                </LinearLayout>
-<net.cachapa.expandablelayout.ExpandableLayout
+        <FrameLayout
+            android:id="@+id/nested"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edt_shape2"
+
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-app:el_expanded="true"
     android:orientation="vertical"
+    >
+
+<net.cachapa.expandablelayout.ExpandableLayout
+    android:id="@+id/expand"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+app:el_expanded="false"
+    android:orientation="vertical"
+    android:layout_marginBottom="120dp"
+
     >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="8dp"
         >
 
@@ -284,10 +340,15 @@ app:el_expanded="true"
                     android:paddingLeft="50dp"
                     android:paddingRight="50dp"
                     android:layout_marginBottom="30dp"
+                    app:layout_constraintTop_toBottomOf="@+id/expand"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </androidx.core.widget.NestedScrollView>
+        </FrameLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
 </layout>
