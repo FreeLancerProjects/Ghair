@@ -116,5 +116,7 @@
     <string name="suc">Success</string>
     <string name="start_price">Start Price :</string>
     <string name="no_auction_to_display">No Auction To Display</string>
+    <string name="no_products">No Products To Display</string>
+    <string name="no_catogry_to_display">No Catogry To Display</string>
 
 </resources>

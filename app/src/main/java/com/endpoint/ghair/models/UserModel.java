@@ -1,6 +1,7 @@
 package com.endpoint.ghair.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserModel implements Serializable {
 
@@ -28,6 +29,7 @@ public class UserModel implements Serializable {
 
             private String token;
     private String market_title;
+    private List<Banners> banners;
 
     public int getId() {
         return id;
@@ -119,5 +121,28 @@ public class UserModel implements Serializable {
 
     public String getMarket_title() {
         return market_title;
+    }
+
+    public List<Banners> getBanners() {
+        return banners;
+    }
+
+    public class Banners implements Serializable
+    {
+        private int id;
+            private int market_id;
+            private String image;
+
+        public int getId() {
+            return id;
+        }
+
+        public int getMarket_id() {
+            return market_id;
+        }
+
+        public String getImage() {
+            return image;
+        }
     }
 }

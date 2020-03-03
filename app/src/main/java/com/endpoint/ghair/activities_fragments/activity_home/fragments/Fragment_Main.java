@@ -24,6 +24,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_addservice.AddServiceActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
+import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
 import com.endpoint.ghair.adapters.MostActiveMarkets_Adapter;
 import com.endpoint.ghair.adapters.Service_Adapter;
 import com.endpoint.ghair.adapters.SlidingImage_Adapter;
@@ -500,12 +501,11 @@ binding.tabLayout.setupWithViewPager(binding.pager);
     }
 
 
-    public void showmarkets() {
-        Intent intent=new Intent(activity, AddServiceActivity.class);
+    public void showProfile(int id) {
+        Intent intent=new Intent(activity, MarketProfileActivity.class);
+        intent.putExtra("search",id);
+
         startActivity(intent);
     }
-    public void showmarkets2() {
-        Intent intent=new Intent(activity, MarketActivity.class);
-        startActivity(intent);
-    }
+
 }

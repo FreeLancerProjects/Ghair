@@ -71,7 +71,7 @@ this.fragment=fragment;
                 public void onClick(View v) {
                     if (fragment instanceof Fragment_Main) {
                         fragment_main = (Fragment_Main) fragment;
-
+fragment_main.showProfile(orderlist.get(eventHolder.getLayoutPosition()).getId());
                     }
                 }
             });

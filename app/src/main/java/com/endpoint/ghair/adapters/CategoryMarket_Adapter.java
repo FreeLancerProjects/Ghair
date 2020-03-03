@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
+import com.endpoint.ghair.databinding.MarketCatRowBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
+import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.models.Slider_Model;
 
 import java.util.ArrayList;
@@ -23,21 +25,19 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Category_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CategoryMarket_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Slider_Model.Data> orderlist;
+    private List<MarketCatogryModel.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-private Fragment_Main fragment_main;
-private Fragment fragment;
-    public Category_Adapter(List<Slider_Model.Data> orderlist, Context context, Fragment fragment) {
+    private ProductsCat_Adapter productsCat_adapter;
+    public CategoryMarket_Adapter(List<MarketCatogryModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-this.fragment=fragment;
 
     }
 
@@ -46,7 +46,7 @@ this.fragment=fragment;
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        MostActiveRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.most_active_row, parent, false);
+        MarketCatRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.market_cat_row, parent, false);
         return new EventHolder(binding);
 
 
@@ -56,22 +56,29 @@ this.fragment=fragment;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
+        eventHolder.binding.setCatogrymodel(orderlist.get(position));
+        eventHolder.binding.setLang(lang);
+        eventHolder.binding.recView1.setLayoutManager(new LinearLayoutManager(context,RecyclerView.HORIZONTAL,false));
+        if(orderlist.get(position).getProducts()!=null&&orderlist.get(position).getProducts().size()>0){
+            productsCat_adapter=new ProductsCat_Adapter(orderlist.get(position).getProducts(),context);
+            eventHolder.binding.recView1.setAdapter(productsCat_adapter);
+        }
         if(position%2!=0){
-            eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_tire));
+            eventHolder.binding.tvTitle.setBackground(context.getResources().getDrawable(R.drawable.accessories));
         }
         else {
-            eventHolder.binding.imOffer.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_auction));
+            eventHolder.binding.tvTitle.setBackground(context.getResources().getDrawable(R.drawable.spare_parts));
 
         }
-        eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(fragment instanceof  Fragment_Main){
-            fragment_main=(Fragment_Main)fragment;
-            fragment_main.showmarkets2();
-        }
-    }
-});
+//        eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//    @Override
+//    public void onClick(View v) {
+//        if(fragment instanceof  Fragment_Main){
+//            fragment_main=(Fragment_Main)fragment;
+//         //   fragment_main.showmarkets2();
+//        }
+//    }
+//});
 /*
 if(i==position){
     if(i!=0) {
@@ -119,9 +126,9 @@ if(i!=position) {
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public MostActiveRowBinding binding;
+        public MarketCatRowBinding binding;
 
-        public EventHolder(@NonNull MostActiveRowBinding binding) {
+        public EventHolder(@NonNull MarketCatRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

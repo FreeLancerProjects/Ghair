@@ -5,9 +5,11 @@ import com.endpoint.ghair.models.App_Data_Model;
 import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.Cities_Model;
+import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.PlaceGeocodeData;
 import com.endpoint.ghair.models.PlaceMapDetailsData;
+import com.endpoint.ghair.models.Product_Model;
 import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.models.UserModel;
@@ -217,6 +219,36 @@ public interface Service {
             @Field("auction_id") String auction_id,
             @Header("lang") String lang,
             @Field("page") int page
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/market-details")
+    Call<UserModel> get_singlemarket(
+            @Field("market_id") String market_id,
+            @Header("lang") String lang
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/AllProductsFilterByBrandCatMarket")
+    Call<Product_Model> get_productss(
+            @Field("brand_id") String brand_id,
+
+            @Field("cat_id") String cat_id,
+
+            @Field("market_id") String market_id,
+            @Header("lang") String lang
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/catsOfMarket")
+    Call<MarketCatogryModel> get_Catogries(
+
+
+            @Field("market_id") String market_id,
+            @Header("lang") String lang
 
 
     );

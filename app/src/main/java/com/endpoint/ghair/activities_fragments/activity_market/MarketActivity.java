@@ -72,8 +72,10 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
         finish();
     }
 
-    public void showProfile() {
+    public void showProfile(int id) {
         Intent intent=new Intent(MarketActivity.this, MarketProfileActivity.class);
+        intent.putExtra("search",id);
+
         startActivity(intent);
     }
 }
