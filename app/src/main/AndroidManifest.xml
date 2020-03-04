@@ -89,18 +89,12 @@
             android:name=".activities_fragments.activity_market_profile.MarketProfileActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name=".activities_fragments.activity_accesories.AccessoriesActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
         <activity
             android:name=".activities_fragments.activity_products.ProductsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name=".activities_fragments.activity_spare_parts.SparePartsActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
         <activity
             android:name=".activities_fragments.activity_addauction.AddAuctionActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
