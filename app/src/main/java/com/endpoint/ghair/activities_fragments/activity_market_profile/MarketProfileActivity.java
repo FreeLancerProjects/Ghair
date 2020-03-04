@@ -17,9 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.activities_fragments.activity_accesories.AccessoriesActivity;
 import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivity;
-import com.endpoint.ghair.activities_fragments.activity_spare_parts.SparePartsActivity;
 import com.endpoint.ghair.adapters.Accessories_Adapter;
 import com.endpoint.ghair.adapters.CategoryMarket_Adapter;
 import com.endpoint.ghair.adapters.Products_Adapter;

@@ -22,7 +22,6 @@ import com.endpoint.ghair.adapters.Accessories_Adapter;
 import com.endpoint.ghair.adapters.Products_Adapter;
 import com.endpoint.ghair.adapters.SpinnerBrandAdapter;
 import com.endpoint.ghair.adapters.SpinnerCatogryAdapter;
-import com.endpoint.ghair.databinding.ActivityAccessoriesBinding;
 import com.endpoint.ghair.databinding.ActivityProductsBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;
