@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
+import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.MarketRowBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
@@ -34,6 +35,7 @@ public class MostActiveMarkets_Adapter extends RecyclerView.Adapter<RecyclerView
     private String lang;
 private Fragment_Main fragment_main;
 private Fragment fragment;
+private MarketActivity marketActivity;
     public MostActiveMarkets_Adapter(List<Market_Model.Data> orderlist, Context context, Fragment fragment) {
         this.orderlist = orderlist;
         this.context = context;
@@ -72,6 +74,12 @@ this.fragment=fragment;
                     if (fragment instanceof Fragment_Main) {
                         fragment_main = (Fragment_Main) fragment;
 fragment_main.showProfile(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                    }
+                    else {
+                        if(context instanceof MarketActivity){
+                            marketActivity=(MarketActivity)context;
+                            marketActivity.showProfile(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                        }
                     }
                 }
             });

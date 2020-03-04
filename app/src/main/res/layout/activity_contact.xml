@@ -107,6 +107,7 @@
                     android:textSize="14sp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
+                    android:textCursorDrawable="@drawable/cursor_bg"
                     android:text="@={contactUs.name}"
                     error="@{contactUs.error_name}"
                     />
@@ -131,6 +132,7 @@
                     android:inputType="textEmailAddress"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
+                    android:textCursorDrawable="@drawable/cursor_bg"
                     android:text="@={contactUs.email}"
                     error="@{contactUs.error_email}"
 
@@ -156,6 +158,7 @@
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:inputType="phone"
+                    android:textCursorDrawable="@drawable/cursor_bg"
                     android:text="@={contactUs.subject}"
                     error="@{contactUs.error_subject}"
 
@@ -180,6 +183,7 @@
                     android:textSize="14sp"
                     android:padding="8dp"
                     android:gravity="top"
+                    android:textCursorDrawable="@drawable/cursor_bg"
                     android:text="@={contactUs.message}"
                     error="@{contactUs.error_message}"
 

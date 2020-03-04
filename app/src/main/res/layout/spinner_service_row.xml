@@ -15,7 +15,7 @@
         android:layout_height="40dp"
         android:textColor="@color/white"
         android:background="@color/input"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:gravity="center"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"

@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 public class MarketCatogryModel implements Serializable {
-private List<Data> data;
+    private List<Data> data;
 
     public List<Data> getData() {
         return data;
     }
 
-    public class Data implements Serializable {
+    public static class Data implements Serializable {
         private int id;
         private String ar_title;
         private String en_title;
@@ -22,7 +22,11 @@ private List<Data> data;
         private String custom_order;
         private String title;
         private String desc;
-private List<Products> products;
+        private List<Products> products;
+
+        public Data(String title) {
+            this.title = title;
+        }
 
         public int getId() {
             return id;
@@ -93,6 +97,7 @@ private List<Products> products;
             private float rating;
             private String main_image;
             private int amount;
+            private String title;
 
             public int getId() {
                 return id;
@@ -172,6 +177,10 @@ private List<Products> products;
 
             public int getAmount() {
                 return amount;
+            }
+
+            public String getTitle() {
+                return title;
             }
         }
     }

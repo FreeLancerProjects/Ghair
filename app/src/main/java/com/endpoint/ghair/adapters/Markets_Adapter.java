@@ -14,28 +14,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
+import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
+import com.endpoint.ghair.databinding.MarketRowBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
-import com.endpoint.ghair.databinding.ServicesRowBinding;
-import com.endpoint.ghair.models.Service_Model;
-import com.endpoint.ghair.models.Slider_Model;
-import com.endpoint.ghair.services.Service;
+import com.endpoint.ghair.models.Market_Model;
 
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Markets_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int ITEM_DATA = 1;
     private final int LOAD = 2;
-    private List<Service_Model.Data> orderlist;
+    private List<Market_Model.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
 private Fragment_Main fragment_main;
 private Fragment fragment;
-    public Service_Adapter(List<Service_Model.Data> orderlist, Context context, Fragment fragment) {
+private MarketActivity marketActivity;
+    public Markets_Adapter(List<Market_Model.Data> orderlist, Context context, Fragment fragment) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -51,7 +51,7 @@ this.fragment=fragment;
         if (viewType==ITEM_DATA)
         {
 
-        ServicesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.services_row, parent, false);
+        MarketRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.market_row, parent, false);
         return new EventHolder(binding);
 
     }else
@@ -66,14 +66,19 @@ this.fragment=fragment;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventHolder) {
             EventHolder eventHolder = (EventHolder) holder;
-            eventHolder.binding.setServicemodel(orderlist.get(position));
+            eventHolder.binding.setMarketmodel(orderlist.get(position));
             eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (fragment instanceof Fragment_Main) {
                         fragment_main = (Fragment_Main) fragment;
-                  //      fragment_main.showmarkets();
-                        fragment_main.AddService(orderlist.get(eventHolder.getLayoutPosition()).getId());
+fragment_main.showProfile(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                    }
+                    else {
+                        if(context instanceof MarketActivity){
+                            marketActivity=(MarketActivity)context;
+                            marketActivity.showProfile(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                        }
                     }
                 }
             });
@@ -93,9 +98,9 @@ this.fragment=fragment;
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public ServicesRowBinding binding;
+        public MarketRowBinding binding;
 
-        public EventHolder(@NonNull ServicesRowBinding binding) {
+        public EventHolder(@NonNull MarketRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -113,7 +118,7 @@ this.fragment=fragment;
 
     @Override
     public int getItemViewType(int position) {
-       Service_Model.Data order_Model = orderlist.get(position);
+       Market_Model.Data order_Model = orderlist.get(position);
         if (order_Model!=null)
         {
             return ITEM_DATA;

@@ -14,6 +14,8 @@ import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.models.UserModel;
 
+import org.androidannotations.annotations.rest.Get;
+
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -201,6 +203,18 @@ public interface Service {
                                       @Field("end_date") String end_date
     );
 
+    @FormUrlEncoded
+    @POST("api/addNewServiceRequest")
+    Call<ResponseBody> AddService(@Field("service_id") String service_id,
+                                  @Field("longitude") String longitude,
+                                  @Field("latitude") String latitude,
+                                  @Field("address") String address,
+                                  @Field("date") String date,
+                                  @Field("time") String time,
+                                  @Field("details") String details,
+                                  @Header("Authorization") String Authorization
+    );
+
     @Multipart
     @POST("api/addNewAuctionRequest")
     Call<ResponseBody> auctionwithimage(
@@ -213,6 +227,7 @@ public interface Service {
             @Header("Authorization") String Authorization,
 
             @Part List<MultipartBody.Part> image);
+
     @FormUrlEncoded
     @POST("api/singleAuction")
     Call<Auction_Model> get_singleauction(
@@ -222,6 +237,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/market-details")
     Call<UserModel> get_singlemarket(
@@ -230,6 +246,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/AllProductsFilterByBrandCatMarket")
     Call<Product_Model> get_productss(
@@ -243,11 +260,48 @@ public interface Service {
 
     );
     @FormUrlEncoded
+    @POST("api/AllProductsFilterByBrandCatMarket")
+    Call<Product_Model> get_productss(
+            @Field("brand_id") String brand_id,
+
+            @Field("cat_id") String cat_id,
+
+            @Field("market_id") String market_id,
+            @Field("name") String name,
+
+            @Header("lang") String lang
+
+
+    );
+    @FormUrlEncoded
     @POST("api/catsOfMarket")
     Call<MarketCatogryModel> get_Catogries(
 
 
             @Field("market_id") String market_id,
+            @Header("lang") String lang
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/getAllCategoriesOrFilterByBrand")
+    Call<MarketCatogryModel> get_catogriesbybrand(
+            @Field("brand_id") String brand_id,
+            @Header("lang") String lang
+
+
+    );
+    @GET("api/categories")
+    Call<MarketCatogryModel> get_catogries(
+            @Header("lang") String lang
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/MarketFilterWithBrandAndCategory")
+    Call<Market_Model> get_Marketbycatogriesandbrand(
+            @Field("brand_id") String brand_id,
+            @Field("cat_id") String cat_id,
             @Header("lang") String lang
 
 

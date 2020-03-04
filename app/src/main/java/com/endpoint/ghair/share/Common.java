@@ -219,7 +219,7 @@ public class Common {
         dialog.setCanceledOnTouchOutside(false);
         ProgressBar bar = new ProgressBar(context);
         Drawable drawable = bar.getIndeterminateDrawable().mutate();
-        drawable.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        drawable.setColorFilter(ContextCompat.getColor(context, R.color.input), PorterDuff.Mode.SRC_IN);
         dialog.setIndeterminateDrawable(drawable);
         return dialog;
 

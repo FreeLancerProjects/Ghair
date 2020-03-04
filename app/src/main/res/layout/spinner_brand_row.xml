@@ -11,14 +11,16 @@
             type="String" />
     </data>
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:textColor="@color/white"
-        android:background="@color/input"
-        android:textSize="15sp"
+        android:textColor="@color/input"
+        android:background="@color/white"
+        android:textSize="13sp"
         android:gravity="center"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text='@{brandModel.title}'
+
         />
 </layout>

@@ -31,6 +31,7 @@ public class ProductsCat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private String lang;
     private final int ITEM_DATA = 1;
     private final int LOAD = 2;
+
     public ProductsCat_Adapter(List<MarketCatogryModel.Data.Products> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
@@ -45,14 +46,12 @@ public class ProductsCat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType==ITEM_DATA) {
+        if (viewType == ITEM_DATA) {
 
-        ProductImageRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.product_image_row, parent, false);
-        return new EventHolder(binding);
-        }
-        else
-        {
-            LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more,parent,false);
+            ProductImageRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.product_image_row, parent, false);
+            return new EventHolder(binding);
+        } else {
+            LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more, parent, false);
             return new LoadHolder(binding);
         }
 
@@ -62,8 +61,10 @@ public class ProductsCat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventHolder) {
 
-        EventHolder eventHolder = (EventHolder) holder;
-            Picasso.with(context).load(Tags.IMAGE_URL+orderlist.get(position).getMain_image()).fit().placeholder(R.drawable.ic_auction).into(eventHolder.binding.image);
+            EventHolder eventHolder = (EventHolder) holder;
+            ((EventHolder) holder).binding.tvname.setText(orderlist.get(position).getTitle());
+
+            Picasso.with(context).load(Tags.IMAGE_URL + orderlist.get(position).getMain_image()).fit().placeholder(R.drawable.ic_auction).into(eventHolder.binding.image);
 
 //eventHolder.binding.setProductmodel(orderlist.get(position));
 
@@ -104,10 +105,9 @@ if(i!=position) {
     ((EventHolder) holder).binding.expandLayout.collapse(true);
 
 
-}*/}
-        else
-        {
-        LoadHolder loadHolder = (LoadHolder) holder;
+}*/
+        } else {
+            LoadHolder loadHolder = (LoadHolder) holder;
             loadHolder.binding.progBar.setIndeterminate(true);
         }
 
@@ -127,12 +127,14 @@ if(i!=position) {
 
         }
     }
+
     public class LoadHolder extends RecyclerView.ViewHolder {
         private LoadMoreBinding binding;
+
         public LoadHolder(@NonNull LoadMoreBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.input), PorterDuff.Mode.SRC_IN);
+            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.input), PorterDuff.Mode.SRC_IN);
         }
 
     }
@@ -140,11 +142,9 @@ if(i!=position) {
     @Override
     public int getItemViewType(int position) {
         MarketCatogryModel.Data.Products order_Model = orderlist.get(position);
-        if (order_Model!=null)
-        {
+        if (order_Model != null) {
             return ITEM_DATA;
-        }else
-        {
+        } else {
             return LOAD;
         }
 

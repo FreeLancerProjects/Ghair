@@ -12,20 +12,20 @@ import androidx.databinding.DataBindingUtil;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.databinding.SpinnerBrandRowBinding;
-import com.endpoint.ghair.databinding.SpinnerCityRowBinding;
+import com.endpoint.ghair.databinding.SpinnerCatogryRowBinding;
 import com.endpoint.ghair.models.Brand_Model;
-import com.endpoint.ghair.models.Cities_Model;
+import com.endpoint.ghair.models.MarketCatogryModel;
 
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class SpinnerBrandAdapter extends BaseAdapter {
-    private List<Brand_Model.Data> dataList;
+public class SpinnerCatogryAdapter extends BaseAdapter {
+    private List<MarketCatogryModel.Data> dataList;
     private Context context;
     private String lang;
-    public SpinnerBrandAdapter(List<Brand_Model.Data> dataList, Context context) {
+    public SpinnerCatogryAdapter(List<MarketCatogryModel.Data> dataList, Context context) {
         this.dataList = dataList;
         this.context = context;
         Paper.init(context);
@@ -49,13 +49,10 @@ public class SpinnerBrandAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        @SuppressLint("ViewHolder") SpinnerBrandRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.spinner_brand_row,viewGroup,false);
-       if(context instanceof HomeActivity){
-           binding.tvName.setTextColor(context.getResources().getColor(R.color.white));
-           binding.tvName.setBackgroundColor(context.getResources().getColor(R.color.input));
-       }
+        @SuppressLint("ViewHolder") SpinnerCatogryRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.spinner_catogry_row,viewGroup,false);
+
         binding.setLang(lang);
-        binding.setBrandModel(dataList.get(i));
+        binding.setCatogryModel(dataList.get(i));
         return binding.getRoot();
     }
 }

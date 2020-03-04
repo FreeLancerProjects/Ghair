@@ -10,7 +10,9 @@
             name="backListener"
             type="com.endpoint.ghair.interfaces.Listeners.BackListener"
             />
-
+        <variable
+            name="addservicemodel"
+            type="com.endpoint.ghair.models.AddServiceModel" />
         <variable
             name="lang"
             type="String" />
@@ -117,8 +119,8 @@
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
                         >
-                        <EditText
-                            android:id="@+id/edtstprice"
+                        <TextView
+                            android:id="@+id/tvdate"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:singleLine="true"
@@ -128,7 +130,10 @@
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:paddingLeft="8dp"
-                            android:paddingRight="8dp"/>
+                            android:paddingRight="8dp"
+                            android:text="@={addservicemodel.date}"
+                            error="@{addservicemodel.error_date}"
+                            />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -175,7 +180,8 @@
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
                         >
-                        <EditText
+                        <TextView
+                            android:id="@+id/tv_time"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:singleLine="true"
@@ -185,7 +191,10 @@
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:paddingLeft="8dp"
-                            android:paddingRight="8dp"/>
+                            android:paddingRight="8dp"
+                            android:text="@={addservicemodel.time}"
+                            error="@{addservicemodel.error_time}"
+                            />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -219,8 +228,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="3dp"
                         android:text="@string/location"
                         android:textColor="@color/white"
                         android:textSize="13sp" />
@@ -229,10 +238,11 @@
                         android:layout_height="45dp"
                         android:orientation="vertical"
                         android:layout_weight="1"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
                         >
                         <EditText
+                            android:id="@+id/edtaddres"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:singleLine="true"
@@ -241,8 +251,12 @@
                             android:textColorHint="@color/gray4"
                             android:textColor="@color/white"
                             android:textSize="13sp"
+                            android:imeOptions="actionSearch"
                             android:paddingLeft="8dp"
-                            android:paddingRight="8dp"/>
+                            android:paddingRight="8dp"
+                            android:text="@={addservicemodel.address}"
+                            error="@{addservicemodel.error_address}"
+                            />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -306,11 +320,13 @@
                     android:background="@drawable/lang_shape"
                     android:layout_marginTop="8dp"
                     android:textColorHint="@color/gray4"
-                    android:textColor="@color/white"
+                    android:textColor="@color/input"
                     android:textSize="13sp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                   android:padding="10dp"
                     android:gravity="top"
+                    android:textCursorDrawable="@drawable/cursor_bg"
+                    android:text="@={addservicemodel.details}"
+                    error="@{addservicemodel.error_details}"
                     />
                 <Button
                     android:id="@+id/btnSend"

@@ -1,8 +1,9 @@
-package com.endpoint.ghair.activities_fragments.activity_market;
+package com.endpoint.ghair.activities_fragments.activity_categories;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,17 +12,18 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
 import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
-import com.endpoint.ghair.adapters.Markets_Adapter;
-import com.endpoint.ghair.adapters.MostActiveMarkets_Adapter;
-import com.endpoint.ghair.databinding.ActivityMarketsBinding;
+import com.endpoint.ghair.adapters.Category_Adapter;
+import com.endpoint.ghair.databinding.ActivityCatogriesBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;
-import com.endpoint.ghair.models.Market_Model;
+import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.remote.Api;
 import com.endpoint.ghair.tags.Tags;
 
@@ -35,13 +37,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MarketActivity extends AppCompatActivity implements Listeners.BackListener {
-    private ActivityMarketsBinding binding;
+public class CatogriesActivity extends AppCompatActivity implements Listeners.BackListener {
+    private ActivityCatogriesBinding binding;
     private String lang;
-    private Markets_Adapter mostActiveMarkets_adapter;
-    private List<Market_Model.Data> dataList;
+    private Category_Adapter category_adapter;
+    private List<MarketCatogryModel.Data> dataList;
+    private String search_id;
 
-    private String search_brand, search_catogry;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -54,45 +56,48 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_markets);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_catogries);
         initView();
-        getMArkets();
 
+getCatogries();
 
     }
 
     @SuppressLint("RestrictedApi")
     private void initView() {
-        if(getIntent().getIntExtra("searchcat",-1)!=0){
-            search_catogry=getIntent().getIntExtra("searchcat",-1)+"";
-            search_brand=getIntent().getStringExtra("searchbrand");
+        if(getIntent().getIntExtra("search",-1)!=0){
+            search_id=getIntent().getIntExtra("search",-1)+"";
         }
-        dataList = new ArrayList<>();
+        dataList=new ArrayList<>();
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
-        mostActiveMarkets_adapter = new Markets_Adapter(dataList, this, null);
-        binding.recView.setLayoutManager(new GridLayoutManager(this, 2));
-        binding.recView.setAdapter(mostActiveMarkets_adapter);
+        category_adapter =new Category_Adapter(dataList,this);
+        binding.recView.setLayoutManager(new GridLayoutManager(this,2));
+        binding.recView.setAdapter(category_adapter);
+        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+
         // setdtat();
+
 
 
     }
 
-    private void getMArkets() {
+    private void getCatogries() {
         dataList.clear();
-        mostActiveMarkets_adapter.notifyDataSetChanged();
+        category_adapter.notifyDataSetChanged();
         binding.progBar.setVisibility(View.VISIBLE);
         try {
 
 
             Api.getService(Tags.base_url)
-                    .get_Marketbycatogriesandbrand(search_brand, search_catogry, lang)
-                    .enqueue(new Callback<Market_Model>() {
+                    .get_catogriesbybrand(search_id,lang)
+                    .enqueue(new Callback<MarketCatogryModel>() {
                         @Override
-                        public void onResponse(Call<Market_Model> call, Response<Market_Model> response) {
+                        public void onResponse(Call<MarketCatogryModel> call, Response<MarketCatogryModel> response) {
                             binding.progBar.setVisibility(View.GONE);
+                            Log.e("resddd",response.code()+"");
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 dataList.clear();
                                 dataList.addAll(response.body().getData());
@@ -100,17 +105,17 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
                                     // rec_sent.setVisibility(View.VISIBLE);
 
                                     binding.llNoNotification.setVisibility(View.GONE);
-                                    mostActiveMarkets_adapter.notifyDataSetChanged();
+                                    category_adapter.notifyDataSetChanged();
                                     //   total_page = response.body().getMeta().getLast_page();
 
                                 } else {
-                                    mostActiveMarkets_adapter.notifyDataSetChanged();
+                                    category_adapter.notifyDataSetChanged();
 
                                     binding.llNoNotification.setVisibility(View.VISIBLE);
 
                                 }
                             } else {
-                                mostActiveMarkets_adapter.notifyDataSetChanged();
+                                category_adapter.notifyDataSetChanged();
 
                                 binding.llNoNotification.setVisibility(View.VISIBLE);
 
@@ -124,12 +129,12 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
                         }
 
                         @Override
-                        public void onFailure(Call<Market_Model> call, Throwable t) {
+                        public void onFailure(Call<MarketCatogryModel> call, Throwable t) {
                             try {
 
                                 binding.progBar.setVisibility(View.GONE);
                                 binding.llNoNotification.setVisibility(View.VISIBLE);
-                                Toast.makeText(MarketActivity.this, getResources().getString(R.string.something), Toast.LENGTH_LONG).show();
+                                Toast.makeText(CatogriesActivity.this, getResources().getString(R.string.something), Toast.LENGTH_LONG).show();
 
 
                                 Log.e("error", t.getMessage());
@@ -145,16 +150,17 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
 
         }
     }
+    public void showProfile(int id) {
+        Intent intent = new Intent(CatogriesActivity.this, MarketActivity.class);
+        intent.putExtra("searchbrand", search_id);
+        intent.putExtra("searchcat", id);
 
+        startActivity(intent);
+    }
     @Override
     public void back() {
         finish();
     }
 
-    public void showProfile(int id) {
-        Intent intent = new Intent(MarketActivity.this, MarketProfileActivity.class);
-        intent.putExtra("search", id);
 
-        startActivity(intent);
-    }
 }

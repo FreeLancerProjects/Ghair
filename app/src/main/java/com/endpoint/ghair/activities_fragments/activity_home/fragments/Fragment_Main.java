@@ -508,4 +508,10 @@ binding.tabLayout.setupWithViewPager(binding.pager);
         startActivity(intent);
     }
 
+    public void AddService(int id) {
+        Intent intent=new Intent(activity, AddServiceActivity.class);
+        intent.putExtra("search",id);
+
+        startActivity(intent);
+    }
 }

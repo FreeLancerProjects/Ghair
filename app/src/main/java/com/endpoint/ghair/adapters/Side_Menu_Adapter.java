@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.NavSideRowBinding;
@@ -32,6 +33,7 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Context context;
     private LayoutInflater inflater;
     private String lang;
+    private HomeActivity activity;
 
     public Side_Menu_Adapter(List<Brand_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
@@ -39,23 +41,21 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+        activity = (HomeActivity) context;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType==ITEM_DATA)
-        {
+        if (viewType == ITEM_DATA) {
 
-        NavSideRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.nav_side_row, parent, false);
-        return new EventHolder(binding);
+            NavSideRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.nav_side_row, parent, false);
+            return new EventHolder(binding);
 
-    }else
-    {
-        LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more,parent,false);
-        return new LoadHolder(binding);
-    }
+        } else {
+            LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more, parent, false);
+            return new LoadHolder(binding);
+        }
 
     }
 
@@ -64,11 +64,14 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (holder instanceof EventHolder) {
             EventHolder eventHolder = (EventHolder) holder;
             eventHolder.binding.setBrandemodel(orderlist.get(position));
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        activity.showCatogries(orderlist.get(eventHolder.getLayoutPosition()).getId());
+    }
+});
 
-
-        }
-        else
-        {
+        } else {
             LoadHolder loadHolder = (LoadHolder) holder;
             loadHolder.binding.progBar.setIndeterminate(true);
         }
@@ -89,24 +92,24 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         }
     }
+
     public class LoadHolder extends RecyclerView.ViewHolder {
         private LoadMoreBinding binding;
+
         public LoadHolder(@NonNull LoadMoreBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         }
 
     }
 
     @Override
     public int getItemViewType(int position) {
-       Brand_Model.Data order_Model = orderlist.get(position);
-        if (order_Model!=null)
-        {
+        Brand_Model.Data order_Model = orderlist.get(position);
+        if (order_Model != null) {
             return ITEM_DATA;
-        }else
-        {
+        } else {
             return LOAD;
         }
 

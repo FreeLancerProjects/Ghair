@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
+import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
 import com.endpoint.ghair.databinding.MarketCatRowBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
 import com.endpoint.ghair.models.MarketCatogryModel;
@@ -32,13 +33,14 @@ public class CategoryMarket_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
     private LayoutInflater inflater;
     private String lang;
     private ProductsCat_Adapter productsCat_adapter;
+    private MarketProfileActivity marketProfileActivity;
     public CategoryMarket_Adapter(List<MarketCatogryModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+marketProfileActivity=(MarketProfileActivity)context;
     }
 
     @NonNull
@@ -63,6 +65,12 @@ public class CategoryMarket_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
             productsCat_adapter=new ProductsCat_Adapter(orderlist.get(position).getProducts(),context);
             eventHolder.binding.recView1.setAdapter(productsCat_adapter);
         }
+        eventHolder.binding.search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+marketProfileActivity.showproducts(orderlist.get(eventHolder.getLayoutPosition()).getId());
+            }
+        });
         if(position%2!=0){
             eventHolder.binding.tvTitle.setBackground(context.getResources().getDrawable(R.drawable.accessories));
         }

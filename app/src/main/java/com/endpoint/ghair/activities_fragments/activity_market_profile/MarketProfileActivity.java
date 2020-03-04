@@ -100,6 +100,7 @@ public class MarketProfileActivity extends AppCompatActivity implements Listener
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MarketProfileActivity.this, ProductsActivity.class);
+                intent.putExtra("search", search_id);
                 startActivity(intent);
             }
         });
@@ -251,7 +252,11 @@ public class MarketProfileActivity extends AppCompatActivity implements Listener
                                 //binding.coord1.scrollTo(0,0);
                                 // setdata(response.body());
                                 marketcatlist.addAll(response.body().getData());
-                                categoryMarket_adapter.notifyDataSetChanged();
+                                if(marketcatlist.size()>0){
+                                categoryMarket_adapter.notifyDataSetChanged();}
+                                else {
+                                    binding.llNoCatogry.setVisibility(View.VISIBLE);
+                                }
 
                             } else {
                                 binding.llNoCatogry.setVisibility(View.VISIBLE);
@@ -321,5 +326,13 @@ public class MarketProfileActivity extends AppCompatActivity implements Listener
     @Override
     public void back() {
         finish();
+    }
+
+    public void showproducts(int id) {
+        Intent intent = new Intent(MarketProfileActivity.this, ProductsActivity.class);
+        intent.putExtra("search", search_id);
+        intent.putExtra("searchcat", id+"");
+
+        startActivity(intent);
     }
 }

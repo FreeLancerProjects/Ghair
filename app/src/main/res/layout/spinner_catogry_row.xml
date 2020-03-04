@@ -4,21 +4,22 @@
     >
     <data>
         <variable
-            name="cityModel"
-            type="com.endpoint.ghair.models.Cities_Model.Data" />
+            name="catogryModel"
+            type="com.endpoint.ghair.models.MarketCatogryModel.Data" />
         <variable
             name="lang"
             type="String" />
     </data>
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:textColor="@color/white"
-        android:background="@color/input"
+        android:textColor="@color/input"
+        android:background="@color/white"
         android:textSize="13sp"
         android:gravity="center"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text='@{cityModel.city_title}'
+        android:text='@{catogryModel.title}'
         />
 </layout>

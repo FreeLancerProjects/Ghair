@@ -51,7 +51,6 @@
                     android:tint="@color/white" />
 
                 <TextView
-                    android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -86,7 +85,7 @@
                     android:background="@drawable/bt_shape"
                     android:orientation="horizontal"
                     android:padding="8dp"
-                    android:weightSum="5"
+                    android:weightSum="4"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <Button
@@ -118,7 +117,7 @@
                             android:textSize="13sp"
 
                             android:layout_margin="5dp"
-                            android:hint="@string/search"                            />
+                            android:hint="@string/searsh"                            />
                     </FrameLayout>
                     <FrameLayout
                         android:layout_width="0dp"
@@ -129,11 +128,13 @@
                         android:background="@drawable/spinner_bg">
 
                         <Spinner
+                            android:id="@+id/spBrand"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="8dp"
                             android:background="@drawable/spinnerblack"
+                           android:spinnerMode="dialog"
                             >
 
                         </Spinner>
@@ -149,37 +150,21 @@
                         android:background="@drawable/spinner_bg">
 
                         <Spinner
+                            android:id="@+id/sp_cat"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="8dp"
                             android:background="@drawable/spinnerblack"
+                            android:spinnerMode="dialog"
+
                             >
 
                         </Spinner>
                     </FrameLayout>
 
 
-                    <FrameLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/spinner_bg"
 
-                        >
-
-                        <Spinner
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/spinnerblack"
-                            >
-
-                        </Spinner>
-                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -194,6 +179,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="8dp"
@@ -247,7 +233,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="no_notifications_to_display"
+                                android:text="@string/no_products"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
                         </LinearLayout>

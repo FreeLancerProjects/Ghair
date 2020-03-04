@@ -36,8 +36,10 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_addauction.AddAuctionActivity;
 import com.endpoint.ghair.activities_fragments.activity_addauction.AddProductActivity;
 import com.endpoint.ghair.activities_fragments.activity_cart.CartActivity;
+import com.endpoint.ghair.activities_fragments.activity_categories.CatogriesActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_More;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.fragment_profile.fragments.Fragment_Profile;
+import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
 import com.endpoint.ghair.activities_fragments.activity_profile.ProfileActivity;
 import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceRequireActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
@@ -611,4 +613,12 @@ private LinearLayoutManager manager;
     }
 
 
+    public void showCatogries(int id) {
+
+            Intent intent=new Intent(HomeActivity.this, CatogriesActivity.class);
+            intent.putExtra("search",id);
+
+            startActivity(intent);
+
+    }
 }

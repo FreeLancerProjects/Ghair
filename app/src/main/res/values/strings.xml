@@ -118,5 +118,9 @@
     <string name="no_auction_to_display">No Auction To Display</string>
     <string name="no_products">No Products To Display</string>
     <string name="no_catogry_to_display">No Catogry To Display</string>
+    <string name="no_market_to_display">No Market To Display</string>
+    <string name="categories">Categories</string>
+    <string name="no_categroies_to_display">No Categroies To Display</string>
+    <string name="ch_cat">Choose Catogry</string>
 
 </resources>

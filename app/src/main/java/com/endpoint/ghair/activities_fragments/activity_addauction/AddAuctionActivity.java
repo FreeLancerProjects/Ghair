@@ -197,7 +197,7 @@ private AddAuctionModel addAuctionModel;
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, second);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm", Locale.ENGLISH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         time += " " + dateFormat.format(calendar.getTime());
 addAuctionModel.setTime(time);
     binding.setAddauctionmodel(addAuctionModel);

@@ -60,7 +60,7 @@
                     android:clickable="false"
                     android:gravity="center"
                     android:longClickable="false"
-                    android:text="@string/markets"
+                    android:text="@string/categories"
                     android:textColor="@color/white"
                     android:textSize="16sp"
 
@@ -112,9 +112,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:text="@string/no_market_to_display"
+                        android:text="@string/no_categroies_to_display"
                         />
                 </LinearLayout>
 
