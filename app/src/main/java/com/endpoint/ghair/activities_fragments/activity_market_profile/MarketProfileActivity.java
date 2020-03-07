@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivity;
+import com.endpoint.ghair.activities_fragments.activity_products_detials.ProductsDetialsActivity;
 import com.endpoint.ghair.adapters.Accessories_Adapter;
 import com.endpoint.ghair.adapters.CategoryMarket_Adapter;
 import com.endpoint.ghair.adapters.Products_Adapter;
@@ -330,6 +331,12 @@ public class MarketProfileActivity extends AppCompatActivity implements Listener
         Intent intent = new Intent(MarketProfileActivity.this, ProductsActivity.class);
         intent.putExtra("search", search_id);
         intent.putExtra("searchcat", id+"");
+
+        startActivity(intent);
+    }
+    public void showproduct(int id) {
+        Intent intent = new Intent(MarketProfileActivity.this, ProductsDetialsActivity.class);
+        intent.putExtra("search", id);
 
         startActivity(intent);
     }

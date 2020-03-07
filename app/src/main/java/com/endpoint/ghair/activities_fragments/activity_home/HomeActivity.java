@@ -81,7 +81,6 @@ public class HomeActivity extends AppCompatActivity {
 private LinearLayoutManager manager;
     private TextView tv_title,tvname,tvphone;
     private DrawerLayout drawer;
-    private NavigationView navigationView;
     private Preferences preferences;
     private UserModel userModel;
     private RecyclerView recmenu;
@@ -109,6 +108,9 @@ private LinearLayoutManager manager;
         setContentView(R.layout.activity_home);
         initView();
         if(userModel!=null){
+            if(userModel.getUser_type().equals("client")){
+                cons_add.setVisibility(View.GONE);
+            }
             tvphone.setText(userModel.getPhone_code().replaceFirst("00","+")+userModel.getPhone());
             if(userModel.getUser_type().equals("market")){
                 if(lang.equals("ar")){
@@ -141,7 +143,6 @@ private LinearLayoutManager manager;
         brandList = new ArrayList<>();
         ahBottomNav = findViewById(R.id.ah_bottom_nav);
         drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
         fragmentManager = getSupportFragmentManager();
         toolbar = findViewById(R.id.toolbar);
         tv_title = findViewById(R.id.tvtitle);
@@ -602,14 +603,17 @@ private LinearLayoutManager manager;
     @SuppressLint("RestrictedApi")
     @Override
     public void onBackPressed() {
+if(drawer.isDrawerOpen(GravityCompat.START)){
+    drawer.closeDrawer(GravityCompat.START);
+}
+else {
+    if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
+        finish();
+    } else {
+        displayFragmentMain();
+    }
 
-        if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
-
-        } else {
-            displayFragmentMain();
-        }
-
-
+}
     }
 
 

@@ -3,10 +3,13 @@ package com.endpoint.ghair.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.endpoint.ghair.models.Add_Order_Model;
 import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.tags.Tags;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.Locale;
 
 public class Preferences {
@@ -105,5 +108,23 @@ public class Preferences {
         create_update_session(context, Tags.session_logout);
     }
 
+    public void create_update_order(Context context, Add_Order_Model buy_models){
+        SharedPreferences sharedPreferences=context.getSharedPreferences("order",Context.MODE_PRIVATE);
+        Gson gson=new Gson();
+        String user_order=gson.toJson(buy_models);
 
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("user_order",user_order);
+        editor.apply();
+        editor.commit();
+    }
+    public Add_Order_Model getUserOrder(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("order",Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String user_order = preferences.getString("user_order",null);
+        Type type=new TypeToken<Add_Order_Model>(){}.getType();
+        Add_Order_Model buy_models=gson.fromJson(user_order,type);
+        return buy_models;
+    }
 }

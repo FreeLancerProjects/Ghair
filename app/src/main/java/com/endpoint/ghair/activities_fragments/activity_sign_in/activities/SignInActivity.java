@@ -94,6 +94,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void DisplayFragmentSignUpMarketr() {
+        fragment_count+=1;
         fragmentSignUpAsMarketr = FragmentSignUpAsMarketr.newInstance();
         if (fragmentSignUpAsMarketr.isAdded()) {
             fragmentManager.beginTransaction().show(fragmentSignUpAsMarketr).commit();

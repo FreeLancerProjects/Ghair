@@ -345,8 +345,10 @@ Log.e("jjjjj",brand+" "+cat+" "+search_id+" "+name);
         }
     }
 
-    public void showdetials() {
+    public void showdetials(int id) {
         Intent intent = new Intent(ProductsActivity.this, ProductsDetialsActivity.class);
+        intent.putExtra("search",id);
+
         startActivity(intent);
     }
 }

@@ -3,6 +3,7 @@ package com.endpoint.ghair.adapters;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
+import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivity;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.OfferRowBinding;
 import com.endpoint.ghair.databinding.ProductImageRowBinding;
@@ -32,6 +35,8 @@ public class Products_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private String lang;
     private final int ITEM_DATA = 1;
     private final int LOAD = 2;
+    private MarketProfileActivity marketProfileActivity;
+    private ProductsActivity productsActivity;
     public Products_Adapter(List<Product_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
@@ -67,7 +72,20 @@ public class Products_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //eventHolder.binding.setProductmodel(orderlist.get(position));
             ((EventHolder) holder).binding.tvname.setText(orderlist.get(position).getTitle());
             Picasso.with(context).load(Tags.IMAGE_URL+orderlist.get(position).getMain_image()).fit().placeholder(R.drawable.ic_auction).into(eventHolder.binding.image);
-/*
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(context instanceof ProductsActivity){
+            productsActivity=(ProductsActivity) context;
+            productsActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+        }
+        else if(context instanceof  MarketProfileActivity){
+            marketProfileActivity=(MarketProfileActivity)context;
+            marketProfileActivity.showproduct(orderlist.get(eventHolder.getLayoutPosition()).getId());
+        }
+    }
+});
+            /*
 if(i==position){
     if(i!=0) {
         if (((EventHolder) holder).binding.expandLayout.isExpanded()) {

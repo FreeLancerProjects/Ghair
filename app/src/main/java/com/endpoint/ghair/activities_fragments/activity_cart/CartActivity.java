@@ -25,6 +25,7 @@ import com.endpoint.ghair.adapters.Cart_Adapter;
 import com.endpoint.ghair.databinding.ActivityCartBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;
+import com.endpoint.ghair.models.Add_Order_Model;
 import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.preferences.Preferences;
 
@@ -44,7 +45,7 @@ public class CartActivity extends AppCompatActivity implements Listeners.BackLis
 
     private Preferences preferences;
     private String lang;
-private List<Slider_Model.Data> order_details;
+private List<Add_Order_Model.Products> order_details;
 private Cart_Adapter cart_adapter;
 
 
@@ -70,7 +71,7 @@ private Cart_Adapter cart_adapter;
 
     @SuppressLint("RestrictedApi")
     private void initView() {
-
+preferences=Preferences.getInstance();
         binding.toolbar.setTitle("");
         order_details = new ArrayList<>();
         cart_adapter = new Cart_Adapter(order_details, this);
@@ -80,21 +81,20 @@ private Cart_Adapter cart_adapter;
         binding.setBackListener(this);
         binding.recCart.setLayoutManager(new GridLayoutManager(this, 1));
         binding.recCart.setAdapter(cart_adapter);
-        setdtat();
-
+        //setdtat();
+getdata();
 
 
     }
 
-    private void setdtat() {
-        order_details.add(new Slider_Model.Data());
-        order_details.add(new Slider_Model.Data());
-        order_details.add(new Slider_Model.Data());
-        order_details.add(new Slider_Model.Data());
-
-
-        cart_adapter.notifyDataSetChanged();
+    private void getdata() {
+        if(preferences.getUserOrder(this)!=null&&preferences.getUserOrder(this).getDetails()!=null){
+            order_details.clear();
+            order_details.addAll(preferences.getUserOrder(this).getDetails());
+            cart_adapter.notifyDataSetChanged();
+        }
     }
+
 
     @Override
     public void back() {

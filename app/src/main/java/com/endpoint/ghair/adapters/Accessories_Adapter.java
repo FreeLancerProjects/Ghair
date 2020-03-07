@@ -60,7 +60,7 @@ eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     public void onClick(View v) {
         if(context instanceof  ProductsActivity){
             productsActivity=(ProductsActivity)context;
-            productsActivity.showdetials();
+            productsActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
         }
     }
 });

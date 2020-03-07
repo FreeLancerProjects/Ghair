@@ -122,5 +122,15 @@
     <string name="categories">اقسام </string>
     <string name="no_categroies_to_display">لا يوجد اقسام</string>
     <string name="ch_cat">اختر القسم</string>
+    <string name="product_name_en">Product Name (English)</string>
+    <string name="product_name_ar">Product Name (Arabic)</string>
+    <string name="catogry">Catogry</string>
+    <string name="english_descreption">English Descreption</string>
+    <string name="arabic_description">Arabic Description</string>
+    <string name="banners">Banners</string>
+    <string name="ch_baner">Choose Banners</string>
+    <string name="your_request_send_suc">Your Request Send Sucsses please wait we will check it</string>
+    <string name="share">share</string>
+    <string name="market">Market</string>
 
 </resources>

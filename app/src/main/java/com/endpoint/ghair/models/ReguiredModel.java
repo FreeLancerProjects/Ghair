@@ -16,6 +16,7 @@ public class ReguiredModel extends BaseObservable implements Serializable {
 
     private String english_title;
     private String arabic_title;
+
     private String model;
 
     private String amount;
@@ -35,6 +36,7 @@ public class ReguiredModel extends BaseObservable implements Serializable {
     public ReguiredModel() {
         this.english_title = "";
         this.arabic_title = "";
+
         this.model = "";
         this.amount = "";
 
@@ -77,7 +79,6 @@ public class ReguiredModel extends BaseObservable implements Serializable {
         notifyPropertyChanged(com.endpoint.ghair.BR.national);
 
     }
-
 
 
 
@@ -134,7 +135,6 @@ public class ReguiredModel extends BaseObservable implements Serializable {
             error_model.set(null);
             error_amount.set(null);
 
-
             return true;
         }else
         {
@@ -152,6 +152,7 @@ public class ReguiredModel extends BaseObservable implements Serializable {
             {
                 error_arabic_title.set(null);
             }
+
             if (model.isEmpty())
             {
                 error_model.set(context.getString(R.string.field_req));

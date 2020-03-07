@@ -13,6 +13,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_cart.CartActivity;
 import com.endpoint.ghair.databinding.CartRowBinding;
 import com.endpoint.ghair.databinding.OrderRowBinding;
+import com.endpoint.ghair.models.Add_Order_Model;
 import com.endpoint.ghair.models.Slider_Model;
 
 import java.util.List;
@@ -22,12 +23,12 @@ import io.paperdb.Paper;
 
 public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Slider_Model.Data> orderlist;
+    private List<Add_Order_Model.Products> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
 private CartActivity cartActivity;
-    public Cart_Adapter(List<Slider_Model.Data> orderlist, Context context) {
+    public Cart_Adapter(List<Add_Order_Model.Products> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -52,9 +53,8 @@ cartActivity=(CartActivity)context;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-        if(position%2!=0){
-            eventHolder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_tire));
-        }
+       eventHolder.binding.setAddordermodel(orderlist.get(position));
+       eventHolder.binding.setLang(lang);
         eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,6 +11,7 @@ import com.endpoint.ghair.models.PlaceGeocodeData;
 import com.endpoint.ghair.models.PlaceMapDetailsData;
 import com.endpoint.ghair.models.Product_Model;
 import com.endpoint.ghair.models.Service_Model;
+import com.endpoint.ghair.models.SingleProductModel;
 import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.models.UserModel;
 
@@ -227,7 +228,37 @@ public interface Service {
             @Header("Authorization") String Authorization,
 
             @Part List<MultipartBody.Part> image);
+    @Multipart
+    @POST("api/product/add")
+    Call<ResponseBody> Addproductwithimagemain(
+            @Part("ar_title") RequestBody ar_title,
+            @Part("en_title") RequestBody en_title,
+            @Part("ar_desc") RequestBody ar_desc,
+            @Part("en_desc") RequestBody en_desc,
 
+            @Part("model_title") RequestBody model_title,
+            @Part("price") RequestBody price,
+            @Part("cat_id") RequestBody cat_id,
+            @Part("brand_id") RequestBody brand_id,
+            @Part("amount") RequestBody amount,
+            @Header("Authorization") String Authorization,
+            @Part MultipartBody.Part main_image,
+            @Part List<MultipartBody.Part> image);
+    @Multipart
+    @POST("api/product/add")
+    Call<ResponseBody> Addproductwithimage(
+            @Part("ar_title") RequestBody ar_title,
+            @Part("en_title") RequestBody en_title,
+            @Part("ar_desc") RequestBody ar_desc,
+            @Part("en_desc") RequestBody en_desc,
+
+            @Part("model_title") RequestBody model_title,
+            @Part("price") RequestBody price,
+            @Part("cat_id") RequestBody cat_id,
+            @Part("brand_id") RequestBody brand_id,
+            @Part("amount") RequestBody amount,
+            @Header("Authorization") String Authorization,
+            @Part List<MultipartBody.Part> image);
     @FormUrlEncoded
     @POST("api/singleAuction")
     Call<Auction_Model> get_singleauction(
@@ -237,7 +268,14 @@ public interface Service {
 
 
     );
+    @FormUrlEncoded
+    @POST("api/product-details")
+    Call<SingleProductModel> get_singleproducr(
+            @Field("product_id") String product_id,
+            @Header("lang") String lang
 
+
+    );
     @FormUrlEncoded
     @POST("api/market-details")
     Call<UserModel> get_singlemarket(

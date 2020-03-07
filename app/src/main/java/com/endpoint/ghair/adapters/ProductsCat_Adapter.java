@@ -3,6 +3,7 @@ package com.endpoint.ghair.adapters;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.ProductImageRowBinding;
 import com.endpoint.ghair.models.MarketCatogryModel;
@@ -31,14 +33,14 @@ public class ProductsCat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private String lang;
     private final int ITEM_DATA = 1;
     private final int LOAD = 2;
-
+private MarketProfileActivity marketProfileActivity;
     public ProductsCat_Adapter(List<MarketCatogryModel.Data.Products> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+marketProfileActivity=(MarketProfileActivity)context;
 
     }
 
@@ -65,7 +67,13 @@ public class ProductsCat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((EventHolder) holder).binding.tvname.setText(orderlist.get(position).getTitle());
 
             Picasso.with(context).load(Tags.IMAGE_URL + orderlist.get(position).getMain_image()).fit().placeholder(R.drawable.ic_auction).into(eventHolder.binding.image);
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        marketProfileActivity.showproduct(orderlist.get(eventHolder.getLayoutPosition()).getId());
 
+    }
+});
 //eventHolder.binding.setProductmodel(orderlist.get(position));
 
 /*

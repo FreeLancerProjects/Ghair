@@ -132,6 +132,14 @@ public class Fragment_More extends Fragment {
                 startActivity(intent);
             }
         });
+        binding.llshare.setOnClickListener(view -> {
+            String app_url = "https://play.google.com/store/apps/details?id=" + activity.getPackageName();
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TITLE, "تطبيق غيار");
+            intent.putExtra(Intent.EXTRA_TEXT, app_url);
+            startActivity(intent);
+        });
     }
 
 
