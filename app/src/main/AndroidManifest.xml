@@ -46,7 +46,13 @@
 
             />
         <activity
-            android:name=".activities_fragments.chat_activity.ChatActivity"
+        android:name=".activities_fragments.chat_activity.ChatActivity"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+
+        />
+        <activity
+            android:name=".activities_fragments.activity_notification.NotificationsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
 

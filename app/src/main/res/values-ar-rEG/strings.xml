@@ -143,5 +143,6 @@
     <string name="sign_in">تسجيل الدخول</string>
     <string name="please_sign_in_or_sign_up">برجاء تسجيل الدخول أو إنشاء حساب جديد.</string>
     <string name="signup">إنشاء حساب جديد</string>
+    <string name="no_notification_found">No Notification Found</string>
 
 </resources>

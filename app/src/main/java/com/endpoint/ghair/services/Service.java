@@ -11,6 +11,7 @@ import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.MessageDataModel;
 import com.endpoint.ghair.models.MessageModel;
+import com.endpoint.ghair.models.NotificationDataModel;
 import com.endpoint.ghair.models.PlaceGeocodeData;
 import com.endpoint.ghair.models.PlaceMapDetailsData;
 import com.endpoint.ghair.models.Product_Model;
@@ -419,6 +420,14 @@ public interface Service {
             @Field("auction_id") String auction_id,
             @Header("Authorization") String Authorization
 
+
+    );
+
+    @GET("api/my-notifications")
+    Call<NotificationDataModel> getnotification(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
 
     );
 }

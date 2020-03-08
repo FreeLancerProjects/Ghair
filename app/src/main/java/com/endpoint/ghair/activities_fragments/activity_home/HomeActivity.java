@@ -40,6 +40,7 @@ import com.endpoint.ghair.activities_fragments.activity_categories.CatogriesActi
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_More;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.fragment_profile.fragments.Fragment_Profile;
 import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
+import com.endpoint.ghair.activities_fragments.activity_notification.NotificationsActivity;
 import com.endpoint.ghair.activities_fragments.activity_profile.ProfileActivity;
 import com.endpoint.ghair.activities_fragments.activity_room.ChatRoomActivity;
 import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceRequireActivity;
@@ -88,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recmenu;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
-    private ImageView imaddauction, imagechat, imagecart;
+    private ImageView imaddauction, imagechat, imagecart,imagenotifi;
     private ConstraintLayout cons_add;
     private CircleImageView improfile;
     private boolean isLoading = false;
@@ -153,6 +154,7 @@ public class HomeActivity extends AppCompatActivity {
         imaddauction = findViewById(R.id.imageplus);
         imagechat = findViewById(R.id.imagechat);
         imagecart = findViewById(R.id.imagecart);
+        imagenotifi=findViewById(R.id.imageNotification);
         progBar = findViewById(R.id.progBar);
         llNobrands = findViewById(R.id.ll_no_brands);
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -210,6 +212,18 @@ public class HomeActivity extends AppCompatActivity {
                 if (userModel != null) {
                     drawer.closeDrawer(GravityCompat.START);
                     Intent intent = new Intent(HomeActivity.this, ChatRoomActivity.class);
+                    startActivity(intent);
+                } else {
+                    Common.CreateNoSignAlertDialog(HomeActivity.this);
+                }
+            }
+        });
+        imagenotifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userModel != null) {
+                    drawer.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(HomeActivity.this, NotificationsActivity.class);
                     startActivity(intent);
                 } else {
                     Common.CreateNoSignAlertDialog(HomeActivity.this);
