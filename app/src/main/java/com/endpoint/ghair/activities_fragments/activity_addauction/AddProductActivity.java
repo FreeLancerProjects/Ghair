@@ -30,6 +30,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivity;
 import com.endpoint.ghair.adapters.ImagesAdapter;
 import com.endpoint.ghair.adapters.SpinnerBrandAdapter;
@@ -196,6 +197,7 @@ else {
         }
     }
     else {
+            Common.CreateNoSignAlertDialog(AddProductActivity.this);
 
         }
     }

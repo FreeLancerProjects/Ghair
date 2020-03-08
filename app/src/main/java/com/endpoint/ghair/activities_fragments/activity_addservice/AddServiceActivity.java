@@ -155,10 +155,17 @@ private UserModel userModel;
         binding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(userModel!=null){
                 if (addServiceModel.isDataValid(AddServiceActivity.this)) {
 services(addServiceModel);
                 }
             }
+            else {
+                    Common.CreateNoSignAlertDialog(AddServiceActivity.this);
+
+                }
+            }
+
         });
         createDatePickerDialog();
         createTimePickerDialog();

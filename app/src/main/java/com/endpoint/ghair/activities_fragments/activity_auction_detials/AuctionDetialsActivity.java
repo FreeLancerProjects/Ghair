@@ -6,11 +6,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
+import com.endpoint.ghair.activities_fragments.chat_activity.ChatActivity;
 import com.endpoint.ghair.adapters.Offer_Adapter;
 import com.endpoint.ghair.adapters.SlidingImageAuction_Adapter;
 import com.endpoint.ghair.databinding.ActivityAuctionDetialsBinding;
@@ -26,19 +30,23 @@ import com.endpoint.ghair.databinding.DialogAddPriceBinding;
 import com.endpoint.ghair.interfaces.Listeners;
 import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Auction_Model;
-import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.models.MessageModel;
+import com.endpoint.ghair.models.UserModel;
+import com.endpoint.ghair.preferences.Preferences;
 import com.endpoint.ghair.remote.Api;
 import com.endpoint.ghair.share.Common;
 import com.endpoint.ghair.tags.Tags;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,6 +62,8 @@ private String search_id;
     private int current_page = 0, NUM_PAGES;
     private boolean isLoading2 = false;
     private int current_page4=1;
+    private Preferences preferences;
+    private UserModel userModel;
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
@@ -75,6 +85,8 @@ getsingleads();
 
     @SuppressLint("RestrictedApi")
     private void initView() {
+        preferences=Preferences.getInstance();
+        userModel=preferences.getUserData(this);
         if(getIntent().getIntExtra("search",-1)!=0){
             search_id=getIntent().getIntExtra("search",-1)+"";
         }
@@ -86,7 +98,7 @@ getsingleads();
         binding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateNoSignAlertDialogs(AuctionDetialsActivity.this);
+                CreateAuctionDialogs(AuctionDetialsActivity.this);
             }
         });
         manager=new LinearLayoutManager(this);
@@ -151,15 +163,98 @@ binding.offer.setOnClickListener(new View.OnClickListener() {
         }, 3000, 3000);
     }
 
+    private void sendauction(String detials,String price)
+    {
+        try {
 
 
-    public static void CreateNoSignAlertDialogs(Context context) {
+            Api.getService(Tags.base_url)
+                    .sendAuction( price, detials, search_id,"Bearer" + " " + userModel.getToken())
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                               getsingleads();
+                            } else {
+
+                                try {
+
+                                    Log.e("errorcode", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (response.code() == 500) {
+                                 //   Toast.makeText(ChatActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    if(response.code()==402) {
+                                        // Toast.makeText(ChatActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();//
+                                        Toast.makeText(AuctionDetialsActivity.this, getResources().getString(R.string.offerless), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(AuctionDetialsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AuctionDetialsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+    }
+
+    public  void CreateAuctionDialogs(Context context) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .create();
 
         DialogAddPriceBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_add_price, null, false);
 
+binding.btnSend.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(userModel!=null){
+            String price=binding.edtstprice.getText().toString();
+            String detials=binding.edtdetials.getText().toString();
+            if(!TextUtils.isEmpty(price)&&!TextUtils.isEmpty(detials)){
+                binding.edtdetials.setError(null);
+                binding.edtstprice.setError(null);
+                sendauction(detials,price);
+            }
+            else {
+                if(price.isEmpty()){
+                    binding.edtstprice.setError(context.getResources().getString(R.string.field_req));
+                }
+                else {
+                    binding.edtstprice.setError(null);
+                }
+                if(detials.isEmpty()){
+                    binding.edtdetials.setError(context.getResources().getString(R.string.field_req));
+                }
+                else {
+                    binding.edtdetials.setError(null);
+                }
+            }
+        }
+        else {
+            Common.CreateNoSignAlertDialog(AuctionDetialsActivity.this);
 
+        }
+        dialog.dismiss();
+    }
+});
 
         dialog.setCanceledOnTouchOutside(false);
         dialog.setView(binding.getRoot());

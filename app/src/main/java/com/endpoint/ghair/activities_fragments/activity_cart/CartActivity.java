@@ -45,7 +45,7 @@ public class CartActivity extends AppCompatActivity implements Listeners.BackLis
 
     private Preferences preferences;
     private String lang;
-private List<Add_Order_Model.Products> order_details;
+private List<Add_Order_Model.Details> order_details;
 private Cart_Adapter cart_adapter;
 
 
@@ -67,7 +67,13 @@ private Cart_Adapter cart_adapter;
 
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1){
+            getdata();
+        }
+    }
 
     @SuppressLint("RestrictedApi")
     private void initView() {
@@ -83,7 +89,12 @@ preferences=Preferences.getInstance();
         binding.recCart.setAdapter(cart_adapter);
         //setdtat();
 getdata();
-
+binding.btCom.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Complete();
+    }
+});
 
     }
 
@@ -92,6 +103,14 @@ getdata();
             order_details.clear();
             order_details.addAll(preferences.getUserOrder(this).getDetails());
             cart_adapter.notifyDataSetChanged();
+            gettotal();
+        }
+        else {
+            binding.llNoStore.setVisibility(View.VISIBLE);
+            binding.tvTotal.setVisibility(View.GONE);
+            binding.btCom.setVisibility(View.GONE);
+order_details.clear();
+cart_adapter.notifyDataSetChanged();
         }
     }
 
@@ -103,6 +122,66 @@ getdata();
 
     public void Complete() {
         Intent intent=new Intent(CartActivity.this, CompleteOrderActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,1);
+    }
+    public void removeitem(int layoutPosition) {
+        order_details.remove(layoutPosition);
+        if(order_details.size()>0){
+            Add_Order_Model add_order_model=preferences.getUserOrder(this);
+            add_order_model.setDetails(order_details);
+            preferences.create_update_order(this,add_order_model);
+            gettotal();
+        }
+        else {
+            preferences.create_update_order(this,null);
+            binding.llNoStore.setVisibility(View.VISIBLE);
+            binding.tvTotal.setVisibility(View.GONE);
+            binding.btCom.setVisibility(View.GONE);
+
+        }
+
+        cart_adapter.notifyDataSetChanged();
+
+    }
+    public void additem(int layoutPosition) {
+        Add_Order_Model.Details products1 =order_details.get(layoutPosition);
+        products1.setPrice((products1.getPrice()/ products1.getAmount())*(products1.getAmount()+1));
+        products1.setAmount(products1.getAmount()+1);
+        order_details.remove(layoutPosition);
+        order_details.add(layoutPosition, products1);
+        Add_Order_Model add_order_model=preferences.getUserOrder(this);
+        add_order_model.setDetails(order_details);
+        preferences.create_update_order(this,add_order_model);
+        cart_adapter.notifyDataSetChanged();
+        gettotal();
+    }
+    public void minusitem(int layoutPosition) {
+
+        Add_Order_Model.Details products1 =order_details.get(layoutPosition);
+        if(products1.getAmount()>1){
+            products1.setPrice((products1.getPrice()/ products1.getAmount())*(products1.getAmount()-1));
+            products1.setAmount(products1.getAmount()-1);
+            order_details.remove(layoutPosition);
+            order_details.add(layoutPosition, products1);
+            Add_Order_Model add_order_model=preferences.getUserOrder(this);
+            add_order_model.setDetails(order_details);
+            preferences.create_update_order(this,add_order_model);
+            cart_adapter.notifyDataSetChanged();
+            gettotal();
+
+        }
+    }
+    private void gettotal() {
+
+        double total=0;
+        for(int i=0;i<order_details.size();i++){
+            total+=order_details.get(i).getPrice();
+
+        }
+
+
+
+
+        binding.tvTotal.setText(getResources().getString(R.string.total)+total+" "+getResources().getString(R.string.real));
     }
 }

@@ -132,5 +132,16 @@
     <string name="your_request_send_suc">Your Request Send Sucsses please wait we will check it</string>
     <string name="share">share App</string>
     <string name="market">Market</string>
+    <string name="total">Total :</string>
+    <string name="real">R.S</string>
+    <string name="chat">chat</string>
+    <string name="no_conversation">No Conversation</string>
+    <string name="completer_order">Completer Order</string>
+    <string name="type_amessage">Type Amessage</string>
+    <string name="offerless">Offer Less Than other Offers</string>
+    <string name="notifications">Notifications</string>
+    <string name="sign_in">Sign In</string>
+    <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
+    <string name="signup">Sign Up</string>
 
 </resources>

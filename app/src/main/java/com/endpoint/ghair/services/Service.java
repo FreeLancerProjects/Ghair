@@ -1,19 +1,25 @@
 package com.endpoint.ghair.services;
 
 
+import com.endpoint.ghair.models.Add_OrderSend_Model;
+import com.endpoint.ghair.models.Add_Order_Model;
 import com.endpoint.ghair.models.App_Data_Model;
 import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.Cities_Model;
 import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.models.Market_Model;
+import com.endpoint.ghair.models.MessageDataModel;
+import com.endpoint.ghair.models.MessageModel;
 import com.endpoint.ghair.models.PlaceGeocodeData;
 import com.endpoint.ghair.models.PlaceMapDetailsData;
 import com.endpoint.ghair.models.Product_Model;
+import com.endpoint.ghair.models.RoomIdModel;
 import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.SingleProductModel;
 import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.models.UserModel;
+import com.endpoint.ghair.models.UserRoomModelData;
 
 import org.androidannotations.annotations.rest.Get;
 
@@ -23,6 +29,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -228,6 +235,7 @@ public interface Service {
             @Header("Authorization") String Authorization,
 
             @Part List<MultipartBody.Part> image);
+
     @Multipart
     @POST("api/product/add")
     Call<ResponseBody> Addproductwithimagemain(
@@ -244,6 +252,7 @@ public interface Service {
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part main_image,
             @Part List<MultipartBody.Part> image);
+
     @Multipart
     @POST("api/product/add")
     Call<ResponseBody> Addproductwithimage(
@@ -259,6 +268,7 @@ public interface Service {
             @Part("amount") RequestBody amount,
             @Header("Authorization") String Authorization,
             @Part List<MultipartBody.Part> image);
+
     @FormUrlEncoded
     @POST("api/singleAuction")
     Call<Auction_Model> get_singleauction(
@@ -268,6 +278,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/product-details")
     Call<SingleProductModel> get_singleproducr(
@@ -276,6 +287,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/market-details")
     Call<UserModel> get_singlemarket(
@@ -297,6 +309,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/AllProductsFilterByBrandCatMarket")
     Call<Product_Model> get_productss(
@@ -311,6 +324,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/catsOfMarket")
     Call<MarketCatogryModel> get_Catogries(
@@ -321,6 +335,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/getAllCategoriesOrFilterByBrand")
     Call<MarketCatogryModel> get_catogriesbybrand(
@@ -329,18 +344,80 @@ public interface Service {
 
 
     );
+
     @GET("api/categories")
     Call<MarketCatogryModel> get_catogries(
             @Header("lang") String lang
 
 
     );
+
     @FormUrlEncoded
     @POST("api/MarketFilterWithBrandAndCategory")
     Call<Market_Model> get_Marketbycatogriesandbrand(
             @Field("brand_id") String brand_id,
             @Field("cat_id") String cat_id,
             @Header("lang") String lang
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/chatRoom/get")
+    Call<RoomIdModel> getRoomId(@Field("from_user_id") int from_user_id,
+                                @Field("to_user_id") int to_user_id,
+                                @Header("Authorization") String Authorization
+
+
+    );
+
+    @POST("api/order/add")
+    Call<ResponseBody> accept_orders(@Body Add_OrderSend_Model add_order_model,
+                                     @Header("Authorization") String Authorization
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/my-chat-rooms")
+    Call<UserRoomModelData> getRooms(@Field("user_id") int user_id,
+                                     @Field("page") int page,
+                                     @Header("Authorization") String Authorization,
+                                     @Header("lang") String lang
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/single-chat-room")
+    Call<MessageDataModel> getRoomMessages(@Field("user_id") int user_id,
+                                           @Field("room_id") int room_id,
+                                           @Field("page") int page,
+                                           @Header("Authorization") String Authorization,
+                                           @Header("lang") String lang
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/message/send")
+    Call<MessageModel> sendChatMessage(
+            @Field("room_id") int room_id,
+            @Field("from_user_id") int from_user_id,
+            @Field("to_user_id") int to_user_id,
+            @Field("message_type") int message_type,
+            @Field("message") String message,
+            @Field("date") long date,
+            @Header("Authorization") String Authorization
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/offer/make")
+    Call<ResponseBody> sendAuction(
+            @Field("price") String price,
+            @Field("details") String details,
+            @Field("auction_id") String auction_id,
+            @Header("Authorization") String Authorization
 
 
     );

@@ -41,6 +41,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.fragment_profile.fragments.Fragment_Profile;
 import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
 import com.endpoint.ghair.activities_fragments.activity_profile.ProfileActivity;
+import com.endpoint.ghair.activities_fragments.activity_room.ChatRoomActivity;
 import com.endpoint.ghair.activities_fragments.activity_service_require.ServiceRequireActivity;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Main;
@@ -53,6 +54,7 @@ import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.preferences.Preferences;
 import com.endpoint.ghair.remote.Api;
+import com.endpoint.ghair.share.Common;
 import com.endpoint.ghair.tags.Tags;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
@@ -78,8 +80,8 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Profile fragment_profile;
     private Fragment_Auction fragment_auction;
     private AHBottomNavigation ahBottomNav;
-private LinearLayoutManager manager;
-    private TextView tv_title,tvname,tvphone;
+    private LinearLayoutManager manager;
+    private TextView tv_title, tvname, tvphone;
     private DrawerLayout drawer;
     private Preferences preferences;
     private UserModel userModel;
@@ -94,6 +96,7 @@ private LinearLayoutManager manager;
     private String lang;
     private ProgressBar progBar;
     private LinearLayout llNobrands;
+
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
@@ -107,23 +110,22 @@ private LinearLayoutManager manager;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
         initView();
-        if(userModel!=null){
-            if(userModel.getUser_type().equals("client")){
+        if (userModel != null) {
+            if (userModel.getUser_type().equals("client")) {
                 cons_add.setVisibility(View.GONE);
             }
-            tvphone.setText(userModel.getPhone_code().replaceFirst("00","+")+userModel.getPhone());
-            if(userModel.getUser_type().equals("market")){
-                if(lang.equals("ar")){
+            tvphone.setText(userModel.getPhone_code().replaceFirst("00", "+") + userModel.getPhone());
+            if (userModel.getUser_type().equals("market")) {
+                if (lang.equals("ar")) {
                     tvname.setText(userModel.getAr_market_title());
-                }
-                else {
+                } else {
                     tvname.setText(userModel.getEn_market_title());
 
                 }
+            } else {
+                tvname.setText(userModel.getName());
             }
-            else {
-            tvname.setText(userModel.getName());}
-            Picasso.with(this).load(Uri.parse(Tags.IMAGE_URL+userModel.getLogo())).placeholder(R.drawable.ic_user).fit().into(improfile);
+            Picasso.with(this).load(Uri.parse(Tags.IMAGE_URL + userModel.getLogo())).placeholder(R.drawable.ic_user).fit().into(improfile);
         }
         getBrands();
         if (savedInstanceState == null) {
@@ -136,8 +138,8 @@ private LinearLayoutManager manager;
 
     @SuppressLint("RestrictedApi")
     private void initView() {
-        preferences=Preferences.getInstance();
-        userModel=preferences.getUserData(this);
+        preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         brandList = new ArrayList<>();
@@ -146,13 +148,13 @@ private LinearLayoutManager manager;
         fragmentManager = getSupportFragmentManager();
         toolbar = findViewById(R.id.toolbar);
         tv_title = findViewById(R.id.tvtitle);
-        tvname=findViewById(R.id.tvName);
-        tvphone=findViewById(R.id.tvphone);
+        tvname = findViewById(R.id.tvName);
+        tvphone = findViewById(R.id.tvphone);
         imaddauction = findViewById(R.id.imageplus);
         imagechat = findViewById(R.id.imagechat);
         imagecart = findViewById(R.id.imagecart);
         progBar = findViewById(R.id.progBar);
-        llNobrands=findViewById(R.id.ll_no_brands);
+        llNobrands = findViewById(R.id.ll_no_brands);
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         recmenu = findViewById(R.id.recView);
@@ -161,7 +163,7 @@ private LinearLayoutManager manager;
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         side_menu_adapter = new Side_Menu_Adapter(brandList, this);
-        manager=new LinearLayoutManager(this);
+        manager = new LinearLayoutManager(this);
         recmenu.setLayoutManager(manager);
         recmenu.setAdapter(side_menu_adapter);
 
@@ -175,7 +177,7 @@ private LinearLayoutManager manager;
                     Intent intent = new Intent(HomeActivity.this, AddAuctionActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(HomeActivity.this, ServiceRequireActivity.class);
+                    Intent intent = new Intent(HomeActivity.this, AddAuctionActivity.class);
                     startActivity(intent);
                 }
             }
@@ -187,14 +189,14 @@ private LinearLayoutManager manager;
                 startActivity(intent);
             }
         });
-        improfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawer.closeDrawer(GravityCompat.START);
-                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
+//        improfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                drawer.closeDrawer(GravityCompat.START);
+//                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         cons_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +204,18 @@ private LinearLayoutManager manager;
                 startActivity(intent);
             }
         });
-
+        imagechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userModel != null) {
+                    drawer.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(HomeActivity.this, ChatRoomActivity.class);
+                    startActivity(intent);
+                } else {
+                    Common.CreateNoSignAlertDialog(HomeActivity.this);
+                }
+            }
+        });
 //        recmenu.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
 //            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -224,6 +237,7 @@ private LinearLayoutManager manager;
 //            }
 //        });
     }
+
     public void Logout() {
         userModel = null;
         preferences.create_update_userdata(this, userModel);
@@ -241,18 +255,18 @@ private LinearLayoutManager manager;
 
 
             Api.getService(Tags.base_url)
-                    .getBrands(1,lang)
+                    .getBrands(1, lang)
                     .enqueue(new Callback<Brand_Model>() {
                         @Override
                         public void onResponse(Call<Brand_Model> call, Response<Brand_Model> response) {
-                          progBar.setVisibility(View.GONE);
+                            progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 brandList.clear();
                                 brandList.addAll(response.body().getData());
                                 if (response.body().getData().size() > 0) {
                                     // rec_sent.setVisibility(View.VISIBLE);
 
-                                   llNobrands.setVisibility(View.GONE);
+                                    llNobrands.setVisibility(View.GONE);
                                     side_menu_adapter.notifyDataSetChanged();
                                     recmenu.setVisibility(View.VISIBLE);
                                     //   total_page = response.body().getMeta().getLast_page();
@@ -266,7 +280,7 @@ private LinearLayoutManager manager;
                             } else {
                                 side_menu_adapter.notifyDataSetChanged();
 
-                               llNobrands.setVisibility(View.VISIBLE);
+                                llNobrands.setVisibility(View.VISIBLE);
 
                                 //Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 try {
@@ -282,7 +296,7 @@ private LinearLayoutManager manager;
                             try {
 
                                 progBar.setVisibility(View.GONE);
-                              llNobrands.setVisibility(View.VISIBLE);
+                                llNobrands.setVisibility(View.VISIBLE);
                                 Toast.makeText(HomeActivity.this, getResources().getString(R.string.something), Toast.LENGTH_LONG).show();
 
 
@@ -305,7 +319,7 @@ private LinearLayoutManager manager;
 
 
             Api.getService(Tags.base_url)
-                    .getBrands(page,lang)
+                    .getBrands(page, lang)
                     .enqueue(new Callback<Brand_Model>() {
                         @Override
                         public void onResponse(Call<Brand_Model> call, Response<Brand_Model> response) {
@@ -386,7 +400,12 @@ private LinearLayoutManager manager;
                         displayFragmentRequire();
                         break;
                     case 3:
-                        displayFragmentProfile();
+                        if (userModel != null) {
+                            displayFragmentProfile();
+                        } else {
+                            Common.CreateNoSignAlertDialog(HomeActivity.this);
+
+                        }
                         break;
                     case 4:
                         displayFragmentMore();
@@ -574,27 +593,28 @@ private LinearLayoutManager manager;
         }
     }
 
-    private void NavigateToSignInActivity() {
-        // Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
-        // startActivity(intent);
-        // finish();
+    public void NavigateToSignInActivity(boolean isSignIn) {
+//Log.e("data",isSignIn+"");
+        Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+        intent.putExtra("sign_up", isSignIn);
+        startActivity(intent);
+        finish();
+
     }
 
-    public void RefreshActivity(String lang)
-    {
-        Paper.book().write("lang",lang);
-        Language.setNewLocale(this,lang);
+    public void RefreshActivity(String lang) {
+        Paper.book().write("lang", lang);
+        Language.setNewLocale(this, lang);
         new Handler()
                 .postDelayed(new Runnable() {
                     @Override
                     public void run() {
 
-                        Intent intent =  getIntent();
+                        Intent intent = getIntent();
                         finish();
                         startActivity(intent);
                     }
-                },1050);
-
+                }, 1050);
 
 
     }
@@ -603,26 +623,25 @@ private LinearLayoutManager manager;
     @SuppressLint("RestrictedApi")
     @Override
     public void onBackPressed() {
-if(drawer.isDrawerOpen(GravityCompat.START)){
-    drawer.closeDrawer(GravityCompat.START);
-}
-else {
-    if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
-        finish();
-    } else {
-        displayFragmentMain();
-    }
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
+                finish();
+            } else {
+                displayFragmentMain();
+            }
 
-}
+        }
     }
 
 
     public void showCatogries(int id) {
 
-            Intent intent=new Intent(HomeActivity.this, CatogriesActivity.class);
-            intent.putExtra("search",id);
+        Intent intent = new Intent(HomeActivity.this, CatogriesActivity.class);
+        intent.putExtra("search", id);
 
-            startActivity(intent);
+        startActivity(intent);
 
     }
 }

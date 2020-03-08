@@ -166,6 +166,7 @@ public class Fragment_Require extends Fragment {
                         }
                     }
                 } else {
+                    Common.CreateNoSignAlertDialog(activity);
 
                 }
             }

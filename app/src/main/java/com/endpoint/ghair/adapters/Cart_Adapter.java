@@ -23,12 +23,12 @@ import io.paperdb.Paper;
 
 public class Cart_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Add_Order_Model.Products> orderlist;
+    private List<Add_Order_Model.Details> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
 private CartActivity cartActivity;
-    public Cart_Adapter(List<Add_Order_Model.Products> orderlist, Context context) {
+    public Cart_Adapter(List<Add_Order_Model.Details> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -55,10 +55,37 @@ cartActivity=(CartActivity)context;
         EventHolder eventHolder = (EventHolder) holder;
        eventHolder.binding.setAddordermodel(orderlist.get(position));
        eventHolder.binding.setLang(lang);
-        eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//        eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                cartActivity.Complete();
+//            }
+//        });
+        eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartActivity.Complete();
+                if(context instanceof  CartActivity){
+                    cartActivity=(CartActivity)context;
+                    cartActivity.removeitem(eventHolder.getLayoutPosition());
+                }
+            }
+        });
+        eventHolder.binding.imageIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(context instanceof  CartActivity){
+                    cartActivity=(CartActivity)context;
+                    cartActivity.additem(eventHolder.getLayoutPosition());
+                }
+            }
+        });
+        eventHolder.binding.imageDecrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(context instanceof  CartActivity){
+                    cartActivity=(CartActivity)context;
+                    cartActivity.minusitem(eventHolder.getLayoutPosition());
+                }
             }
         });
 /*

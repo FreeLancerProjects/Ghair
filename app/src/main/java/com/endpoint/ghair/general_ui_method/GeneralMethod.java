@@ -17,6 +17,10 @@ import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GeneralMethod {
@@ -32,6 +36,15 @@ public class GeneralMethod {
 
 
         }
+    }
+    @BindingAdapter({"date"})
+    public static void displayDate (TextView textView,long date)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd/MMM", Locale.ENGLISH);
+        String m_date = dateFormat.format(new Date(date*1000));
+
+        textView.setText(String.format("%s",m_date));
+
     }
     @BindingAdapter("url")
     public static void imageUrl(RoundedImageView imageView,String url)

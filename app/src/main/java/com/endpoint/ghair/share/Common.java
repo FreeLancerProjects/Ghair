@@ -26,6 +26,9 @@ import androidx.databinding.DataBindingUtil;
 
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
+import com.endpoint.ghair.activities_fragments.activity_sign_in.activities.SignInActivity;
+import com.endpoint.ghair.databinding.DialogCustomBinding;
 
 import java.io.File;
 
@@ -50,6 +53,53 @@ public class Common {
 
     }
 
+    public static void CreateNoSignAlertDialog(Context context) {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .create();
+
+        AppCompatActivity activity = (AppCompatActivity) context;
+        DialogCustomBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_custom, null, false);
+
+        binding.btnSignUp.setOnClickListener((v) -> {
+            dialog.dismiss();
+
+            if (activity instanceof HomeActivity) {
+                HomeActivity homeActivity = (HomeActivity) activity;
+                homeActivity.NavigateToSignInActivity(false);
+            } else {
+                Intent intent = new Intent(context, SignInActivity.class);
+                intent.putExtra("sign_up", false);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+            }
+        });
+        binding.btnSignIn.setOnClickListener((v) -> {
+            dialog.dismiss();
+
+            if (activity instanceof HomeActivity) {
+                HomeActivity homeActivity = (HomeActivity) activity;
+                homeActivity.NavigateToSignInActivity(true);
+            } else {
+                Intent intent = new Intent(context, SignInActivity.class);
+                intent.putExtra("sign_up", true);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+
+
+            }
+
+        });
+
+        binding.btnCancel.setOnClickListener((v) ->
+                dialog.dismiss()
+
+        );
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+//        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
+    }
 
 
     @TargetApi(Build.VERSION_CODES.KITKAT)

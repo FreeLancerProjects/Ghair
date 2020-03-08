@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.databinding.ActivityAddAuctionBinding;
 import com.endpoint.ghair.databinding.DialogSelectImageBinding;
 import com.endpoint.ghair.interfaces.Listeners;
@@ -131,6 +132,7 @@ private AddAuctionModel addAuctionModel;
                         }
                     }
                 } else {
+                    Common.CreateNoSignAlertDialog(AddAuctionActivity.this);
 
                 }
             }

@@ -10,7 +10,9 @@
             name="backListener"
             type="com.endpoint.ghair.interfaces.Listeners.BackListener"
             />
-
+        <variable
+            name="addorderModel"
+            type="com.endpoint.ghair.models.CompleteOrderModel" />
         <variable
             name="lang"
             type="String" />
@@ -86,7 +88,9 @@
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    >
 
                     <ImageView
                         android:layout_width="30dp"
@@ -145,7 +149,9 @@
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    >
 
                     <ImageView
                         android:layout_width="30dp"
@@ -239,16 +245,21 @@
                         android:paddingRight="20dp">
 
                         <EditText
+                            android:id="@+id/edtaddres"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:layout_marginTop="8dp"
                             android:background="@color/white"
+                            android:textCursorDrawable="@drawable/cursor_bg"
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp"
                             android:singleLine="true"
                             android:textColor="@color/input"
                             android:textColorHint="@color/gray4"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:text="@={addorderModel.address}"
+                            error="@{addorderModel.address_error}"
+                            />
 
                         <View
                             android:layout_width="match_parent"
@@ -290,7 +301,7 @@
                     android:background="@drawable/btn_price_shape"
                     android:paddingLeft="50dp"
                     android:paddingRight="50dp"
-                    android:text="@string/confirm_order"
+                    android:text="@string/completer_order"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </LinearLayout>

@@ -3,7 +3,7 @@ package com.endpoint.ghair.models;
 import java.io.Serializable;
 import java.util.List;
 
-public class Add_Order_Model implements Serializable {
+public class Add_OrderSend_Model implements Serializable {
 
 
    private List<Details> details;
@@ -66,33 +66,13 @@ private int user_id;
               private int product_id;
               private int amount;
               private double price;
-        private String ar_title;
-        private String en_title;
-private String image;
 
-        public String getImage() {
-            return image;
-        }
 
-        public void setImage(String image) {
-            this.image = image;
-        }
 
-        public String getAr_title() {
-            return ar_title;
-        }
 
-        public void setAr_title(String ar_title) {
-            this.ar_title = ar_title;
-        }
 
-        public String getEn_title() {
-            return en_title;
-        }
 
-        public void setEn_title(String en_title) {
-            this.en_title = en_title;
-        }
+
 
         public int getMarket_id() {
             return market_id;

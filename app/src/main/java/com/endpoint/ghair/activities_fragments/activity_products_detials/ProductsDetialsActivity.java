@@ -103,8 +103,8 @@ binding.btnSend.setOnClickListener(new View.OnClickListener() {
     private void addtocart() {
         Add_Order_Model add_order_model=preferences.getUserOrder(this);
         if(add_order_model!=null){
-                List<Add_Order_Model.Products> order_details=add_order_model.getDetails();
-                Add_Order_Model.Products products1 = null;
+                List<Add_Order_Model.Details> order_details=add_order_model.getDetails();
+                Add_Order_Model.Details products1 = null;
                 int pos = 0;
                 for(int i=0;i<order_details.size();i++){
                     if(singleProductModel.getId()==order_details.get(i).getProduct_id()&&singleProductModel.getMarket_id()==order_details.get(i).getMarket_id()){
@@ -122,7 +122,7 @@ binding.btnSend.setOnClickListener(new View.OnClickListener() {
 
                 }
                 else {
-                    products1 =new Add_Order_Model.Products();
+                    products1 =new Add_Order_Model.Details();
                     products1.setAr_title(singleProductModel.getAr_title());
                     products1.setEn_title(singleProductModel.getEn_title());
                     products1.setAmount(1);
@@ -140,8 +140,8 @@ binding.btnSend.setOnClickListener(new View.OnClickListener() {
         }
         else {
             add_order_model=new Add_Order_Model();
-            List<Add_Order_Model.Products> order_details=new ArrayList<>();
-            Add_Order_Model.Products products1 =new Add_Order_Model.Products();
+            List<Add_Order_Model.Details> order_details=new ArrayList<>();
+            Add_Order_Model.Details products1 =new Add_Order_Model.Details();
             products1.setProduct_id(singleProductModel.getId());
             products1.setPrice(singleProductModel.getPrice());
             products1.setAmount(1);

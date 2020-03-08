@@ -8,7 +8,7 @@
             type="String" />
         <variable
             name="addordermodel"
-            type="com.endpoint.ghair.models.Add_Order_Model.Products" />
+            type="com.endpoint.ghair.models.Add_Order_Model.Details" />
 
     </data>
     <androidx.cardview.widget.CardView
@@ -195,6 +195,9 @@ android:layout_marginLeft="8dp"
             android:layout_height="35dp"
             android:gravity="center"
             android:padding="6dp"
+            android:src="@drawable/ic_close"
+            android:background="@drawable/circle_delete"
+
             />
 
     </FrameLayout>
