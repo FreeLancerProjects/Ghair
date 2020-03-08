@@ -167,12 +167,15 @@ binding.offer.setOnClickListener(new View.OnClickListener() {
     {
         try {
 
-
+            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
             Api.getService(Tags.base_url)
                     .sendAuction( price, detials, search_id,"Bearer" + " " + userModel.getToken())
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
                                getsingleads();
                             } else {
@@ -198,6 +201,7 @@ binding.offer.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
                             try {
+                                dialog.dismiss();
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {

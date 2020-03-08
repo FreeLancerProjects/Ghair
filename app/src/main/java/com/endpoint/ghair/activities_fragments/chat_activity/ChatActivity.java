@@ -93,7 +93,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         binding.setBackListener(this);
         manager = new LinearLayoutManager(this);
 
-        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.input), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(manager);
         chat_adapter = new Chat_Adapter(messagedatalist, userModel.getId(),chatUserModel.getImage(), this);
         binding.recView.setItemViewCacheSize(25);

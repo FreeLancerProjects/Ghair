@@ -70,7 +70,7 @@ public class NotificationsActivity extends AppCompatActivity implements Listener
     private void initView() {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.input), PorterDuff.Mode.SRC_IN);
         manager = new LinearLayoutManager(this);
         binding.recView.setLayoutManager(manager);
         notificationModelList = new ArrayList<>();
