@@ -87,6 +87,7 @@ binding.tab1.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
         if(tab.getPosition()==0){
             binding.tab.setVisibility(View.GONE);
             type=3;
+            getmysauction();
         }
         else {
             binding.tab.setVisibility(View.VISIBLE);
