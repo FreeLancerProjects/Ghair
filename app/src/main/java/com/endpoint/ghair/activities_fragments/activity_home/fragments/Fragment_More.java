@@ -108,10 +108,10 @@ public class Fragment_More extends Fragment {
             @Override
             public void onClick(View v) {
                 if (userModel != null) {
-                    Intent intent = new Intent(activity, Edit_Profile_Activity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(activity, Edit_Profile_Activity.class);
+//                    startActivity(intent);
                 } else {
-
+Common.CreateNoSignAlertDialog(activity);
                 }
             }
         });

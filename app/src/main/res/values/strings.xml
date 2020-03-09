@@ -144,5 +144,10 @@
     <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
     <string name="signup">Sign Up</string>
     <string name="no_notification_found">No Notification Found</string>
+    <string name="current">Current</string>
+    <string name="previous">Previous</string>
+    <string name="no_order_found">No Order Found</string>
+    <string name="client_only_can_order">Client Only Can Order</string>
+    <string name="other_auction">Other Auction</string>
 
 </resources>

@@ -11,7 +11,11 @@ import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.models.MessageDataModel;
 import com.endpoint.ghair.models.MessageModel;
+import com.endpoint.ghair.models.MyAuctionModel;
+import com.endpoint.ghair.models.MyRequiredModel;
+import com.endpoint.ghair.models.MyServiceModel;
 import com.endpoint.ghair.models.NotificationDataModel;
+import com.endpoint.ghair.models.Order_Model;
 import com.endpoint.ghair.models.PlaceGeocodeData;
 import com.endpoint.ghair.models.PlaceMapDetailsData;
 import com.endpoint.ghair.models.Product_Model;
@@ -425,6 +429,112 @@ public interface Service {
 
     @GET("api/my-notifications")
     Call<NotificationDataModel> getnotification(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/client/currentOrders")
+    Call<Order_Model> getclentcurrentorder(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/client/previousOrders")
+    Call<Order_Model> getclentpreviousorder(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/market/currentOrders")
+    Call<Order_Model> gettmarketcurrentorder(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/market/previousOrders")
+    Call<Order_Model> getmarketpreviousorder(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/client/currentNeededService")
+    Call<MyServiceModel> getclentcurrentservice(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/client/previousNeededService")
+    Call<MyServiceModel> getclentpreviousservice(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/market/currentNeededService")
+    Call<MyServiceModel> gettmarketcurrentservice(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/market/previousNeededService")
+    Call<MyServiceModel> getmarketpreviousservice(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+
+    );
+    @GET("api/client/currentRequiredProduct")
+    Call<MyRequiredModel> getclentcurrentrequired(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/client/previousRequiredProduct")
+    Call<MyRequiredModel> getclentpreviousrequired(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/market/currentRequiredProduct")
+    Call<MyRequiredModel> gettmarketcurrentrequired(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/market/previousRequiredProduct")
+    Call<MyRequiredModel> getmarketpreviousrequired(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/client/currentAuction")
+    Call<MyAuctionModel> getcurrentauction(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/client/previousAuction")
+    Call<MyAuctionModel> getpreviousauction(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+    );
+    @GET("api/myAuctions")
+    Call<MyAuctionModel> getmyauction(
             @Query("page") int page,
             @Header("Authorization") String Authorization,
             @Header("lang") String lang

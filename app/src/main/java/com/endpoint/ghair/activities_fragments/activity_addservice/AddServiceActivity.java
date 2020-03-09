@@ -156,8 +156,12 @@ private UserModel userModel;
             @Override
             public void onClick(View v) {
                 if(userModel!=null){
+                    if(userModel.getUser_type().equals("client")){
                 if (addServiceModel.isDataValid(AddServiceActivity.this)) {
 services(addServiceModel);
+                }}
+                else {
+                    Common.CreateAlertDialog(AddServiceActivity.this,getResources().getString(R.string.client_only_can_order));
                 }
             }
             else {

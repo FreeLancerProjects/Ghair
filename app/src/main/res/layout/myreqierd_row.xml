@@ -7,10 +7,8 @@
 
         <variable
             name="ordermodel"
-            type="com.endpoint.ghair.models.Order_Model.Data" />
-<variable
-    name="title"
-    type="String" />
+            type="com.endpoint.ghair.models.MyRequiredModel.Data" />
+
     </data>
 <LinearLayout
     android:layout_width="match_parent"
@@ -55,6 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="5dp"
                 android:scaleType="fitXY"
+                image="@{ordermodel.brand.image}"
                 />
 
 
@@ -93,7 +92,7 @@
                         android:layout_marginEnd="5dp"
                         android:textColor="@color/input"
                         android:textSize="13sp"
-                        android:text="@{title}"
+                        android:text="@{ordermodel.title}"
                         />
 
 
@@ -123,7 +122,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text='@{ordermodel.total_cost+""}'
+                        android:text='@{ordermodel.price+""}'
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -154,7 +153,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@{ordermodel.date}"
+                        android:text="@{ordermodel.model_title}"
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -184,7 +183,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="@{ordermodel.time}"
+                        android:text='@{ordermodel.amount+""}'
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 

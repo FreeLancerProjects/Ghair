@@ -158,6 +158,7 @@ public class Fragment_Require extends Fragment {
             @Override
             public void onClick(View v) {
                 if (userModel != null) {
+                    if(userModel.getUser_type().equals("client")){
                     if (reguiredModel.isDataValid(activity)) {
                         if (imageList != null && imageList.size() > 0) {
                             requireimage(reguiredModel);
@@ -165,7 +166,11 @@ public class Fragment_Require extends Fragment {
                             require(reguiredModel);
                         }
                     }
-                } else {
+                }
+                else {
+Common.CreateAlertDialog(activity,activity.getResources().getString(R.string.client_only_can_order));
+                    }
+                }else {
                     Common.CreateNoSignAlertDialog(activity);
 
                 }

@@ -11,34 +11,32 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
-import com.endpoint.ghair.databinding.AccesoriesRowBinding;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
-import com.endpoint.ghair.databinding.OrderRowBinding;
-import com.endpoint.ghair.models.Auction_Model;
-import com.endpoint.ghair.models.Order_Model;
-import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.databinding.MyneedRowBinding;
+import com.endpoint.ghair.databinding.MyreqierdRowBinding;
+import com.endpoint.ghair.models.MyRequiredModel;
+import com.endpoint.ghair.models.MyServiceModel;
 
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyRequiredAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Order_Model.Data> orderlist;
+    private List<MyRequiredModel.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
     String title;
     private final int ITEM_DATA = 1;
     private final int LOAD = 2;
-    public OrderAdapter(List<Order_Model.Data> orderlist, Context context, String title) {
+    public MyRequiredAdapter(List<MyRequiredModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        this.title = title;
 
     }
 
@@ -47,7 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if (viewType==ITEM_DATA) {
-            OrderRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.order_row, parent, false);
+            MyreqierdRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.myreqierd_row, parent, false);
             return new EventHolder(binding);
         }
         else
@@ -62,7 +60,6 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventHolder) {
             EventHolder eventHolder = (EventHolder) holder;
-            eventHolder.binding.setTitle(title);
             eventHolder.binding.setOrdermodel(orderlist.get(position));
 /*
 if(i==position){
@@ -116,9 +113,9 @@ if(i!=position) {
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public OrderRowBinding binding;
+        public MyreqierdRowBinding binding;
 
-        public EventHolder(@NonNull OrderRowBinding binding) {
+        public EventHolder(@NonNull MyreqierdRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -136,7 +133,7 @@ if(i!=position) {
 
     @Override
     public int getItemViewType(int position) {
-        Order_Model.Data order_Model = orderlist.get(position);
+        MyRequiredModel.Data order_Model = orderlist.get(position);
         if (order_Model!=null)
         {
             return ITEM_DATA;

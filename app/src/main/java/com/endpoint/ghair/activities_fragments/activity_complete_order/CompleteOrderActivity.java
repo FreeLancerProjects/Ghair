@@ -100,6 +100,7 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
     private UserModel userModel;
     private CompleteOrderModel completeOrderModel;
     ProgressDialog dialog;
+
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
@@ -121,7 +122,7 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
 
     @SuppressLint("RestrictedApi")
     private void initView() {
-    dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
@@ -135,7 +136,11 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
             public void onClick(View v) {
                 if (completeOrderModel.isDataValid(CompleteOrderActivity.this)) {
                     if (userModel != null) {
-                        Completeorder();
+                        if (userModel.getUser_type().equals("client")) {
+                            Completeorder();
+                        } else {
+                            Common.CreateAlertDialog(CompleteOrderActivity.this, getResources().getString(R.string.client_only_can_order));
+                        }
                     } else {
                         Common.CreateNoSignAlertDialog(CompleteOrderActivity.this);
 
@@ -159,31 +164,32 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
 
     private void Completeorder() {
         Add_Order_Model add_order_model = preferences.getUserOrder(this);
-        Add_OrderSend_Model add_orderSend_model=new Add_OrderSend_Model();
+        Add_OrderSend_Model add_orderSend_model = new Add_OrderSend_Model();
         add_orderSend_model.setAddress(completeOrderModel.getAddress());
         add_orderSend_model.setLatitude(Double.parseDouble(completeOrderModel.getLatitude()));
         add_orderSend_model.setLongitude(Double.parseDouble(completeOrderModel.getLongitude()));
         add_orderSend_model.setUser_id(userModel.getId());
         List<Add_Order_Model.Details> order_details = add_order_model.getDetails();
-        List<Add_OrderSend_Model.Details> details=new ArrayList<>();
+        List<Add_OrderSend_Model.Details> details = new ArrayList<>();
         double total = 0;
         for (int i = 0; i < order_details.size(); i++) {
             total += order_details.get(i).getPrice();
-getChatRoomId(order_details.get(i).getMarket_id());
-Add_OrderSend_Model.Details details1=new Add_OrderSend_Model.Details();
-details1.setAmount(order_details.get(i).getAmount());
+            getChatRoomId(order_details.get(i).getMarket_id());
+            Add_OrderSend_Model.Details details1 = new Add_OrderSend_Model.Details();
+            details1.setAmount(order_details.get(i).getAmount());
             details1.setMarket_id(order_details.get(i).getMarket_id());
             details1.setProduct_id(order_details.get(i).getProduct_id());
             details1.setPrice(order_details.get(i).getPrice());
-details.add(details1);
+            details.add(details1);
 
         }
 
         add_orderSend_model.setTotal_cost(total);
         add_orderSend_model.setDetails(details);
-accept_order(add_orderSend_model);
+        accept_order(add_orderSend_model);
 
     }
+
     private void getChatRoomId(int marketid) {
 
 
@@ -191,32 +197,29 @@ accept_order(add_orderSend_model);
         try {
 
             Api.getService(Tags.base_url)
-                    .getRoomId(userModel.getId(),marketid,"Bearer" + " " + userModel.getToken())
+                    .getRoomId(userModel.getId(), marketid, "Bearer" + " " + userModel.getToken())
                     .enqueue(new Callback<RoomIdModel>() {
                         @Override
                         public void onResponse(Call<RoomIdModel> call, Response<RoomIdModel> response) {
-                 //           dialog.dismiss();
-                            if (response.isSuccessful()&&response.body()!=null)
-                            {
+                            //           dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
 
-                            }else
-                            {
+                            } else {
                                 if (response.code() == 500) {
-                                   // Toast.makeText(CompleteOrderActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(CompleteOrderActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                                     try {
-                                        Log.e("error_code",response.code()+"_"+response.errorBody().string());
+                                        Log.e("error_code", response.code() + "_" + response.errorBody().string());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
 
 
-                                }else
-                                {
-                                  //  Toast.makeText(MarketProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    //  Toast.makeText(MarketProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                     try {
 
-                                        Log.e("error_code",response.code()+"_"+response.errorBody().string());
+                                        Log.e("error_code", response.code() + "_" + response.errorBody().string());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -227,28 +230,27 @@ accept_order(add_orderSend_model);
                         @Override
                         public void onFailure(Call<RoomIdModel> call, Throwable t) {
                             try {
-                   //             dialog.dismiss();
-                                if (t.getMessage()!=null)
-                                {
-                                    Log.e("error",t.getMessage());
-                                    if (t.getMessage().toLowerCase().contains("failed to connect")||t.getMessage().toLowerCase().contains("unable to resolve host"))
-                                    {
-                                        Toast.makeText(CompleteOrderActivity.this,R.string.something, Toast.LENGTH_SHORT).show();
-                                    }else
-                                    {
-                                        Toast.makeText(CompleteOrderActivity.this,t.getMessage(), Toast.LENGTH_SHORT).show();
+                                //             dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(CompleteOrderActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(CompleteOrderActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
-                            }catch (Exception e){}
+                            } catch (Exception e) {
+                            }
                         }
                     });
-        }catch (Exception e){
+        } catch (Exception e) {
             dialog.dismiss();
 
         }
 
     }
+
     private void accept_order(Add_OrderSend_Model add_order_model) {
         try {
 
@@ -256,26 +258,25 @@ accept_order(add_orderSend_model);
             String str = g.toJson(add_order_model);
 
             Log.e("Addorder", str);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
-        Api.getService(Tags.base_url).accept_orders(add_order_model,"Bearer" + " " + userModel.getToken()).enqueue(new Callback<ResponseBody>() {
+        Api.getService(Tags.base_url).accept_orders(add_order_model, "Bearer" + " " + userModel.getToken()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 dialog.dismiss();
                 if (response.isSuccessful()) {
-                //    showorders();
+                    //    showorders();
                     // Common.CreateSignAlertDialog(activity, getResources().getString(R.string.sucess));
-                     Toast.makeText(CompleteOrderActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-Accept();
+                    Toast.makeText(CompleteOrderActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                    Accept();
                     //  activity.refresh(Send_Data.getType());
                 } else {
-                 //   Common.CreateDialogAlert(CartActivity.this, getString(R.string.failed));
+                    //   Common.CreateDialogAlert(CartActivity.this, getString(R.string.failed));
 
                     try {
-                        Log.e("Error_code", response.code() + "_" + response.errorBody().string()+response.raw()+response.message());
+                        Log.e("Error_code", response.code() + "_" + response.errorBody().string() + response.raw() + response.message());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -286,7 +287,7 @@ Accept();
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 try {
                     dialog.dismiss();
-                   // Toast.makeText(CartActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(CartActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                     Log.e("Error", t.getMessage());
                 } catch (Exception e) {
                 }
@@ -295,8 +296,8 @@ Accept();
     }
 
     private void Accept() {
-    preferences.create_update_order(this,null);
-    finish();
+        preferences.create_update_order(this, null);
+        finish();
     }
 
     @Override

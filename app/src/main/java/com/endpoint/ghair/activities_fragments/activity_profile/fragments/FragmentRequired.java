@@ -54,7 +54,7 @@ public class FragmentRequired extends Fragment {
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.progBar.setVisibility(View.GONE);
 
-        markets_adapter=new OrderAdapter(dataList,activity);
+       // markets_adapter=new OrderAdapter(dataList,activity);
         binding.recView.setAdapter(markets_adapter);
         setdtat();
 

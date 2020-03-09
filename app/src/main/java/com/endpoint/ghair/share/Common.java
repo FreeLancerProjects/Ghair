@@ -28,6 +28,7 @@ import androidx.databinding.DataBindingUtil;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_sign_in.activities.SignInActivity;
+import com.endpoint.ghair.databinding.DialogCustom2Binding;
 import com.endpoint.ghair.databinding.DialogCustomBinding;
 
 import java.io.File;
@@ -51,6 +52,26 @@ public class Common {
         }
 
 
+    }
+    public static void CreateAlertDialog(Context context, String msg) {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .create();
+
+        DialogCustom2Binding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_custom2, null, false);
+        binding.tvMsg.setText(msg);
+        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
+                                                 @Override
+                                                 public void onClick(View v) {
+                                                     dialog.dismiss();
+                                                 }
+                                             }
+
+        );
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+//        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
     }
 
     public static void CreateNoSignAlertDialog(Context context) {

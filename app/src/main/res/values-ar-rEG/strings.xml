@@ -143,6 +143,11 @@
     <string name="sign_in">تسجيل الدخول</string>
     <string name="please_sign_in_or_sign_up">برجاء تسجيل الدخول أو إنشاء حساب جديد.</string>
     <string name="signup">إنشاء حساب جديد</string>
-    <string name="no_notification_found">No Notification Found</string>
+    <string name="no_notification_found">لايوجد اشعارات</string>
+    <string name="current">الحاليه</string>
+    <string name="previous">السابقه</string>
+    <string name="no_order_found">لايوجد طلبات</string>
+    <string name="client_only_can_order">Client Only Can Order</string>
+    <string name="other_auction">المزادات الاخرى</string>
 
 </resources>

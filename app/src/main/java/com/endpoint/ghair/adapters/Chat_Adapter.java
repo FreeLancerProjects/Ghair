@@ -128,7 +128,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public LoadMoreHolder(LoadMoreBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.input), PorterDuff.Mode.SRC_IN);
 
         }
 
