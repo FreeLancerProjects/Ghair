@@ -25,6 +25,7 @@ import com.endpoint.ghair.activities_fragments.activity_terms.TermsActivity;
 import com.endpoint.ghair.adapters.CityAdapter;
 import com.endpoint.ghair.databinding.FragmentSignUpAsCustomerBinding;
 import com.endpoint.ghair.interfaces.Listeners;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Cities_Model;
 import com.endpoint.ghair.models.SignUpCustomerModel;
 import com.endpoint.ghair.models.UserModel;
@@ -72,8 +73,7 @@ public class Fragment_SignUpAsCustomer extends Fragment implements Listeners.Sig
         activity = (SignInActivity) getActivity();
         Paper.init(activity);
         preferences = Preferences.getInstance();
-        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(current_language);
+        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(current_language);
         binding.setSignUpModel(signUpModel);
         binding.setSignUpListener(this);
         binding.setShowDialogListener(this);

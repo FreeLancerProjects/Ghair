@@ -21,6 +21,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.adapters.MyServicesAdapter;
 import com.endpoint.ghair.adapters.OrderAdapter;
 import com.endpoint.ghair.databinding.FragmentOrdersBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.MyServiceModel;
 import com.endpoint.ghair.models.MyServiceModel;
 import com.endpoint.ghair.models.Slider_Model;
@@ -82,8 +83,7 @@ public class FragmentMyServices extends Fragment {
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.input), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
         Paper.init(activity);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        userModel=preferences.getUserData(activity);
+lang = Paper.book().read("lang", Locale.getDefault().getLanguage());userModel=preferences.getUserData(activity);
         manager=new LinearLayoutManager(activity);
         binding.recView.setLayoutManager(manager);
 

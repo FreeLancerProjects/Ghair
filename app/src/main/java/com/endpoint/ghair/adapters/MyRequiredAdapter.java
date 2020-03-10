@@ -14,6 +14,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.MyneedRowBinding;
 import com.endpoint.ghair.databinding.MyreqierdRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.MyRequiredModel;
 import com.endpoint.ghair.models.MyServiceModel;
 
@@ -36,9 +37,7 @@ public class MyRequiredAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
-    }
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());}
 
     @NonNull
     @Override

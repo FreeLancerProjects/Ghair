@@ -14,6 +14,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.databinding.CartRowBinding;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.OfferRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.models.Slider_Model;
 
@@ -35,10 +36,7 @@ public class Offer_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
-
-    }
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());}
 
     @NonNull
     @Override

@@ -92,8 +92,7 @@ getsingleads();
         }
         dataList=new ArrayList<>();
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         binding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override

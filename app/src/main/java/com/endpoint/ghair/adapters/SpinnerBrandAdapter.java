@@ -13,6 +13,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.databinding.SpinnerBrandRowBinding;
 import com.endpoint.ghair.databinding.SpinnerCityRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.Cities_Model;
 
@@ -29,8 +30,7 @@ public class SpinnerBrandAdapter extends BaseAdapter {
         this.dataList = dataList;
         this.context = context;
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-    }
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());}
 
     @Override
     public int getCount() {

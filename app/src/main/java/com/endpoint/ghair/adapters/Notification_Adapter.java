@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.NotificationRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.NotificationDataModel;
 
 import java.util.List;
@@ -34,10 +35,7 @@ public class Notification_Adapter extends RecyclerView.Adapter<RecyclerView.View
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
-
-    }
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());}
 
     @NonNull
     @Override

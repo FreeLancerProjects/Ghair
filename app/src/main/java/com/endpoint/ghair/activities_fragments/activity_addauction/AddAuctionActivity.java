@@ -97,8 +97,7 @@ private AddAuctionModel addAuctionModel;
     private void initView() {
         imageList=new ArrayList<>();
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         addAuctionModel=new AddAuctionModel();
         binding.setAddauctionmodel(addAuctionModel);

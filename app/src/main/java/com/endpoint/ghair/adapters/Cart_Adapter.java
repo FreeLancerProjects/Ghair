@@ -13,6 +13,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_cart.CartActivity;
 import com.endpoint.ghair.databinding.CartRowBinding;
 import com.endpoint.ghair.databinding.OrderRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Add_Order_Model;
 import com.endpoint.ghair.models.Slider_Model;
 
@@ -33,9 +34,7 @@ private CartActivity cartActivity;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
-cartActivity=(CartActivity)context;
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());cartActivity=(CartActivity)context;
     }
 
     @NonNull

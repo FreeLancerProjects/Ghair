@@ -37,8 +37,7 @@ public class AboutActivity extends AppCompatActivity implements Listeners.BackLi
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
-    }
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,7 @@ public class AboutActivity extends AppCompatActivity implements Listeners.BackLi
     private void initView() {
 
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         getAbout();

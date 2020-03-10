@@ -18,6 +18,7 @@ import com.endpoint.ghair.activities_fragments.activity_sign_in.fragments.Fragme
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.ServiceRowBinding;
 import com.endpoint.ghair.databinding.ServicesRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Service_Model;
 
 import java.util.List;
@@ -39,8 +40,7 @@ private Fragment fragment;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-this.fragment=fragment;
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());this.fragment=fragment;
 
     }
 

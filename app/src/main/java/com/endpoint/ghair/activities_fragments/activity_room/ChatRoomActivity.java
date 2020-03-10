@@ -77,8 +77,7 @@ public class ChatRoomActivity extends AppCompatActivity implements Listeners.Bac
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.input), PorterDuff.Mode.SRC_IN);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.input), PorterDuff.Mode.SRC_IN);
        binding.setBackListener(this);
        binding.setLang(lang);
         userRoomModelList=new ArrayList<>();

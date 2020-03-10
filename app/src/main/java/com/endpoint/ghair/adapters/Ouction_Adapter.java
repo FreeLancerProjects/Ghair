@@ -19,6 +19,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_Auction;
 import com.endpoint.ghair.databinding.AuctionRowBinding;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.tags.Tags;
 import com.squareup.picasso.Picasso;
@@ -45,8 +46,7 @@ Fragment_Auction fragment_auction;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        fragment_auction=(Fragment_Auction)fragment;
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());fragment_auction=(Fragment_Auction)fragment;
 
     }
 

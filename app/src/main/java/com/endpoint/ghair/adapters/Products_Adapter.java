@@ -17,6 +17,7 @@ import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivit
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.OfferRowBinding;
 import com.endpoint.ghair.databinding.ProductImageRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.models.Product_Model;
 import com.endpoint.ghair.tags.Tags;
@@ -42,10 +43,7 @@ public class Products_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
-
-    }
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());}
 
     @NonNull
     @Override

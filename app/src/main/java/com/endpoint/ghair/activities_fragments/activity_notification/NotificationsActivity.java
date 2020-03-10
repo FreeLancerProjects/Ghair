@@ -78,8 +78,7 @@ public class NotificationsActivity extends AppCompatActivity implements Listener
         binding.recView.setAdapter(notification_adapter);
         binding.setBackListener(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {

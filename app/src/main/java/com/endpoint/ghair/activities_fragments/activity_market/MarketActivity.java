@@ -69,8 +69,7 @@ public class MarketActivity extends AppCompatActivity implements Listeners.BackL
         }
         dataList = new ArrayList<>();
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         mostActiveMarkets_adapter = new Markets_Adapter(dataList, this, null);
         binding.recView.setLayoutManager(new GridLayoutManager(this, 2));

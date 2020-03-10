@@ -86,8 +86,7 @@ public class MarketProfileActivity extends AppCompatActivity implements Listener
         dataList = new ArrayList<>();
         marketcatlist = new ArrayList<>();
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         products_adapter = new Products_Adapter(dataList, this);
         binding.recView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));

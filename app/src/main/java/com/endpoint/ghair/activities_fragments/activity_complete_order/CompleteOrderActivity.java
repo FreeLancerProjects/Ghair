@@ -125,8 +125,7 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
         dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);

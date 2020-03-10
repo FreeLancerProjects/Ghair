@@ -109,8 +109,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
         Paper.init(this);
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(current_language);
+                current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(current_language);
         binding.setViewModel(editprofileModel);
         binding.setBackListener(this);
         binding.setEditprofilelistner(this);

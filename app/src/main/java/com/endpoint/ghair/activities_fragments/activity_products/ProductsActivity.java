@@ -87,8 +87,7 @@ public class ProductsActivity extends AppCompatActivity implements Listeners.Bac
         brandList = new ArrayList<>();
         maDataList = new ArrayList<>();
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         products_adapter = new Products_Adapter(dataList, this);
         binding.recView.setLayoutManager(new GridLayoutManager(this, 3));

@@ -17,6 +17,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_
 import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
 import com.endpoint.ghair.databinding.MarketCatRowBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.models.Slider_Model;
 
@@ -39,8 +40,7 @@ public class CategoryMarket_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-marketProfileActivity=(MarketProfileActivity)context;
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());marketProfileActivity=(MarketProfileActivity)context;
     }
 
     @NonNull

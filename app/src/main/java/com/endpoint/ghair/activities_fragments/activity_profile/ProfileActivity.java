@@ -51,8 +51,7 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private void initView() {
 
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         fragmentList = new ArrayList<>();
         titles = new ArrayList<>();
 binding.setBackListener(this);

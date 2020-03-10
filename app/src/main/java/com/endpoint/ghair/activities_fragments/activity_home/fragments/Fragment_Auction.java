@@ -23,6 +23,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_auction_detials.AuctionDetialsActivity;
 import com.endpoint.ghair.adapters.Ouction_Adapter;
 import com.endpoint.ghair.databinding.FragmentAuctionBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.models.Market_Model;
 import com.endpoint.ghair.preferences.Preferences;
@@ -70,8 +71,7 @@ getAuction();
 
         activity = (HomeActivity) getActivity();
         Paper.init(activity);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        preferences = Preferences.getInstance();
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());preferences = Preferences.getInstance();
         auction_adapter =new Ouction_Adapter(dataList,activity,this);
         manager=new LinearLayoutManager(activity);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.input), PorterDuff.Mode.SRC_IN);

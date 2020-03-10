@@ -15,6 +15,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_market_profile.MarketProfileActivity;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.ProductImageRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.MarketCatogryModel;
 import com.endpoint.ghair.models.Product_Model;
 import com.endpoint.ghair.tags.Tags;
@@ -39,8 +40,7 @@ private MarketProfileActivity marketProfileActivity;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-marketProfileActivity=(MarketProfileActivity)context;
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());marketProfileActivity=(MarketProfileActivity)context;
 
     }
 

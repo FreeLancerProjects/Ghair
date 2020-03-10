@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.databinding.SpinnerCityRowBinding;
 import com.endpoint.ghair.databinding.SpinnerServiceRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Cities_Model;
 import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.services.Service;
@@ -30,8 +31,7 @@ public class ServicespinnerAdapter extends BaseAdapter {
         this.dataList = dataList;
         this.context = context;
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-    }
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());}
 
     @Override
     public int getCount() {

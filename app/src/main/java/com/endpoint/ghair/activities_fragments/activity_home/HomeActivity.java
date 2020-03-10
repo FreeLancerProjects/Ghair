@@ -103,9 +103,7 @@ public class HomeActivity extends AppCompatActivity {
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
-
-    }
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));}
 
 
     public void gettotal() {
@@ -171,7 +169,7 @@ public class HomeActivity extends AppCompatActivity {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+               lang = Paper.book().read("lang", Locale.getDefault().getLanguage());Log.e("ldlmfmmvm",lang);
         brandList = new ArrayList<>();
         ahBottomNav = findViewById(R.id.ah_bottom_nav);
         drawer = findViewById(R.id.drawer_layout);

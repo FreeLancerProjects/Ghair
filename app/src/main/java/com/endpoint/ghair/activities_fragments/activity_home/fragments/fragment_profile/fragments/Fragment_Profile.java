@@ -16,6 +16,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 
 import com.endpoint.ghair.adapters.ViewPagerAdapter;
 import com.endpoint.ghair.databinding.FragmentProfileBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Slider_Model;
 import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.preferences.Preferences;
@@ -35,9 +36,10 @@ public class Fragment_Profile extends Fragment {
     private List<String> titles;
     private ViewPagerAdapter adapter;
 
-private List<Slider_Model.Data> dataList;
-private Preferences preferences;
-private UserModel userModel;
+    private List<Slider_Model.Data> dataList;
+    private Preferences preferences;
+    private UserModel userModel;
+
     public static Fragment_Profile newInstance() {
         return new Fragment_Profile();
     }
@@ -52,12 +54,12 @@ private UserModel userModel;
     }
 
 
-
     private void initView() {
-activity=(HomeActivity)getActivity();
+        activity = (HomeActivity) getActivity();
+        preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(activity);
         Paper.init(activity);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         fragmentList = new ArrayList<>();
         titles = new ArrayList<>();
         binding.tab.setupWithViewPager(binding.pager);
@@ -70,12 +72,8 @@ activity=(HomeActivity)getActivity();
         binding.pager.setAdapter(adapter);
 
 
-
-
-
-
-
     }
+
     private void addFragments_Titles() {
         fragmentList.add(FragmentMyOrder.newInstance());
         fragmentList.add(FragmentMyAuction.newInstance());
@@ -87,11 +85,11 @@ activity=(HomeActivity)getActivity();
         titles.add(getString(R.string.require));
         titles.add(getString(R.string.my_services));
 
-if(userModel.getUser_type().equals("market")){
-    fragmentList.add(FragmentMyProducts.newInstance());
-    titles.add(getString(R.string.my_products));
+        if (!userModel.getUser_type().equals("client")) {
+            fragmentList.add(FragmentMyProducts.newInstance());
+            titles.add(getString(R.string.my_products));
 
-}
+        }
 
     }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_products.ProductsActivity;
 import com.endpoint.ghair.databinding.AccesoriesRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Slider_Model;
 
 import java.util.List;
@@ -32,10 +33,7 @@ private ProductsActivity productsActivity;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
-
-    }
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());}
 
     @NonNull
     @Override

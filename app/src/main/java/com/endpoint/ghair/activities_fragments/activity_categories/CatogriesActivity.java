@@ -70,8 +70,7 @@ getCatogries();
         }
         dataList=new ArrayList<>();
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         category_adapter =new Category_Adapter(dataList,this);
         binding.recView.setLayoutManager(new GridLayoutManager(this,2));

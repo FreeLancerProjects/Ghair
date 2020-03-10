@@ -22,6 +22,7 @@ import com.endpoint.ghair.adapters.MyRequiredAdapter;
 import com.endpoint.ghair.adapters.MyServicesAdapter;
 import com.endpoint.ghair.adapters.OrderAdapter;
 import com.endpoint.ghair.databinding.FragmentOrdersBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.MyRequiredModel;
 import com.endpoint.ghair.models.MyRequiredModel;
 import com.endpoint.ghair.models.Slider_Model;
@@ -84,8 +85,7 @@ public class FragmentRequired extends Fragment {
 
        // markets_adapter=new OrderAdapter(dataList,activity);
         Paper.init(activity);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        userModel=preferences.getUserData(activity);
+lang = Paper.book().read("lang", Locale.getDefault().getLanguage());userModel=preferences.getUserData(activity);
         manager=new LinearLayoutManager(activity);
         binding.recView.setLayoutManager(manager);
 

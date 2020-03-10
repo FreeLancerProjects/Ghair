@@ -123,8 +123,7 @@ private UserModel userModel;
         userModel=preferences.getUserData(this);
         addServiceModel = new AddServiceModel();
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         binding.setAddservicemodel(addServiceModel);
         binding.tvdate.setOnClickListener(new View.OnClickListener() {

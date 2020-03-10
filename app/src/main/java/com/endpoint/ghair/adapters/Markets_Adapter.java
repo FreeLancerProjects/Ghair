@@ -18,6 +18,7 @@ import com.endpoint.ghair.activities_fragments.activity_market.MarketActivity;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.MarketRowBinding;
 import com.endpoint.ghair.databinding.MostActiveRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Market_Model;
 
 import java.util.List;
@@ -40,8 +41,7 @@ private MarketActivity marketActivity;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-this.fragment=fragment;
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());this.fragment=fragment;
 
     }
 

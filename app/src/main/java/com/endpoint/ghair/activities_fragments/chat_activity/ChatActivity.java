@@ -88,8 +88,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(lang);
         binding.setBackListener(this);
         manager = new LinearLayoutManager(this);
 

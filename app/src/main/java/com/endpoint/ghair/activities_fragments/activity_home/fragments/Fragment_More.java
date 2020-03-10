@@ -23,6 +23,7 @@ import com.endpoint.ghair.activities_fragments.activity_edit_profile.Edit_Profil
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_terms.TermsActivity;
 import com.endpoint.ghair.databinding.FragmentMoreBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.preferences.Preferences;
 import com.endpoint.ghair.share.Common;
@@ -59,8 +60,7 @@ public class Fragment_More extends Fragment {
         userModel = preferences.getUserData(activity);
         Paper.init(activity);
 
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        if (lang.equals("en")) {
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());if (lang.equals("en")) {
             binding.tvEn.setBackground(activity.getResources().getDrawable(R.drawable.item_lang_shape));
             binding.tvEn.setTextColor(activity.getResources().getColor(R.color.white));
             binding.tvAr.setBackground(activity.getResources().getDrawable(R.drawable.lang_shape));

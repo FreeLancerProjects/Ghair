@@ -32,6 +32,7 @@ import com.endpoint.ghair.adapters.SpinnerBrandAdapter;
 import com.endpoint.ghair.databinding.DialogSelectImageBinding;
 import com.endpoint.ghair.databinding.FragmentAuctionBinding;
 import com.endpoint.ghair.databinding.FragmentRequireBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.ReguiredModel;
 import com.endpoint.ghair.models.SignUpMArketModel;
@@ -91,8 +92,8 @@ public class Fragment_Require extends Fragment {
     private void initView() {
         activity = (HomeActivity) getActivity();
         Paper.init(activity);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        reguiredModel = new ReguiredModel();
+lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+ reguiredModel = new ReguiredModel();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         brandList = new ArrayList<>();

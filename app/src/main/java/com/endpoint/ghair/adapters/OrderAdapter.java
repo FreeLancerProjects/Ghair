@@ -14,6 +14,7 @@ import com.endpoint.ghair.R;
 import com.endpoint.ghair.databinding.AccesoriesRowBinding;
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.OrderRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Auction_Model;
 import com.endpoint.ghair.models.Order_Model;
 import com.endpoint.ghair.models.Slider_Model;
@@ -37,8 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        this.title = title;
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());this.title = title;
 
     }
 

@@ -22,6 +22,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.adapters.MyRequiredAdapter;
 import com.endpoint.ghair.adapters.Products_Adapter;
 import com.endpoint.ghair.databinding.FragmentOrdersBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Product_Model;
 import com.endpoint.ghair.models.Product_Model;
 import com.endpoint.ghair.models.UserModel;
@@ -70,7 +71,7 @@ getproducts();
 
     private void initView() {
         binding.tab1.setVisibility(View.GONE);
-
+binding.tab.setVisibility(View.GONE);
         dataList=new ArrayList<>();
         preferences = Preferences.getInstance();
         activity = (HomeActivity) getActivity();
@@ -79,8 +80,7 @@ getproducts();
 
        // markets_adapter=new OrderAdapter(dataList,activity);
         Paper.init(activity);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        userModel=preferences.getUserData(activity);
+lang = Paper.book().read("lang", Locale.getDefault().getLanguage());userModel=preferences.getUserData(activity);
         manager=new LinearLayoutManager(activity);
         binding.recView.setLayoutManager(manager);
 

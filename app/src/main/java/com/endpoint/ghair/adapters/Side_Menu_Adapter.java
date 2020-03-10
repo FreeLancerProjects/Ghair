@@ -18,6 +18,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_
 import com.endpoint.ghair.databinding.LoadMoreBinding;
 import com.endpoint.ghair.databinding.NavSideRowBinding;
 import com.endpoint.ghair.databinding.ServicesRowBinding;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.Service_Model;
 
@@ -40,8 +41,7 @@ public class Side_Menu_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        activity = (HomeActivity) context;
+ lang = Paper.book().read("lang", Locale.getDefault().getLanguage());activity = (HomeActivity) context;
     }
 
     @NonNull

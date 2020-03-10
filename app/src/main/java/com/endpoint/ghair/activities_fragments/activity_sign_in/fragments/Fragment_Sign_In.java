@@ -21,6 +21,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.endpoint.ghair.databinding.FragmentSignInBinding;
 import com.endpoint.ghair.interfaces.Listeners;
+import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.LoginModel;
 import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.preferences.Preferences;
@@ -63,8 +64,7 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
         activity = (SignInActivity) getActivity();
         preferences = Preferences.getInstance();
         Paper.init(activity);
-        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setLoginModel(loginModel);
+        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLoginModel(loginModel);
         binding.setLang(current_language);
         binding.setLoginListener(this);
         binding.setNewAccountListener(this);
