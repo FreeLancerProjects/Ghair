@@ -33,6 +33,11 @@ public class UserRoomModelData implements Serializable {
         private String other_user_avatar;
         private String note;
         private String last_message_type;
+        private long last_message_date;
+
+        public long getLast_message_date() {
+            return last_message_date;
+        }
 
         public String getLast_message_type() {
             return last_message_type;

@@ -37,6 +37,7 @@
 
 
             >
+
             <TextView
                 android:id="@+id/tv_message_content"
                 android:layout_width="wrap_content"
@@ -44,7 +45,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textSize="16sp"
-                android:textColor="@color/input"
+                android:textColor="@color/white"
                 android:maxWidth="270dp"
                 android:text="@{messagemodel.message}"
                 android:layout_marginTop="5dp"
@@ -59,8 +60,8 @@
                 android:layout_marginRight="15dp"
                 android:textColor="@color/input"
                 android:textSize="13sp"
-                android:visibility="gone"
                 android:layout_marginBottom="5dp"
+                date="@{messagemodel.date}"
                 />
         </LinearLayout>
     </LinearLayout>

@@ -11,6 +11,7 @@ import androidx.databinding.BindingAdapter;
 
 
 import com.endpoint.ghair.R;
+import com.endpoint.ghair.share.TimeAgo;
 import com.endpoint.ghair.tags.Tags;
 import com.github.siyamed.shapeimageview.HexagonImageView;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
@@ -44,6 +45,14 @@ public class GeneralMethod {
         String m_date = dateFormat.format(new Date(date*1000));
 
         textView.setText(String.format("%s",m_date));
+
+    }
+    @BindingAdapter("datetime")
+    public static void convertToNotDate(TextView textView,long date)
+    {
+        long d = date*1000;
+        String n_date = TimeAgo.getTimeAgo(d,textView.getContext());
+        textView.setText(n_date);
 
     }
     @BindingAdapter("url")
