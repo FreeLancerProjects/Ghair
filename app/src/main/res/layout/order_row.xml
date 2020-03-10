@@ -93,7 +93,7 @@
                         android:layout_marginEnd="5dp"
                         android:textColor="@color/input"
                         android:textSize="13sp"
-                        android:text="@{title}"
+                        android:text='@{ordermodel.id+""}'
                         />
 
 
