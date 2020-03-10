@@ -83,13 +83,13 @@ private String lang;
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.input), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(manager);
         if(userModel.getUser_type().equals("client")){
-            title =userModel.getName();
+            title ="client";
         }
         else {
             if(lang.equals("ar")){
-            title =userModel.getAr_market_title();}
+            title ="market";}
             else {
-                title =userModel.getEn_market_title();
+                title ="market";
             }
         }
 

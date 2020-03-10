@@ -50,6 +50,7 @@ import com.endpoint.ghair.activities_fragments.activity_home.fragments.Fragment_
 import com.endpoint.ghair.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.endpoint.ghair.adapters.Side_Menu_Adapter;
 import com.endpoint.ghair.language.Language;
+import com.endpoint.ghair.models.Add_Order_Model;
 import com.endpoint.ghair.models.Brand_Model;
 import com.endpoint.ghair.models.Service_Model;
 import com.endpoint.ghair.models.UserModel;
@@ -89,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recmenu;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
-    private ImageView imaddauction, imagechat, imagecart,imagenotifi;
+    private ImageView imaddauction, imagechat, imagecart, imagenotifi;
     private ConstraintLayout cons_add;
     private CircleImageView improfile;
     private boolean isLoading = false;
@@ -97,12 +98,38 @@ public class HomeActivity extends AppCompatActivity {
     private String lang;
     private ProgressBar progBar;
     private LinearLayout llNobrands;
+    private TextView textNotify;
+    private int amount = 0;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
+
     }
 
+
+    public void gettotal() {
+        amount = 0;
+        if (preferences.getUserOrder(this) != null) {
+            for (int i = 0; i < preferences.getUserOrder(this).getDetails().size(); i++) {
+                amount += preferences.getUserOrder(this).getDetails().get(i).getAmount();
+
+            }
+        }
+        addItemToCart();
+
+    }
+
+    private void addItemToCart() {
+        if (amount > 0) {
+
+            textNotify.setText(amount + "");
+            textNotify.setVisibility(View.GONE);
+
+        } else {
+            textNotify.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +138,8 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
         initView();
+        gettotal();
+
         if (userModel != null) {
             if (userModel.getUser_type().equals("client")) {
                 cons_add.setVisibility(View.GONE);
@@ -154,7 +183,7 @@ public class HomeActivity extends AppCompatActivity {
         imaddauction = findViewById(R.id.imageplus);
         imagechat = findViewById(R.id.imagechat);
         imagecart = findViewById(R.id.imagecart);
-        imagenotifi=findViewById(R.id.imageNotification);
+        imagenotifi = findViewById(R.id.imageNotification);
         progBar = findViewById(R.id.progBar);
         llNobrands = findViewById(R.id.ll_no_brands);
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -162,6 +191,7 @@ public class HomeActivity extends AppCompatActivity {
         recmenu = findViewById(R.id.recView);
         improfile = findViewById(R.id.imageprofile);
         cons_add = findViewById(R.id.cons_add);
+        textNotify = findViewById(R.id.textNotify);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         side_menu_adapter = new Side_Menu_Adapter(brandList, this);
@@ -657,5 +687,11 @@ public class HomeActivity extends AppCompatActivity {
 
         startActivity(intent);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gettotal();
     }
 }

@@ -56,6 +56,11 @@ private Cart_Adapter cart_adapter;
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getdata();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

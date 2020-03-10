@@ -74,15 +74,47 @@
                         android:padding="8dp"
                         android:layout_gravity="center_vertical"
                         />
-                    <ImageView
-                        android:id="@+id/imagecart"
-                        android:layout_width="45dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_cart"
-                        android:tint="@color/white"
-                        android:padding="8dp"
-                        android:layout_gravity="center_vertical"
-                        />
+                    <RelativeLayout
+                        android:id="@+id/cartRelativeLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="5dp"
+                        android:clickable="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imagecart"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:padding="8dp"
+
+                            android:src="@drawable/ic_cart"
+                            android:tint="@color/white"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/textNotify"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignLeft="@id/imagecart"
+                            android:layout_alignTop="@id/imagecart"
+                            android:layout_gravity="start"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:visibility="gone"
+
+                            />
+                    </RelativeLayout>
+
                 </LinearLayout>
 
 

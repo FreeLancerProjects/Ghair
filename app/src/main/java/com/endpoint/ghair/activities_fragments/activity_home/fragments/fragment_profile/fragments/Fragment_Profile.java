@@ -17,6 +17,8 @@ import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.adapters.ViewPagerAdapter;
 import com.endpoint.ghair.databinding.FragmentProfileBinding;
 import com.endpoint.ghair.models.Slider_Model;
+import com.endpoint.ghair.models.UserModel;
+import com.endpoint.ghair.preferences.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ public class Fragment_Profile extends Fragment {
     private ViewPagerAdapter adapter;
 
 private List<Slider_Model.Data> dataList;
+private Preferences preferences;
+private UserModel userModel;
     public static Fragment_Profile newInstance() {
         return new Fragment_Profile();
     }
@@ -83,7 +87,11 @@ activity=(HomeActivity)getActivity();
         titles.add(getString(R.string.require));
         titles.add(getString(R.string.my_services));
 
+if(userModel.getUser_type().equals("market")){
+    fragmentList.add(FragmentMyProducts.newInstance());
+    titles.add(getString(R.string.my_products));
 
+}
 
     }
 

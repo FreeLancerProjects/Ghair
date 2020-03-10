@@ -540,4 +540,14 @@ public interface Service {
             @Header("lang") String lang
 
     );
+
+    @GET("api/AllProductsFilterByBrandCatMarket")
+    Call<Product_Model> get_myproductss(
+            @Query("page") int page,
+            @Header("Authorization") String Authorization,
+            @Header("lang") String lang
+
+
+
+    );
 }
