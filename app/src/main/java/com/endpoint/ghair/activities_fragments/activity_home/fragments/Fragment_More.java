@@ -1,9 +1,6 @@
 package com.endpoint.ghair.activities_fragments.activity_home.fragments;
 
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,17 +14,15 @@ import androidx.fragment.app.Fragment;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_about.AboutActivity;
-import com.endpoint.ghair.activities_fragments.activity_addauction.AddProductActivity;
 import com.endpoint.ghair.activities_fragments.activity_contact.ContactActivity;
-import com.endpoint.ghair.activities_fragments.activity_edit_profile.Edit_Profile_Activity;
+import com.endpoint.ghair.activities_fragments.activity_edit_profile.Edit_Profile_Client_Activity;
+import com.endpoint.ghair.activities_fragments.activity_edit_profile.Edit_Profile_Market_Activity;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.ghair.activities_fragments.activity_terms.TermsActivity;
 import com.endpoint.ghair.databinding.FragmentMoreBinding;
-import com.endpoint.ghair.language.Language;
 import com.endpoint.ghair.models.UserModel;
 import com.endpoint.ghair.preferences.Preferences;
 import com.endpoint.ghair.share.Common;
-import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 
@@ -108,8 +103,13 @@ public class Fragment_More extends Fragment {
             @Override
             public void onClick(View v) {
                 if (userModel != null) {
-//                    Intent intent = new Intent(activity, Edit_Profile_Activity.class);
-//                    startActivity(intent);
+                    if(userModel.getUser_type().equals("client")){
+                    Intent intent = new Intent(activity, Edit_Profile_Client_Activity.class);
+                    startActivity(intent);}
+                    else {
+                        Intent intent = new Intent(activity, Edit_Profile_Market_Activity.class);
+                        startActivity(intent);
+                    }
                 } else {
 Common.CreateNoSignAlertDialog(activity);
                 }
@@ -121,6 +121,7 @@ Common.CreateNoSignAlertDialog(activity);
                 if (userModel != null) {
                     activity.Logout();
                 } else {
+                    Common.CreateNoSignAlertDialog(activity);
 
                 }
             }

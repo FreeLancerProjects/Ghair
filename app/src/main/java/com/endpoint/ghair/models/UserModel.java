@@ -30,7 +30,7 @@ public class UserModel implements Serializable {
             private String token;
     private String market_title;
     private List<Banners> banners;
-
+private List<services> services;
     public int getId() {
         return id;
     }
@@ -127,6 +127,10 @@ public class UserModel implements Serializable {
         return banners;
     }
 
+    public List<UserModel.services> getServices() {
+        return services;
+    }
+
     public class Banners implements Serializable
     {
         private int id;
@@ -143,6 +147,14 @@ public class UserModel implements Serializable {
 
         public String getImage() {
             return image;
+        }
+    }
+    public class  services
+    {
+        private int id;
+
+        public int getId() {
+            return id;
         }
     }
 }

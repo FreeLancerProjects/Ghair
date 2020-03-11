@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="ordermodel"
-            type="com.endpoint.ghair.models.MyRequiredModel.Data" />
+            name="productmodel"
+            type="com.endpoint.ghair.models.Product_Model.Data" />
 
     </data>
 <LinearLayout
@@ -53,7 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="5dp"
                 android:scaleType="fitXY"
-                image="@{ordermodel.brand.image}"
+                image="@{productmodel.main_image}"
                 />
 
 
@@ -92,7 +92,7 @@
                         android:layout_marginEnd="5dp"
                         android:textColor="@color/input"
                         android:textSize="13sp"
-                        android:text="@{ordermodel.title}"
+                        android:text="@{productmodel.title}"
                         />
 
 
@@ -122,7 +122,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text='@{ordermodel.price+""}'
+                        android:text='@{productmodel.price+""}'
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -153,7 +153,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text='@{ordermodel.created_at.split(" ")[0]}'
+                        android:text='@{productmodel.created_at.split(" ")[0]}'
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 
@@ -183,7 +183,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text='@{ordermodel.created_at.split(" ")[1]}'
+                        android:text='@{productmodel.created_at.split(" ")[1]}'
                         android:textColor="@color/input"
                         android:textSize="13sp" />
 

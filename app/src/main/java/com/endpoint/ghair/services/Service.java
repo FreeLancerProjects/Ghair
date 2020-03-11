@@ -171,15 +171,37 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/client/profile/update")
     Call<UserModel> editprofile(@Field("name") String name,
-                                @Field("phone") String phone,
                                 @Field("city_id") String city_id,
                                 @Header("Authorization") String Authorization);
+    @FormUrlEncoded
+    @POST("api/market/profile/update")
+    Call<UserModel> editprofile(@Field("ar_market_title") String ar_market_title,
+                                @Field("en_market_title") String en_market_title,
+                                @Field("longitude") String longitude,
+                                @Field("latitude") String latitude,
+                                @Field("address") String address,
+                                @Field("city_id") String city_id,
+                                @Field("phone") String phone,
 
+                                @Header("Authorization") String Authorization);
     @Multipart
-    @POST("api/user_image")
-    Call<UserModel> editUserImage(@Part("Authorization") RequestBody Authorization,
+    @POST("api/client/profile/update")
+    Call<UserModel> editUserImage(@Header("Authorization") String Authorization,
                                   @Part MultipartBody.Part image);
+    @Multipart
+    @POST("api/market/profile/update")
+    Call<UserModel> editUserImage(@Header("Authorization") String Authorization,
+                                  @Part MultipartBody.Part image,
+                                  @Part("ar_market_title") RequestBody ar_market_title,
+                                  @Part("en_market_title") RequestBody en_market_title,
+                                  @Part("longitude") RequestBody longitude,
+                                  @Part("latitude") RequestBody latitude,
+                                  @Part("address") RequestBody address,
+                                  @Part("city_id") RequestBody city_id,
+                                  @Part("phone") RequestBody phone,
+                                  @Part("services") List<RequestBody> services
 
+                                  );
     @FormUrlEncoded
     @POST("api/addNewRequiredRequest")
     Call<ResponseBody> requireservice(@Field("ar_title") String ar_title,
@@ -550,4 +572,18 @@ public interface Service {
 
 
     );
+    @FormUrlEncoded
+    @POST("api/forgetPasswordSendCode")
+    Call<UserModel> forget(@Field("phone") String phone,
+                           @Field("phone_code") String phone_code,
+                           @Field("sendMethod")String sendMethod
+    );
+
+
+
+    @FormUrlEncoded
+    @POST("api/resetPassword")
+    Call<UserModel> changpass(
+            @Field("user_id") int user_id,
+            @Field("password") String password);
 }

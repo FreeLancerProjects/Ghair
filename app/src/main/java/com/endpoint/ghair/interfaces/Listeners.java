@@ -33,7 +33,9 @@ public interface Listeners {
     }
     interface EditprofileListener
     {
-        void Editprofile(String name, String phone);
+        void Editprofile(String name);
+        void Editprofile(String englishname,String arabicname);
+
 
     }
 
@@ -53,7 +55,14 @@ public interface Listeners {
         void sendContact(ContactUsModel contactUsModel);
     }
 
-
-
-
+    interface ForgetListner
+    {
+        void forget();
+    }
+    interface PasswordListner {
+        void checkDatapass(String pass);
+    }
+    interface ForgetpasswordListner {
+        void checkDataForget(String phone_code, String phone);
+    }
 }

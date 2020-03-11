@@ -9,6 +9,7 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
 
+
 import com.endpoint.ghair.BR;
 import com.endpoint.ghair.R;
 
@@ -17,22 +18,22 @@ import java.io.Serializable;
 public class EditprofileModel extends BaseObservable implements Serializable {
 
     private String name;
-    private String phone;
+
     private String city_id;
     public ObservableField<String> error_name = new ObservableField<>();
-    public ObservableField<String> error_phone = new ObservableField<>();
+
 
 
 
     public EditprofileModel() {
         this.name = "";
-        this.phone="";
+
         this.city_id = "";
     }
 
-    public EditprofileModel(String name, String city_id, String phone) {
+    public EditprofileModel(String name, String city_id) {
         setName(name);
-        setPhone(phone);
+
         setCity_id(city_id);
     }
 
@@ -43,24 +44,11 @@ public class EditprofileModel extends BaseObservable implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-        notifyPropertyChanged(BR.name);
+        notifyPropertyChanged(com.endpoint.ghair.BR.name);
 
 
     }
 
-
-
-    @Bindable
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-        notifyPropertyChanged(BR.phone);
-
-    }
 
 
 
@@ -78,15 +66,14 @@ public class EditprofileModel extends BaseObservable implements Serializable {
     public boolean isDataValid(Context context)
     {
         if (//!TextUtils.isEmpty(phone_code)&&
-                !TextUtils.isEmpty(phone)&&
                 !TextUtils.isEmpty(name)&&
+
                 !TextUtils.isEmpty(city_id)
         )
         {
             error_name.set(null);
-           // error_amount.set(null);
-            error_phone.set(null);
-            //error_email.set(null);
+           // error_phone_code.set(null);
+
 
             return true;
         }else
@@ -103,19 +90,13 @@ public class EditprofileModel extends BaseObservable implements Serializable {
 
           /*  if (phone_code.isEmpty())
             {
-                error_amount.set(context.getString(R.string.field_req));
+                error_phone_code.set(context.getString(R.string.field_req));
             }else
             {
-                error_amount.set(null);
+                error_phone_code.set(null);
             }*/
 
-            if (phone.isEmpty())
-            {
-                error_phone.set(context.getString(R.string.field_req));
-            }else
-            {
-                error_phone.set(null);
-            }
+
 
 
 

@@ -65,7 +65,8 @@ public class Fragment_Profile extends Fragment {
         binding.tab.setupWithViewPager(binding.pager);
         addFragments_Titles();
         binding.pager.setOffscreenPageLimit(fragmentList.size());
-
+binding.setUsermodel(userModel);
+binding.setLang(lang);
         adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragments(fragmentList);
         adapter.addTitles(titles);

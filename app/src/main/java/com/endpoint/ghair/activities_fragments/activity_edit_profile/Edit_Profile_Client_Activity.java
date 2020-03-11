@@ -15,6 +15,8 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
@@ -56,7 +58,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Edit_Profile_Activity extends AppCompatActivity implements Listeners.EditprofileListener, Listeners.BackListener, Listeners.ShowCountryDialogListener, OnCountryPickerListener {
+public class Edit_Profile_Client_Activity extends AppCompatActivity implements Listeners.EditprofileListener, Listeners.BackListener {
     private String current_language;
     private ActivityEditProfileBinding binding;
     private CountryPicker countryPicker;
@@ -74,17 +76,21 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));}
 
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile);
 
         initView();
         if (userModel != null) {
+
+
             updatedata(userModel);
         }
     }
@@ -92,13 +98,11 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     private void updatedata(UserModel userModel) {
         this.userModel = userModel;
         preferences.create_update_userdata(this, userModel);
-//        editprofileModel.setBrand_id(this.userModel.getBrand_id() + "");
-//        editprofileModel.setName(this.userModel.getName());
-//        editprofileModel.setPhone(this.userModel.getUser().getMobile());
-//        editprofileModel.setEmail(this.userModel.getUser().getEmail());
-//        editprofileModel.setAbout(this.userModel.getUser().getAbout());
-//        binding.setUserModel(userModel);
-//        binding.setViewModel(editprofileModel);
+        editprofileModel.setCity_id(this.userModel.getCity_id() + "");
+        editprofileModel.setName(this.userModel.getName());
+binding.edtName.setText(userModel.getName());
+        binding.setUserModel(userModel);
+        binding.setViewModel(editprofileModel);
     }
 
     private String city_id = "";
@@ -109,13 +113,12 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
         Paper.init(this);
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-                current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());binding.setLang(current_language);
+        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        binding.setLang(current_language);
         binding.setViewModel(editprofileModel);
         binding.setBackListener(this);
         binding.setEditprofilelistner(this);
-        binding.setShowDialogListener(this);
         binding.setUserModel(userModel);
-        createCountryDialog();
         adapter = new CityAdapter(dataList, this);
         binding.spinnerCity.setAdapter(adapter);
         binding.image.setOnClickListener(view -> CreateImageAlertDialog());
@@ -147,21 +150,11 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     }
 
     private void updateCityAdapter(Cities_Model body) {
-
-        dataList.add(new Cities_Model.Data("إختر"));
-        if (body.getData() != null) {
+        dataList.add(new Cities_Model.Data(getResources().getString(R.string.ch_city)));
+        if(body.getData()!=null){
             dataList.addAll(body.getData());
-            adapter.notifyDataSetChanged();
-            if (userModel != null) {
-                for (int i = 1; i < dataList.size(); i++) {
-                    if (dataList.get(i).getId_city() == userModel.getCity_id()) {
-                        binding.spinnerCity.setSelection(i);
-                    }
-                }
-            }
-        }
+            adapter.notifyDataSetChanged();}
     }
-
     private void getCities() {
         try {
             ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
@@ -174,10 +167,10 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                         public void onResponse(Call<Cities_Model> call, Response<Cities_Model> response) {
                             dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                                if (response.body().getData() != null) {
-                                    updateCityAdapter(response.body());
-                                } else {
-                                    Log.e("error", response.code() + "_" + response.errorBody());
+                                if(response.body().getData()!=null){
+                                    updateCityAdapter(response.body());}
+                                else {
+                                    Log.e("error",response.code()+"_"+response.errorBody());
 
                                 }
 
@@ -185,19 +178,18 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
 
                                 try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    Log.e("error",response.code()+"_"+response.errorBody().string());
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                                 if (response.code() == 500) {
-                                 //   Toast.makeText(Edit_Profile_Activity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                                 //   Toast.makeText(Edit_Profile_Client_Activity.class, "Server Error", Toast.LENGTH_SHORT).show();
 
-
-                                } else {
-                               //     Toast.makeText(Edit_Profile_Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
 
                                 }
+
                             }
                         }
 
@@ -208,9 +200,9 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                        Toast.makeText(Edit_Profile_Activity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Edit_Profile_Client_Activity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(Edit_Profile_Activity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Edit_Profile_Client_Activity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -224,59 +216,21 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     }
 
 
-    private void createCountryDialog() {
-        countryPicker = new CountryPicker.Builder()
-                .canSearch(true)
-                .listener(this)
-                .theme(CountryPicker.THEME_NEW)
-                .with(this)
-                .build();
 
-        TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-
-        if (countryPicker.getCountryFromSIM() != null) {
-            updatePhoneCode(countryPicker.getCountryFromSIM());
-        } else if (telephonyManager != null && countryPicker.getCountryByISO(telephonyManager.getNetworkCountryIso()) != null) {
-            updatePhoneCode(countryPicker.getCountryByISO(telephonyManager.getNetworkCountryIso()));
-        } else if (countryPicker.getCountryByLocale(Locale.getDefault()) != null) {
-            updatePhoneCode(countryPicker.getCountryByLocale(Locale.getDefault()));
-        } else {
-            String code = "+966";
-            // binding.tvPhoneCode.setText(code);
-            //  editprofileModel.setAmount(code.replace("+","00"));
-
-        }
-
-    }
 
     @Override
-    public void showDialog() {
+    public void Editprofile(String name) {
 
-        countryPicker.showDialog(this);
-    }
-
-    @Override
-    public void onSelectCountry(Country country) {
-        updatePhoneCode(country);
-
-    }
-
-    private void updatePhoneCode(Country country) {
-        // binding.tvPhoneCode.setText(country.getDialCode());
-        // editprofileModel.setAmount(country.getDialCode().replace("+","00"));
-
-    }
-
-    @Override
-    public void Editprofile(String name, String phone) {
-        if (phone.startsWith("0")) {
-            phone = phone.replaceFirst("0", "");
-        }
-        editprofileModel = new EditprofileModel(name, city_id, phone);
+        editprofileModel = new EditprofileModel(name,city_id);
         binding.setViewModel(editprofileModel);
         if (editprofileModel.isDataValid(this)) {
             signUp(editprofileModel);
         }
+    }
+
+    @Override
+    public void Editprofile(String englishname, String arabicname) {
+
     }
 
     private void signUp(EditprofileModel editprofileModel) {
@@ -285,16 +239,15 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .editprofile(editprofileModel.getName(), editprofileModel.getPhone(), editprofileModel.getCity_id(), "Bearer" + " " + userModel.getToken()
-                            )
+                    .editprofile(editprofileModel.getName(), editprofileModel.getCity_id(), "Bearer" + " " + userModel.getToken())
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                             dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                               // Toast.makeText(Edit_Profile_Activity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
 
-                                preferences.create_update_userdata(Edit_Profile_Activity.this, response.body());
+                                preferences.create_update_userdata(Edit_Profile_Client_Activity.this, response.body());
                                 finish();
 
                             } else {
@@ -305,7 +258,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                                     e.printStackTrace();
                                 }
 
-                             //   Toast.makeText(Edit_Profile_Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.fa), Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -318,9 +271,9 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                        Toast.makeText(Edit_Profile_Activity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Edit_Profile_Client_Activity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(Edit_Profile_Activity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Edit_Profile_Client_Activity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -361,7 +314,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
 
         binding.btnCancel.setOnClickListener(v -> dialog.dismiss());
 
-//        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+       // dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.setCanceledOnTouchOutside(false);
         dialog.setView(binding.getRoot());
         dialog.show();
@@ -376,8 +329,8 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     }
 
     private void Check_CameraPermission() {
-        if (ContextCompat.checkSelfPermission(Edit_Profile_Activity.this, camera_permission) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, write_permission) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(Edit_Profile_Activity.this, new String[]{camera_permission, write_permission}, IMG_REQ2);
+        if (ContextCompat.checkSelfPermission(Edit_Profile_Client_Activity.this, camera_permission) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, write_permission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(Edit_Profile_Client_Activity.this, new String[]{camera_permission, write_permission}, IMG_REQ2);
         } else {
             SelectImage(IMG_REQ2);
 
@@ -407,15 +360,16 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                 intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, img_req);
             } catch (SecurityException e) {
-                Toast.makeText(Edit_Profile_Activity.this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_Profile_Client_Activity.this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Toast.makeText(Edit_Profile_Activity.this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_Profile_Client_Activity.this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
 
             }
 
 
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -425,14 +379,14 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 SelectImage(IMG_REQ1);
             } else {
-                Toast.makeText(Edit_Profile_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
             }
 
         } else if (requestCode == IMG_REQ2) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 SelectImage(IMG_REQ2);
             } else {
-                Toast.makeText(Edit_Profile_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -465,13 +419,12 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
         dialog.setCancelable(false);
         dialog.show();
 
-        RequestBody id_part = Common.getRequestBodyText("Bearer" + " " + userModel.getToken()
-        );
+        RequestBody id_part = Common.getRequestBodyText(String.valueOf(user_id));
 
         MultipartBody.Part image_part = Common.getMultiPart(this, Uri.parse(image), "logo");
 
         Api.getService(Tags.base_url)
-                .editUserImage(id_part, image_part)
+                .editUserImage("Bearer" + " " + userModel.getToken(), image_part)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -479,13 +432,13 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                         if (response.isSuccessful() && response.body() != null) {
                             //listener.onSuccess(response.body());
 
-                           // Toast.makeText(Edit_Profile_Activity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
                             updatedata(response.body());
 
                         } else {
                             Log.e("codeimage", response.code() + "_");
                             try {
-                             //   Toast.makeText(Edit_Profile_Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 Log.e("respons", response.errorBody().string());
                             } catch (IOException e) {
@@ -499,7 +452,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                     public void onFailure(Call<UserModel> call, Throwable t) {
                         try {
                             dialog.dismiss();
-                            Toast.makeText(Edit_Profile_Activity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
 
                         } catch (Exception e) {
                         }
@@ -516,10 +469,10 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
             return Uri.parse(path);
 
         } catch (SecurityException e) {
-            Toast.makeText(Edit_Profile_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
-            Toast.makeText(Edit_Profile_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Edit_Profile_Client_Activity.this, getString(R.string.perm_image_denied), Toast.LENGTH_SHORT).show();
 
         }
         return null;

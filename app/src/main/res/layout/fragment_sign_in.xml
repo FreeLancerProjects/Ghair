@@ -43,7 +43,7 @@
 
                 >
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/logo"
                     android:layout_width="130dp"
                     android:layout_height="130dp"

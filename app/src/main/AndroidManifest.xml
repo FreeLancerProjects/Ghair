@@ -52,6 +52,12 @@
 
         />
         <activity
+            android:name=".activities_fragments.activity_edit_profile.Edit_Profile_Market_Activity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+
+            />
+        <activity
             android:name=".activities_fragments.activity_notification.NotificationsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
@@ -64,7 +70,7 @@
 
             />
         <activity
-            android:name=".activities_fragments.activity_edit_profile.Edit_Profile_Activity"
+            android:name=".activities_fragments.activity_edit_profile.Edit_Profile_Client_Activity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
 

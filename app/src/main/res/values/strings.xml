@@ -157,4 +157,16 @@
     <string name="yesterday">yesterday</string>
     <string name="day">D</string>
     <string name="my_products">My Products</string>
+    <string name="enter_code">Enter Code</string>
+    <string name="we_ll_never_share_or_sell_your_phone_number_your_privacy_is_100_guaranteed">We\'ll never share or sell your phone number your privacy is 100% guaranteed.</string>
+    <string name="enter_the_sms_verification_code_below_that_was_sent_to_your_mobile_phone">Enter the SMS verification code below that was sent to your mobile phone</string>
+    <string name="inc_code_verification">Incorrect code verification</string>
+    <string name="you_will_receive_4_digit">You will receive 4 digit code on your mobile</string>
+    <string name="resend">Resend</string>
+    <string name="confirm">Confirm</string>
+    <string name="inc_code">Incorrect code</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="inc_phone">Incorrect Phone</string>
+
 </resources>

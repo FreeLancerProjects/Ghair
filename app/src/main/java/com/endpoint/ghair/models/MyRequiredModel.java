@@ -1,5 +1,7 @@
 package com.endpoint.ghair.models;
 
+import org.stringtemplate.v4.ST;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,13 +32,18 @@ public class MyRequiredModel implements Serializable {
         private int brand_id;
         private int offer_id;
         private int cat_id;
-private String title;
+        private String title;
         private int amount;
         private String required_type;
 
         private Market market;
         private int status;
         private Brand brand;
+        private String created_at;
+
+        public String getCreated_at() {
+            return created_at;
+        }
 
         public String getTitle() {
             return title;

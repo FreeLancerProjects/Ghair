@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.ghair.R;
 import com.endpoint.ghair.activities_fragments.activity_home.HomeActivity;
+import com.endpoint.ghair.adapters.MyProductsAdapter;
 import com.endpoint.ghair.adapters.MyRequiredAdapter;
 import com.endpoint.ghair.adapters.Products_Adapter;
 import com.endpoint.ghair.databinding.FragmentOrdersBinding;
@@ -46,7 +47,7 @@ public class FragmentMyProducts extends Fragment {
     private HomeActivity activity;
     private FragmentOrdersBinding binding;
     private Preferences preferences;
-    private Products_Adapter products_adapter;
+    private MyProductsAdapter products_adapter;
     private List<Product_Model.Data> dataList;
     private UserModel userModel;
     private int type=0;
@@ -80,11 +81,12 @@ binding.tab.setVisibility(View.GONE);
 
        // markets_adapter=new OrderAdapter(dataList,activity);
         Paper.init(activity);
-lang = Paper.book().read("lang", Locale.getDefault().getLanguage());userModel=preferences.getUserData(activity);
+lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+userModel=preferences.getUserData(activity);
         manager=new LinearLayoutManager(activity);
         binding.recView.setLayoutManager(manager);
 
-        products_adapter=new Products_Adapter(dataList,activity);
+        products_adapter=new MyProductsAdapter(dataList,activity);
         binding.recView.setAdapter(products_adapter);
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

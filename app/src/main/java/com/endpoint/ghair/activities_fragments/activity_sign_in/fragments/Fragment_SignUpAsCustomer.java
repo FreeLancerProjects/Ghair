@@ -282,11 +282,8 @@ binding.tvRegister.setOnClickListener(new View.OnClickListener() {
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                             dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                                preferences.create_update_userdata(activity,response.body());
-                                preferences.create_update_session(activity, Tags.session_login);
-                                Intent intent = new Intent(activity, HomeActivity.class);
-                                startActivity(intent);
-                                activity.finish();
+                                activity.displayFragmentCodeVerification(response.body(),1);
+
 
                             } else {
                                 try {

@@ -39,6 +39,11 @@ private List<Data> data;
 
                 private String title;
                 private String desc;
+        private String created_at;
+
+        public String getCreated_at() {
+            return created_at;
+        }
 
         public int getId() {
             return id;

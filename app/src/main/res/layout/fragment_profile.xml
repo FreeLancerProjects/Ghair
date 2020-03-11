@@ -13,7 +13,9 @@
         <variable
             name="lang"
             type="String" />
-
+<variable
+    name="usermodel"
+    type="com.endpoint.ghair.models.UserModel" />
 
     </data>
 
@@ -89,7 +91,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:text="@string/name"
+                                android:text='@{usermodel.user_type.equals("client")?usermodel.name:lang.equals("ar")?usermodel.ar_market_title:usermodel.en_market_title}'
                                 android:textColor="@color/input"
                                 android:textSize="13sp" />
 
@@ -120,7 +122,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:text="@string/phone_number"
+                                android:text="@{usermodel.phone}"
                                 android:textColor="@color/input"
                                 android:textSize="13sp" />
 
@@ -151,7 +153,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:text="@string/location"
+                                android:text="@{usermodel.address}"
                                 android:textColor="@color/input"
                                 android:textSize="13sp" />
 
