@@ -86,6 +86,7 @@ import java.util.Locale;
 import io.paperdb.Paper;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -399,23 +400,23 @@ editprofileModel.setLongitude(lng+"");
             ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
             dialog.setCancelable(false);
             dialog.show();
-
+Log.e("llllll",skillid.toString());
             Api.getService(Tags.base_url)
                     .editprofile(editprofileModel.getArabic_title(),editprofileModel.getEnglish_title(),editprofileModel.getLongitude(),editprofileModel.getLatitude(),editprofileModel.getAddress(), editprofileModel.getCity_id(),userModel.getPhone(),skillid, "Bearer" + " " + userModel.getToken())
-                    .enqueue(new Callback<UserModel>() {
+                    .enqueue(new Callback<RequestBody>() {
                         @Override
-                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
                             dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
                                 Toast.makeText(Edit_Profile_Market_Activity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-
-                                preferences.create_update_userdata(Edit_Profile_Market_Activity.this, response.body());
+                                Log.e("kdkdkdkk",response.body().toString());
+                                //      preferences.create_update_userdata(Edit_Profile_Market_Activity.this, response.body());
                                 finish();
 
                             } else {
                                 try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    Log.e("errorsss", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -427,7 +428,7 @@ editprofileModel.setLongitude(lng+"");
                         }
 
                         @Override
-                        public void onFailure(Call<UserModel> call, Throwable t) {
+                        public void onFailure(Call<RequestBody> call, Throwable t) {
                             try {
                                 dialog.dismiss();
                                 if (t.getMessage() != null) {

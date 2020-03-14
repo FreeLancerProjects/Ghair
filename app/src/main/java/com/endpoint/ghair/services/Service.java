@@ -175,14 +175,14 @@ public interface Service {
                                 @Header("Authorization") String Authorization);
     @FormUrlEncoded
     @POST("api/market/profile/update")
-    Call<UserModel> editprofile(@Field("ar_market_title") String ar_market_title,
+    Call<RequestBody> editprofile(@Field("ar_market_title") String ar_market_title,
                                 @Field("en_market_title") String en_market_title,
                                 @Field("longitude") String longitude,
                                 @Field("latitude") String latitude,
                                 @Field("address") String address,
                                 @Field("city_id") String city_id,
                                 @Field("phone") String phone,
-                                @Field("services") List<Integer> services,
+                                @Field("services_list") List<Integer> services,
 
                                 @Header("Authorization") String Authorization);
     @Multipart
