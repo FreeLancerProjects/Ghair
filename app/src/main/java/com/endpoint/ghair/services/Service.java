@@ -182,6 +182,7 @@ public interface Service {
                                 @Field("address") String address,
                                 @Field("city_id") String city_id,
                                 @Field("phone") String phone,
+                                @Field("services") List<Integer> services,
 
                                 @Header("Authorization") String Authorization);
     @Multipart

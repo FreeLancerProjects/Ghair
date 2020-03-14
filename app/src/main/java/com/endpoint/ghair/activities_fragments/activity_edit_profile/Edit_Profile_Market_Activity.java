@@ -222,7 +222,25 @@ editprofileModel.setLongitude(lng+"");
 
             }
         });
+        updateskill();
     }
+
+    private void updateskill() {
+        if(userModel!=null&&userModel.getServices()!=null){
+        for(int i=0;i<userModel.getServices().size();i++){
+            skillid.add( userModel.getServices().get(i).getPivot().getService_id());
+            if(lang.equals("ar")) {
+                servicelists.add(new Service_Model.Data(userModel.getServices().get(i).getPivot().getService_id(), userModel.getServices().get(i).getAr_title()));
+            }
+            else {
+                servicelists.add(new Service_Model.Data(userModel.getServices().get(i).getPivot().getService_id(), userModel.getServices().get(i).getEn_title()));
+
+            }
+            chooserService_adapter.notifyDataSetChanged();
+            binding.receview.setVisibility(View.VISIBLE);
+        }
+    }}
+
     private boolean notidisfound(int position) {
         for(int i=0;i<skillid.size();i++){
             if(servDataList.get(position).getId()==skillid.get(i)){
@@ -381,13 +399,9 @@ editprofileModel.setLongitude(lng+"");
             ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
             dialog.setCancelable(false);
             dialog.show();
-            if(skillid.size()==0){
-                for(int i=0;i<userModel.getServices().size();i++){
 
-                }
-            }
             Api.getService(Tags.base_url)
-                    .editprofile(editprofileModel.getArabic_title(),editprofileModel.getEnglish_title(),editprofileModel.getLongitude(),editprofileModel.getLatitude(),editprofileModel.getAddress(), editprofileModel.getCity_id(),userModel.getPhone(), "Bearer" + " " + userModel.getToken())
+                    .editprofile(editprofileModel.getArabic_title(),editprofileModel.getEnglish_title(),editprofileModel.getLongitude(),editprofileModel.getLatitude(),editprofileModel.getAddress(), editprofileModel.getCity_id(),userModel.getPhone(),skillid, "Bearer" + " " + userModel.getToken())
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {

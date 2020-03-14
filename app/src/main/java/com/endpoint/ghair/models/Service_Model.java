@@ -21,6 +21,11 @@ public class Service_Model implements Serializable {
             this.title = title;
         }
 
+        public Data(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
+
         private int id;
             private String ar_title;
             private String en_title;
